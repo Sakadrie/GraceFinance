@@ -1,0 +1,33 @@
+{
+  "generator-jhipster": {
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "graceFinance",
+    "buildTool": "maven",
+    "cacheProvider": null,
+    "clientFramework": "angular",
+    "clientTestFrameworks": [],
+    "clientTheme": "none",
+    "creationTimestamp": 1771330048704,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "enableHibernateCache": null,
+    "enableTranslation": true,
+    "entities": [],
+    "feignClient": null,
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "NmFmYjZhN2JiYzZjYzY5YzQwZGI4N2I1NTA1ZTBiN2QzZDU3Yjk2MjNjMmMyODc2MGQ1YWVkMzFmZTRkMmIyM2ZmNjk1NGUyMmJjNjFhZWE1NTE4MGRjZTg0NjAyYWE0MzY2NjdhN2UyMDQ0ZjgxM2E0YTliZGRhZGUzZGUzMTI=",
+    "languages": ["fr"],
+    "microfrontend": null,
+    "microfrontends": [],
+    "nativeLanguage": "fr",
+    "packageName": "com.gracefinance.gracefinanceapp",
+    "prodDatabaseType": "postgresql",
+    "reactive": true,
+    "serverPort": null,
+    "serviceDiscoveryType": null,
+    "syncUserWithIdp": null,
+    "testFrameworks": [],
+    "withAdminUi": true
+  }
+}
