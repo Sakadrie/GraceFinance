@@ -1,4 +1,4 @@
-package com.gracefinance.gracefinanceapp.service;
+package com.gracefinance.gracefinanceapp.service.security;
 
 public class UsernameAlreadyUsedException extends RuntimeException {
 

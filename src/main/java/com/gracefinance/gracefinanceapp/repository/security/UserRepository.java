@@ -1,10 +1,10 @@
-package com.gracefinance.gracefinanceapp.repository;
+package com.gracefinance.gracefinanceapp.repository.security;
 
 import static org.springframework.data.relational.core.query.Criteria.where;
 import static org.springframework.data.relational.core.query.Query.query;
 
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.domain.User;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.User;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;

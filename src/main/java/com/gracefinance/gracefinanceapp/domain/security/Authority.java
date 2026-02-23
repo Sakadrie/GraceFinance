@@ -1,7 +1,8 @@
-package com.gracefinance.gracefinanceapp.domain;
+package com.gracefinance.gracefinanceapp.domain.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 import org.springframework.data.annotation.Id;

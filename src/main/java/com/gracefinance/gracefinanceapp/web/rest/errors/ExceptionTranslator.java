@@ -99,13 +99,13 @@ public class ExceptionTranslator extends ResponseEntityExceptionHandler implemen
 
     private ProblemDetailWithCause getProblemDetailWithCause(Throwable ex) {
         if (
-            ex instanceof com.gracefinance.gracefinanceapp.service.UsernameAlreadyUsedException
+            ex instanceof com.gracefinance.gracefinanceapp.service.security.UsernameAlreadyUsedException
         ) return (ProblemDetailWithCause) new LoginAlreadyUsedException().getBody();
         if (
-            ex instanceof com.gracefinance.gracefinanceapp.service.EmailAlreadyUsedException
+            ex instanceof com.gracefinance.gracefinanceapp.service.security.EmailAlreadyUsedException
         ) return (ProblemDetailWithCause) new EmailAlreadyUsedException().getBody();
         if (
-            ex instanceof com.gracefinance.gracefinanceapp.service.InvalidPasswordException
+            ex instanceof com.gracefinance.gracefinanceapp.service.security.InvalidPasswordException
         ) return (ProblemDetailWithCause) new InvalidPasswordException().getBody();
 
         if (ex instanceof AuthenticationException) {

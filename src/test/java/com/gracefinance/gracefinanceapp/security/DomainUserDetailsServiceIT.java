@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import com.gracefinance.gracefinanceapp.IntegrationTest;
 import com.gracefinance.gracefinanceapp.config.Constants;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
-import com.gracefinance.gracefinanceapp.service.UserService;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
+import com.gracefinance.gracefinanceapp.service.security.UserService;
 import java.util.Locale;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.AfterEach;

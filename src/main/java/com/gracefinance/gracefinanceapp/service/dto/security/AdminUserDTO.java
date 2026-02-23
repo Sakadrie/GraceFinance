@@ -1,8 +1,8 @@
-package com.gracefinance.gracefinanceapp.service.dto;
+package com.gracefinance.gracefinanceapp.service.dto.security;
 
 import com.gracefinance.gracefinanceapp.config.Constants;
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.domain.User;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.User;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.Instant;

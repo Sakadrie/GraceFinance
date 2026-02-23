@@ -1,6 +1,6 @@
-package com.gracefinance.gracefinanceapp.repository;
+package com.gracefinance.gracefinanceapp.repository.security;
 
-import com.gracefinance.gracefinanceapp.domain.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Repository;
 

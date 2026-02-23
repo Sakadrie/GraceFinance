@@ -1,5 +1,6 @@
 package com.gracefinance.gracefinanceapp.domain;
 
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
 import org.reactivestreams.Publisher;
 import org.springframework.data.r2dbc.mapping.OutboundRow;
 import org.springframework.data.r2dbc.mapping.event.AfterConvertCallback;

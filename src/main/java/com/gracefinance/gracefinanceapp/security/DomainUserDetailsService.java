@@ -1,8 +1,8 @@
 package com.gracefinance.gracefinanceapp.security;
 
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
 import java.util.*;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.slf4j.Logger;

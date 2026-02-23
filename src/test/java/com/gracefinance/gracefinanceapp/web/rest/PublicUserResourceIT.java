@@ -1,9 +1,10 @@
 package com.gracefinance.gracefinanceapp.web.rest;
 
 import com.gracefinance.gracefinanceapp.IntegrationTest;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
 import com.gracefinance.gracefinanceapp.security.AuthoritiesConstants;
+import com.gracefinance.gracefinanceapp.web.rest.security.PublicUserResource;
 import java.util.Set;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

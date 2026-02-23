@@ -7,9 +7,10 @@ import static org.hamcrest.Matchers.is;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gracefinance.gracefinanceapp.IntegrationTest;
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.repository.AuthorityRepository;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
 import com.gracefinance.gracefinanceapp.repository.EntityManager;
+import com.gracefinance.gracefinanceapp.repository.security.AuthorityRepository;
+import com.gracefinance.gracefinanceapp.web.rest.security.AuthorityResource;
 import java.time.Duration;
 import java.util.List;
 import java.util.UUID;

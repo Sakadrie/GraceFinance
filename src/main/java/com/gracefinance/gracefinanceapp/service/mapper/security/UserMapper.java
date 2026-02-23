@@ -1,9 +1,9 @@
-package com.gracefinance.gracefinanceapp.service.mapper;
+package com.gracefinance.gracefinanceapp.service.mapper.security;
 
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.service.dto.AdminUserDTO;
-import com.gracefinance.gracefinanceapp.service.dto.UserDTO;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.service.dto.security.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.UserDTO;
 import java.util.*;
 import java.util.stream.Collectors;
 import org.mapstruct.BeanMapping;

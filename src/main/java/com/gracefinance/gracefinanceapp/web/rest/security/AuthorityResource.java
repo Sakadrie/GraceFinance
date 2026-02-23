@@ -1,7 +1,7 @@
-package com.gracefinance.gracefinanceapp.web.rest;
+package com.gracefinance.gracefinanceapp.web.rest.security;
 
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.repository.AuthorityRepository;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.repository.security.AuthorityRepository;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import java.net.URI;

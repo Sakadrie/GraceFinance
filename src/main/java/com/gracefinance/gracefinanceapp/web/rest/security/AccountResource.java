@@ -1,11 +1,11 @@
-package com.gracefinance.gracefinanceapp.web.rest;
+package com.gracefinance.gracefinanceapp.web.rest.security;
 
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
 import com.gracefinance.gracefinanceapp.security.SecurityUtils;
 import com.gracefinance.gracefinanceapp.service.MailService;
-import com.gracefinance.gracefinanceapp.service.UserService;
-import com.gracefinance.gracefinanceapp.service.dto.AdminUserDTO;
 import com.gracefinance.gracefinanceapp.service.dto.PasswordChangeDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.security.UserService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.*;
 import com.gracefinance.gracefinanceapp.web.rest.vm.KeyAndPasswordVM;
 import com.gracefinance.gracefinanceapp.web.rest.vm.ManagedUserVM;

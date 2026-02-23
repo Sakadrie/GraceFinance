@@ -1,7 +1,8 @@
-package com.gracefinance.gracefinanceapp.domain;
+package com.gracefinance.gracefinanceapp.domain.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gracefinance.gracefinanceapp.config.Constants;
+import com.gracefinance.gracefinanceapp.domain.AbstractAuditingEntity;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

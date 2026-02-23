@@ -1,12 +1,12 @@
-package com.gracefinance.gracefinanceapp.web.rest;
+package com.gracefinance.gracefinanceapp.web.rest.security;
 
 import com.gracefinance.gracefinanceapp.config.Constants;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
 import com.gracefinance.gracefinanceapp.security.AuthoritiesConstants;
 import com.gracefinance.gracefinanceapp.service.MailService;
-import com.gracefinance.gracefinanceapp.service.UserService;
-import com.gracefinance.gracefinanceapp.service.dto.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.security.UserService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;
 import com.gracefinance.gracefinanceapp.web.rest.errors.EmailAlreadyUsedException;
 import com.gracefinance.gracefinanceapp.web.rest.errors.LoginAlreadyUsedException;

@@ -1,7 +1,7 @@
-package com.gracefinance.gracefinanceapp.web.rest;
+package com.gracefinance.gracefinanceapp.web.rest.security;
 
-import com.gracefinance.gracefinanceapp.service.UserService;
-import com.gracefinance.gracefinanceapp.service.dto.UserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.UserDTO;
+import com.gracefinance.gracefinanceapp.service.security.UserService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;

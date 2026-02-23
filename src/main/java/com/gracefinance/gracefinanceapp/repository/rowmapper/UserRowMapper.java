@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.repository.rowmapper;
 
-import com.gracefinance.gracefinanceapp.domain.User;
+import com.gracefinance.gracefinanceapp.domain.security.User;
 import io.r2dbc.spi.Row;
 import java.time.Instant;
 import java.util.function.BiFunction;

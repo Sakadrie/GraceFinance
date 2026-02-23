@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service;
 
-import com.gracefinance.gracefinanceapp.domain.User;
+import com.gracefinance.gracefinanceapp.domain.security.User;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;

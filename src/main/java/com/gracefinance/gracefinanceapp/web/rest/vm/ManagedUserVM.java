@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.web.rest.vm;
 
-import com.gracefinance.gracefinanceapp.service.dto.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.AdminUserDTO;
 import jakarta.validation.constraints.Size;
 
 /**

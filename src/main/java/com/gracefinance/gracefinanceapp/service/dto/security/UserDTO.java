@@ -1,6 +1,6 @@
-package com.gracefinance.gracefinanceapp.service.dto;
+package com.gracefinance.gracefinanceapp.service.dto.security;
 
-import com.gracefinance.gracefinanceapp.domain.User;
+import com.gracefinance.gracefinanceapp.domain.security.User;
 import java.io.Serializable;
 import java.util.Objects;
 

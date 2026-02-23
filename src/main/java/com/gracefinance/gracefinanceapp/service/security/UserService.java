@@ -1,14 +1,14 @@
-package com.gracefinance.gracefinanceapp.service;
+package com.gracefinance.gracefinanceapp.service.security;
 
 import com.gracefinance.gracefinanceapp.config.Constants;
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.repository.AuthorityRepository;
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.repository.security.AuthorityRepository;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
 import com.gracefinance.gracefinanceapp.security.AuthoritiesConstants;
 import com.gracefinance.gracefinanceapp.security.SecurityUtils;
-import com.gracefinance.gracefinanceapp.service.dto.AdminUserDTO;
-import com.gracefinance.gracefinanceapp.service.dto.UserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.UserDTO;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
