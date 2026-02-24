@@ -48,7 +48,7 @@ class PublicUserResourceIT {
         userRepository.save(user).block();
 
         // Get all the users
-        webTestClient57
+        webTestClient
             .get()
             .uri("/api/users?sort=id,desc")
             .accept(MediaType.APPLICATION_JSON)
