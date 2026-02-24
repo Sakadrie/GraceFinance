@@ -2,11 +2,12 @@ package com.gracefinance.gracefinanceapp.service.mapper;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.gracefinance.gracefinanceapp.domain.Authority;
-import com.gracefinance.gracefinanceapp.domain.User;
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+import com.gracefinance.gracefinanceapp.domain.security.User;
 import com.gracefinance.gracefinanceapp.security.AuthoritiesConstants;
-import com.gracefinance.gracefinanceapp.service.dto.AdminUserDTO;
-import com.gracefinance.gracefinanceapp.service.dto.UserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.AdminUserDTO;
+import com.gracefinance.gracefinanceapp.service.dto.security.UserDTO;
+import com.gracefinance.gracefinanceapp.service.mapper.security.UserMapper;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashSet;

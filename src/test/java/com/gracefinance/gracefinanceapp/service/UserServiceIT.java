@@ -4,8 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gracefinance.gracefinanceapp.IntegrationTest;
 import com.gracefinance.gracefinanceapp.config.Constants;
-import com.gracefinance.gracefinanceapp.domain.User;
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.domain.security.User;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
+import com.gracefinance.gracefinanceapp.service.security.UserService;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

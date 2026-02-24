@@ -4,7 +4,7 @@ import static com.gracefinance.gracefinanceapp.security.AuthoritiesConstants.ADM
 import static com.gracefinance.gracefinanceapp.security.SecurityUtils.AUTHORITIES_CLAIM;
 import static com.gracefinance.gracefinanceapp.security.SecurityUtils.JWT_ALGORITHM;
 
-import com.gracefinance.gracefinanceapp.repository.UserRepository;
+import com.gracefinance.gracefinanceapp.repository.security.UserRepository;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 import io.micrometer.core.instrument.MeterRegistry;

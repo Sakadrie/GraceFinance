@@ -1,5 +1,6 @@
 package com.gracefinance.gracefinanceapp.domain;
 
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
 import java.util.UUID;
 
 public class AuthorityTestSamples {

@@ -2,6 +2,8 @@ package com.gracefinance.gracefinanceapp.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
+
 public class AuthorityAsserts {
 
     /**

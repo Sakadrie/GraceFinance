@@ -1,8 +1,10 @@
 package com.gracefinance.gracefinanceapp.domain;
 
-import static com.gracefinance.gracefinanceapp.domain.AuthorityTestSamples.*;
+import static com.gracefinance.gracefinanceapp.domain.AuthorityTestSamples.getAuthoritySample1;
+import static com.gracefinance.gracefinanceapp.domain.AuthorityTestSamples.getAuthoritySample2;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.gracefinance.gracefinanceapp.domain.security.Authority;
 import com.gracefinance.gracefinanceapp.web.rest.TestUtil;
 import org.junit.jupiter.api.Test;
 
