@@ -1,0 +1,191 @@
+/**
+ * APPLICATION: Gestion Financière d'Église (Norme SYSCOHADA)
+ * Version: 1.0
+ */
+
+// ==========================================
+// 1. ENTITÉ FINANCIÈRE
+// ==========================================
+
+entity EntiteFinanciere {
+  nom String required,
+  code String required unique,
+  type String required,        // EGLISE | STRUCTURE_LOCALE | STRUCTURE_REGIONALE | STRUCTURE_NATIONALE
+  description String,
+  actif Boolean required
+}
+
+// ==========================================
+// 2. CAISSES
+// ==========================================
+
+entity Caisse {
+  nom String required,
+  code String required,
+  type String required,        // INTERNE | BANCAIRE | PROJET
+  devise String required,
+  solde BigDecimal required,
+  actif Boolean required
+}
+
+// ==========================================
+// 3. CATÉGORIES
+// ==========================================
+
+entity Categorie {
+  nom String required,
+  code String required,
+  typeCategorie String required,  // RECETTE | DEPENSE
+  description String,
+  actif Boolean required
+}
+
+// ==========================================
+// 4. RECETTES
+// ==========================================
+
+entity Recette {
+  code String required,
+  dateRecette LocalDate required,
+  montant BigDecimal required,
+  typeRecette String required,    // DIME | OFFRANDE | DON | CONTRIBUTION_SPECIALE | RECETTE_PROJET | TRANSFERT_RECU
+  anonyme Boolean required,
+  membreNom String,
+  motif String,
+  referencePiece String,
+  statut String required          // BROUILLON | EN_ATTENTE_VALIDATION | VALIDE | REJETE | ANNULE
+}
+
+// ==========================================
+// 5. DÉPENSES
+// ==========================================
+
+entity Depense {
+  code String required,
+  dateDepense LocalDate required,
+  montant BigDecimal required,
+  motif String required,
+  referencePiece String,
+  statut String required,         // BROUILLON | EN_ATTENTE_VALIDATION | VALIDE | REJETE | ANNULE
+  validerPar String,
+  dateValidation Instant
+}
+
+// ==========================================
+// 6. TRANSFERTS
+// ==========================================
+
+entity Transfert {
+  code String required,
+  dateTransfert LocalDate required,
+  montant BigDecimal required,
+  motif String,
+  typeTransfert String required,  // INTERNE | INTER_ENTITE
+  statut String required,         // BROUILLON | EN_ATTENTE_VALIDATION | VALIDE | REJETE | ANNULE
+  validerPar String,
+  dateValidation Instant
+}
+
+// ==========================================
+// 7. SÉCURITÉ & DROITS
+// ==========================================
+
+entity Droit {
+  nom String required,
+  code String required unique,
+  description String
+}
+
+entity Profil {
+  nom String required,
+  code String required unique,
+  description String
+}
+
+/**
+ * Lien User JHipster ↔ EntiteFinanciere ↔ Profils
+ * - Un user appartient à une seule EntiteFinanciere
+ * - Un user peut avoir plusieurs profils dans cette entité
+ * - On utilise le User JHipster directement via la relation
+ */
+entity AffectationUtilisateur {
+  actif Boolean required,
+  dateAffectation LocalDate required
+}
+
+// ==========================================
+// 8. COMPTABILITÉ V2
+// ==========================================
+
+entity CompteComptable {
+  code String required,
+  libelle String required,
+  classe Integer required
+}
+
+entity EcritureComptable {
+  dateComptable LocalDate required,
+  numeroPiece String required,
+  libelle String,
+  referenceExterne String
+}
+
+entity LigneEcriture {
+  montant BigDecimal required,
+  sens String required,   // DEBIT | CREDIT
+  libelle String
+}
+
+// ==========================================
+// RELATIONS
+// ==========================================
+
+relationship ManyToOne {
+  Caisse{entiteFinanciere required} to EntiteFinanciere,
+
+  Categorie{entiteFinanciere required} to EntiteFinanciere,
+
+  Recette{entiteFinanciere required} to EntiteFinanciere,
+  Recette{caisse required} to Caisse,
+  Recette{categorie required} to Categorie,
+
+  Depense{entiteFinanciere required} to EntiteFinanciere,
+  Depense{caisse required} to Caisse,
+  Depense{categorie required} to Categorie,
+
+  Transfert{entiteFinanciereSource required} to EntiteFinanciere,
+  Transfert{caisseSource required} to Caisse,
+  Transfert{caisseDestination required} to Caisse,
+
+  // Lien vers User JHipster
+  AffectationUtilisateur{user required} to User with builtInEntity,
+  AffectationUtilisateur{entiteFinanciere required} to EntiteFinanciere,
+
+  LigneEcriture{ecriture required} to EcritureComptable,
+  LigneEcriture{compte required} to CompteComptable
+}
+
+relationship OneToMany {
+  EntiteFinanciere to Caisse{entiteFinanciere},
+  EntiteFinanciere to Categorie{entiteFinanciere},
+  EcritureComptable to LigneEcriture{ecriture}
+}
+
+relationship ManyToMany {
+  // Structures nationales/régionales liées à plusieurs églises (RG-22)
+  EntiteFinanciere{egliseLiee} to EntiteFinanciere{structureLiee},
+
+  Profil{droit} to Droit{profil},
+
+  AffectationUtilisateur{profil} to Profil{affectation}
+}
+
+// ==========================================
+// CONFIGURATION TECHNIQUE
+// ==========================================
+
+filter Recette, Depense, Transfert, AffectationUtilisateur, Caisse, Categorie, EcritureComptable, LigneEcriture, CompteComptable
+
+paginate * with pagination
+service * with serviceImpl
+dto * with mapstruct

@@ -36,11 +36,34 @@
               "src/main/webapp/robots.txt"
             ],
             "styles": [
+              "src/main/webapp/content/public/assets/css/bootstrap.min.css",
+
+              "src/main/webapp/content/public/assets/css/fonts.min.css",
+              "src/main/webapp/content/public/assets/css/kaiadmin.min.css",
+              "src/main/webapp/content/public/assets/css/demo.css",
               "src/main/webapp/content/scss/vendor.scss",
-              "src/main/webapp/content/scss/global.scss",
-              "src/main/webapp/content/public/assets/css/kaiadmin.css"
+              "src/main/webapp/content/scss/global.scss"
             ],
-            "scripts": ["src/main/webapp/content/public/assets/js/kaiadmin.js"]
+            "scripts": [
+              "src/main/webapp/content/public/assets/js/plugin/webfont/webfont.min.js",
+
+              "src/main/webapp/content/public/assets/js/core/jquery-3.7.1.min.js",
+              "src/main/webapp/content/public/assets/js/core/popper.min.js",
+              "src/main/webapp/content/public/assets/js/core/bootstrap.min.js",
+
+              "src/main/webapp/content/public/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/chart.js/chart.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/chart-circle/circles.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/datatables/datatables.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/sweetalert/sweetalert.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/jsvectormap/jsvectormap.min.js",
+              "src/main/webapp/content/public/assets/js/plugin/jsvectormap/world.js",
+
+              "src/main/webapp/content/public/assets/js/kaiadmin.min.js"
+            ],
+            "allowedCommonJsDependencies": ["jquery", "chart.js", "sweetalert"]
           },
           "configurations": {
             "production": {
@@ -56,8 +79,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

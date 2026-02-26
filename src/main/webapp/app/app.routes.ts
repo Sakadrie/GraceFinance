@@ -5,6 +5,7 @@ import { Authority } from 'app/config/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { errorRoute } from './layouts/error/error.route';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { DashboardComponent } from './administration/dashboard/dashboard/dashboard.component';
 
 const routes: Routes = [
   // {
@@ -41,17 +42,11 @@ const routes: Routes = [
   // ...errorRoute,
   {
     path: '',
-    component: AdminLayoutComponent,
-    // canActivate: [AuthGuard],
-    resolve: {
-      // account: AccountDataResolve,
-    },
+    component: AdminLayoutComponent, // 👈 layout parent
     children: [
-      // { path: '', redirectTo: '/auth/signin', pathMatch: 'full' },
-      {
-        path: 'admin',
-        loadChildren: () => import('./administration/administration.routes').then(m => m.ADMINISTRATION_ROUTE),
-      },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: DashboardComponent },
+      // ajouter tes autres pages ici
     ],
   },
   // {
