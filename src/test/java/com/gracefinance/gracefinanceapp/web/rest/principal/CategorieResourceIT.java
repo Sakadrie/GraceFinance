@@ -1,4 +1,4 @@
-package com.gracefinance.gracefinanceapp.web.rest.referentiel;
+package com.gracefinance.gracefinanceapp.web.rest.principal;
 
 import static com.gracefinance.gracefinanceapp.domain.principal.CategorieAsserts.assertCategorieUpdatableFieldsEquals;
 import static com.gracefinance.gracefinanceapp.web.rest.TestUtil.createUpdateProxyForBean;
@@ -15,7 +15,7 @@ import com.gracefinance.gracefinanceapp.repository.principal.EntiteFinanciereRep
 import com.gracefinance.gracefinanceapp.repository.referentiel.CategorieRepository;
 import com.gracefinance.gracefinanceapp.service.dto.referentiel.CategorieDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.referentiel.CategorieMapper;
-import com.gracefinance.gracefinanceapp.web.rest.principal.EntiteFinanciereResourceIT;
+import com.gracefinance.gracefinanceapp.web.rest.referentiel.CategorieResource;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.AfterEach;

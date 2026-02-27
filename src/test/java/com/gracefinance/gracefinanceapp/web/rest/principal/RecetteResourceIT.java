@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.web.rest.principal;
 
-import static com.gracefinance.gracefinanceapp.domain.principal.RecetteAsserts.*;
+import static com.gracefinance.gracefinanceapp.domain.principal.RecetteAsserts.assertRecetteUpdatableFieldsEquals;
 import static com.gracefinance.gracefinanceapp.web.rest.TestUtil.createUpdateProxyForBean;
 import static com.gracefinance.gracefinanceapp.web.rest.TestUtil.sameNumber;
 import static org.assertj.core.api.Assertions.assertThat;
