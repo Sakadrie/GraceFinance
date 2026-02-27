@@ -1,0 +1,200 @@
+<div>
+  <h2 id="page-heading" data-cy="DepenseHeading">
+    <span jhiTranslate="graceFinanceApp.depense.home.title">Depenses</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="graceFinanceApp.depense.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-depense"
+        [routerLink]="['/depense/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="graceFinanceApp.depense.home.createLabel">Créer un nouveau Depense</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  <jhi-filter [filters]="filters" />
+
+  @if (depenses().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="graceFinanceApp.depense.home.notFound">Aucun Depense trouvé</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="code">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.code">Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateDepense">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.dateDepense">Date Depense</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="montant">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.montant">Montant</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="motif">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.motif">Motif</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="referencePiece">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.referencePiece">Reference Piece</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="statut">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.statut">Statut</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="validerPar">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.validerPar">Valider Par</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="dateValidation">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.dateValidation">Date Validation</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="entiteFinanciere.id">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.entiteFinanciere">Entite Financiere</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="caisse.id">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.caisse">Caisse</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="categorie.id">
+              <div class="d-flex">
+                <span jhiTranslate="graceFinanceApp.depense.categorie">Categorie</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (depense of depenses(); track trackId(depense)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/depense', depense.id, 'view']">{{ depense.id }}</a>
+              </td>
+              <td>{{ depense.code }}</td>
+              <td>{{ depense.dateDepense | formatMediumDate }}</td>
+              <td>{{ depense.montant }}</td>
+              <td>{{ depense.motif }}</td>
+              <td>{{ depense.referencePiece }}</td>
+              <td>{{ depense.statut }}</td>
+              <td>{{ depense.validerPar }}</td>
+              <td>{{ depense.dateValidation | formatMediumDatetime }}</td>
+              <td>
+                @if (depense.entiteFinanciere) {
+                  <div>
+                    <a [routerLink]="['/entite-financiere', depense.entiteFinanciere.id, 'view']">{{ depense.entiteFinanciere.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (depense.caisse) {
+                  <div>
+                    <a [routerLink]="['/caisse', depense.caisse.id, 'view']">{{ depense.caisse.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (depense.categorie) {
+                  <div>
+                    <a [routerLink]="['/categorie', depense.categorie.id, 'view']">{{ depense.categorie.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/depense', depense.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/depense', depense.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(depense)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (depenses().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

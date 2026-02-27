@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (transfert(); as transfertRef) {
+      <div>
+        <h2 data-cy="transfertDetailsHeading"><span jhiTranslate="graceFinanceApp.transfert.detail.title">Transfert</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ transfertRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.code">Code</span></dt>
+          <dd>
+            <span>{{ transfertRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.dateTransfert">Date Transfert</span></dt>
+          <dd>
+            <span>{{ transfertRef.dateTransfert | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.montant">Montant</span></dt>
+          <dd>
+            <span>{{ transfertRef.montant }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.motif">Motif</span></dt>
+          <dd>
+            <span>{{ transfertRef.motif }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.typeTransfert">Type Transfert</span></dt>
+          <dd>
+            <span>{{ transfertRef.typeTransfert }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.statut">Statut</span></dt>
+          <dd>
+            <span>{{ transfertRef.statut }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.validerPar">Valider Par</span></dt>
+          <dd>
+            <span>{{ transfertRef.validerPar }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.dateValidation">Date Validation</span></dt>
+          <dd>
+            <span>{{ transfertRef.dateValidation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.entiteFinanciereSource">Entite Financiere Source</span></dt>
+          <dd>
+            @if (transfert()!.entiteFinanciereSource) {
+              <div>
+                <a [routerLink]="['/entite-financiere', transfert()!.entiteFinanciereSource?.id, 'view']">{{
+                  transfertRef.entiteFinanciereSource?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.caisseSource">Caisse Source</span></dt>
+          <dd>
+            @if (transfert()!.caisseSource) {
+              <div>
+                <a [routerLink]="['/caisse', transfert()!.caisseSource?.id, 'view']">{{ transfertRef.caisseSource?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.transfert.caisseDestination">Caisse Destination</span></dt>
+          <dd>
+            @if (transfert()!.caisseDestination) {
+              <div>
+                <a [routerLink]="['/caisse', transfert()!.caisseDestination?.id, 'view']">{{ transfertRef.caisseDestination?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/transfert', transfertRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

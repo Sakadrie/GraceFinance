@@ -1,0 +1,246 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-recette-heading" data-cy="RecetteCreateUpdateHeading" jhiTranslate="graceFinanceApp.recette.home.createOrEditLabel">
+        Créer ou éditer un Recette
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="graceFinanceApp.recette.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let codeRef = editForm.get('code')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_code" jhiTranslate="graceFinanceApp.recette.code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          @if (codeRef.invalid && (codeRef.dirty || codeRef.touched)) {
+            <div>
+              @if (editForm.get('code')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let dateRecetteRef = editForm.get('dateRecette')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateRecette" jhiTranslate="graceFinanceApp.recette.dateRecette">Date Recette</label>
+          <div class="input-group">
+            <input
+              id="field_dateRecette"
+              data-cy="dateRecette"
+              type="text"
+              class="form-control"
+              name="dateRecette"
+              ngbDatepicker
+              #dateRecetteDp="ngbDatepicker"
+              formControlName="dateRecette"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateRecetteDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (dateRecetteRef.invalid && (dateRecetteRef.dirty || dateRecetteRef.touched)) {
+            <div>
+              @if (editForm.get('dateRecette')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let montantRef = editForm.get('montant')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_montant" jhiTranslate="graceFinanceApp.recette.montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+          @if (montantRef.invalid && (montantRef.dirty || montantRef.touched)) {
+            <div>
+              @if (editForm.get('montant')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('montant')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Ce champ doit être un nombre.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let typeRecetteRef = editForm.get('typeRecette')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_typeRecette" jhiTranslate="graceFinanceApp.recette.typeRecette">Type Recette</label>
+          <input
+            type="text"
+            class="form-control"
+            name="typeRecette"
+            id="field_typeRecette"
+            data-cy="typeRecette"
+            formControlName="typeRecette"
+          />
+          @if (typeRecetteRef.invalid && (typeRecetteRef.dirty || typeRecetteRef.touched)) {
+            <div>
+              @if (editForm.get('typeRecette')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let anonymeRef = editForm.get('anonyme')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_anonyme" jhiTranslate="graceFinanceApp.recette.anonyme">Anonyme</label>
+          <input type="checkbox" class="form-check" name="anonyme" id="field_anonyme" data-cy="anonyme" formControlName="anonyme" />
+          @if (anonymeRef.invalid && (anonymeRef.dirty || anonymeRef.touched)) {
+            <div>
+              @if (editForm.get('anonyme')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_membreNom" jhiTranslate="graceFinanceApp.recette.membreNom">Membre Nom</label>
+          <input type="text" class="form-control" name="membreNom" id="field_membreNom" data-cy="membreNom" formControlName="membreNom" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_motif" jhiTranslate="graceFinanceApp.recette.motif">Motif</label>
+          <input type="text" class="form-control" name="motif" id="field_motif" data-cy="motif" formControlName="motif" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_referencePiece" jhiTranslate="graceFinanceApp.recette.referencePiece">Reference Piece</label>
+          <input
+            type="text"
+            class="form-control"
+            name="referencePiece"
+            id="field_referencePiece"
+            data-cy="referencePiece"
+            formControlName="referencePiece"
+          />
+        </div>
+
+        @let statutRef = editForm.get('statut')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_statut" jhiTranslate="graceFinanceApp.recette.statut">Statut</label>
+          <input type="text" class="form-control" name="statut" id="field_statut" data-cy="statut" formControlName="statut" />
+          @if (statutRef.invalid && (statutRef.dirty || statutRef.touched)) {
+            <div>
+              @if (editForm.get('statut')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_entiteFinanciere" jhiTranslate="graceFinanceApp.recette.entiteFinanciere"
+            >Entite Financiere</label
+          >
+          <select
+            class="form-control"
+            id="field_entiteFinanciere"
+            data-cy="entiteFinanciere"
+            name="entiteFinanciere"
+            formControlName="entiteFinanciere"
+            [compareWith]="compareEntiteFinanciere"
+          >
+            @if (!editForm.get('entiteFinanciere')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (entiteFinanciereOption of entiteFinancieresSharedCollection; track $index) {
+              <option [ngValue]="entiteFinanciereOption">{{ entiteFinanciereOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['entiteFinanciere'])!.invalid &&
+          (editForm.get(['entiteFinanciere'])!.dirty || editForm.get(['entiteFinanciere'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['entiteFinanciere'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_caisse" jhiTranslate="graceFinanceApp.recette.caisse">Caisse</label>
+          <select
+            class="form-control"
+            id="field_caisse"
+            data-cy="caisse"
+            name="caisse"
+            formControlName="caisse"
+            [compareWith]="compareCaisse"
+          >
+            @if (!editForm.get('caisse')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (caisseOption of caissesSharedCollection; track $index) {
+              <option [ngValue]="caisseOption">{{ caisseOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['caisse'])!.invalid && (editForm.get(['caisse'])!.dirty || editForm.get(['caisse'])!.touched)) {
+          <div>
+            @if (editForm.get(['caisse'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_categorie" jhiTranslate="graceFinanceApp.recette.categorie">Categorie</label>
+          <select
+            class="form-control"
+            id="field_categorie"
+            data-cy="categorie"
+            name="categorie"
+            formControlName="categorie"
+            [compareWith]="compareCategorie"
+          >
+            @if (!editForm.get('categorie')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (categorieOption of categoriesSharedCollection; track $index) {
+              <option [ngValue]="categorieOption">{{ categorieOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['categorie'])!.invalid && (editForm.get(['categorie'])!.dirty || editForm.get(['categorie'])!.touched)) {
+          <div>
+            @if (editForm.get(['categorie'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

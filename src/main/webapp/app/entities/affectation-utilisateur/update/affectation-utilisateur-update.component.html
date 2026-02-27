@@ -1,0 +1,149 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-affectation-utilisateur-heading"
+        data-cy="AffectationUtilisateurCreateUpdateHeading"
+        jhiTranslate="graceFinanceApp.affectationUtilisateur.home.createOrEditLabel"
+      >
+        Créer ou éditer un Affectation Utilisateur
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="graceFinanceApp.affectationUtilisateur.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let actifRef = editForm.get('actif')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_actif" jhiTranslate="graceFinanceApp.affectationUtilisateur.actif">Actif</label>
+          <input type="checkbox" class="form-check" name="actif" id="field_actif" data-cy="actif" formControlName="actif" />
+          @if (actifRef.invalid && (actifRef.dirty || actifRef.touched)) {
+            <div>
+              @if (editForm.get('actif')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let dateAffectationRef = editForm.get('dateAffectation')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateAffectation" jhiTranslate="graceFinanceApp.affectationUtilisateur.dateAffectation"
+            >Date Affectation</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateAffectation"
+              data-cy="dateAffectation"
+              type="text"
+              class="form-control"
+              name="dateAffectation"
+              ngbDatepicker
+              #dateAffectationDp="ngbDatepicker"
+              formControlName="dateAffectation"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateAffectationDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (dateAffectationRef.invalid && (dateAffectationRef.dirty || dateAffectationRef.touched)) {
+            <div>
+              @if (editForm.get('dateAffectation')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_user" jhiTranslate="graceFinanceApp.affectationUtilisateur.user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareUser">
+            @if (!editForm.get('user')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (userOption of usersSharedCollection; track $index) {
+              <option [ngValue]="userOption">{{ userOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['user'])!.invalid && (editForm.get(['user'])!.dirty || editForm.get(['user'])!.touched)) {
+          <div>
+            @if (editForm.get(['user'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_entiteFinanciere" jhiTranslate="graceFinanceApp.affectationUtilisateur.entiteFinanciere"
+            >Entite Financiere</label
+          >
+          <select
+            class="form-control"
+            id="field_entiteFinanciere"
+            data-cy="entiteFinanciere"
+            name="entiteFinanciere"
+            formControlName="entiteFinanciere"
+            [compareWith]="compareEntiteFinanciere"
+          >
+            @if (!editForm.get('entiteFinanciere')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (entiteFinanciereOption of entiteFinancieresSharedCollection; track $index) {
+              <option [ngValue]="entiteFinanciereOption">{{ entiteFinanciereOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (
+          editForm.get(['entiteFinanciere'])!.invalid &&
+          (editForm.get(['entiteFinanciere'])!.dirty || editForm.get(['entiteFinanciere'])!.touched)
+        ) {
+          <div>
+            @if (editForm.get(['entiteFinanciere'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label for="field_profils" jhiTranslate="graceFinanceApp.affectationUtilisateur.profil">Profil</label>
+          <select
+            class="form-control"
+            id="field_profils"
+            data-cy="profil"
+            multiple
+            name="profils"
+            formControlName="profils"
+            [compareWith]="compareProfil"
+          >
+            @for (profilOption of profilsSharedCollection; track $index) {
+              <option [ngValue]="profilOption">{{ profilOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

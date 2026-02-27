@@ -1,0 +1,129 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-ligne-ecriture-heading"
+        data-cy="LigneEcritureCreateUpdateHeading"
+        jhiTranslate="graceFinanceApp.ligneEcriture.home.createOrEditLabel"
+      >
+        Créer ou éditer un Ligne Ecriture
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="graceFinanceApp.ligneEcriture.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let montantRef = editForm.get('montant')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_montant" jhiTranslate="graceFinanceApp.ligneEcriture.montant">Montant</label>
+          <input type="number" class="form-control" name="montant" id="field_montant" data-cy="montant" formControlName="montant" />
+          @if (montantRef.invalid && (montantRef.dirty || montantRef.touched)) {
+            <div>
+              @if (editForm.get('montant')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('montant')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >Ce champ doit être un nombre.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let sensRef = editForm.get('sens')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_sens" jhiTranslate="graceFinanceApp.ligneEcriture.sens">Sens</label>
+          <input type="text" class="form-control" name="sens" id="field_sens" data-cy="sens" formControlName="sens" />
+          @if (sensRef.invalid && (sensRef.dirty || sensRef.touched)) {
+            <div>
+              @if (editForm.get('sens')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_libelle" jhiTranslate="graceFinanceApp.ligneEcriture.libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ecriture" jhiTranslate="graceFinanceApp.ligneEcriture.ecriture">Ecriture</label>
+          <select
+            class="form-control"
+            id="field_ecriture"
+            data-cy="ecriture"
+            name="ecriture"
+            formControlName="ecriture"
+            [compareWith]="compareEcritureComptable"
+          >
+            @if (!editForm.get('ecriture')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (ecritureComptableOption of ecritureComptablesSharedCollection; track $index) {
+              <option [ngValue]="ecritureComptableOption">{{ ecritureComptableOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['ecriture'])!.invalid && (editForm.get(['ecriture'])!.dirty || editForm.get(['ecriture'])!.touched)) {
+          <div>
+            @if (editForm.get(['ecriture'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_compte" jhiTranslate="graceFinanceApp.ligneEcriture.compte">Compte</label>
+          <select
+            class="form-control"
+            id="field_compte"
+            data-cy="compte"
+            name="compte"
+            formControlName="compte"
+            [compareWith]="compareCompteComptable"
+          >
+            @if (!editForm.get('compte')!.value) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (compteComptableOption of compteComptablesSharedCollection; track $index) {
+              <option [ngValue]="compteComptableOption">{{ compteComptableOption.id }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['compte'])!.invalid && (editForm.get(['compte'])!.dirty || editForm.get(['compte'])!.touched)) {
+          <div>
+            @if (editForm.get(['compte'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

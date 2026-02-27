@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (affectationUtilisateur(); as affectationUtilisateurRef) {
+      <div>
+        <h2 data-cy="affectationUtilisateurDetailsHeading">
+          <span jhiTranslate="graceFinanceApp.affectationUtilisateur.detail.title">Affectation Utilisateur</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ affectationUtilisateurRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.affectationUtilisateur.actif">Actif</span></dt>
+          <dd>
+            <span>{{ affectationUtilisateurRef.actif }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.affectationUtilisateur.dateAffectation">Date Affectation</span></dt>
+          <dd>
+            <span>{{ affectationUtilisateurRef.dateAffectation | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.affectationUtilisateur.user">User</span></dt>
+          <dd>
+            <span>{{ affectationUtilisateurRef.user?.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.affectationUtilisateur.entiteFinanciere">Entite Financiere</span></dt>
+          <dd>
+            @if (affectationUtilisateur()!.entiteFinanciere) {
+              <div>
+                <a [routerLink]="['/entite-financiere', affectationUtilisateur()!.entiteFinanciere?.id, 'view']">{{
+                  affectationUtilisateurRef.entiteFinanciere?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.affectationUtilisateur.profil">Profil</span></dt>
+          <dd>
+            @for (profil of affectationUtilisateurRef.profils; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/profil', profil.id, 'view']">{{ profil?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/affectation-utilisateur', affectationUtilisateurRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

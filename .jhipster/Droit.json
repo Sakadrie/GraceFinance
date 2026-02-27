@@ -1,0 +1,36 @@
+{
+  "annotations": {
+    "changelogDate": "20260226094910"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Droit",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "profil",
+      "otherEntityRelationshipName": "droit",
+      "relationshipName": "profil",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

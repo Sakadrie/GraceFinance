@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (droit(); as droitRef) {
+      <div>
+        <h2 data-cy="droitDetailsHeading"><span jhiTranslate="graceFinanceApp.droit.detail.title">Droit</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ droitRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.droit.nom">Nom</span></dt>
+          <dd>
+            <span>{{ droitRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.droit.code">Code</span></dt>
+          <dd>
+            <span>{{ droitRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.droit.description">Description</span></dt>
+          <dd>
+            <span>{{ droitRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.droit.profil">Profil</span></dt>
+          <dd>
+            @for (profil of droitRef.profils; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/profil', profil.id, 'view']">{{ profil?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/droit', droitRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

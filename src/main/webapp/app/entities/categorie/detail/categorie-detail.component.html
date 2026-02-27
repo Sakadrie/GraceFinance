@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (categorie(); as categorieRef) {
+      <div>
+        <h2 data-cy="categorieDetailsHeading"><span jhiTranslate="graceFinanceApp.categorie.detail.title">Categorie</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ categorieRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.categorie.nom">Nom</span></dt>
+          <dd>
+            <span>{{ categorieRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.categorie.code">Code</span></dt>
+          <dd>
+            <span>{{ categorieRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.categorie.typeCategorie">Type Categorie</span></dt>
+          <dd>
+            <span>{{ categorieRef.typeCategorie }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.categorie.description">Description</span></dt>
+          <dd>
+            <span>{{ categorieRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.categorie.actif">Actif</span></dt>
+          <dd>
+            <span>{{ categorieRef.actif }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.categorie.entiteFinanciere">Entite Financiere</span></dt>
+          <dd>
+            @if (categorie()!.entiteFinanciere) {
+              <div>
+                <a [routerLink]="['/entite-financiere', categorie()!.entiteFinanciere?.id, 'view']">{{
+                  categorieRef.entiteFinanciere?.id
+                }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/categorie', categorieRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

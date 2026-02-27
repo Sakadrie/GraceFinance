@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ecritureComptable(); as ecritureComptableRef) {
+      <div>
+        <h2 data-cy="ecritureComptableDetailsHeading">
+          <span jhiTranslate="graceFinanceApp.ecritureComptable.detail.title">Ecriture Comptable</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ ecritureComptableRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ecritureComptable.dateComptable">Date Comptable</span></dt>
+          <dd>
+            <span>{{ ecritureComptableRef.dateComptable | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ecritureComptable.numeroPiece">Numero Piece</span></dt>
+          <dd>
+            <span>{{ ecritureComptableRef.numeroPiece }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ecritureComptable.libelle">Libelle</span></dt>
+          <dd>
+            <span>{{ ecritureComptableRef.libelle }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ecritureComptable.referenceExterne">Reference Externe</span></dt>
+          <dd>
+            <span>{{ ecritureComptableRef.referenceExterne }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ecriture-comptable', ecritureComptableRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

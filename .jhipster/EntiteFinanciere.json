@@ -1,0 +1,54 @@
+{
+  "annotations": {
+    "changelogDate": "20260226094904"
+  },
+  "applications": "*",
+  "documentation": "APPLICATION: Gestion Financière d'Église (Norme SYSCOHADA)\\nVersion: 1.0",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "actif",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "EntiteFinanciere",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "entiteFinanciere",
+      "otherEntityRelationshipName": "structureLiee",
+      "relationshipName": "egliseLiee",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "entiteFinanciere",
+      "otherEntityRelationshipName": "egliseLiee",
+      "relationshipName": "structureLiee",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

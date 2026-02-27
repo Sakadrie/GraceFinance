@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (depense(); as depenseRef) {
+      <div>
+        <h2 data-cy="depenseDetailsHeading"><span jhiTranslate="graceFinanceApp.depense.detail.title">Depense</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ depenseRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.code">Code</span></dt>
+          <dd>
+            <span>{{ depenseRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.dateDepense">Date Depense</span></dt>
+          <dd>
+            <span>{{ depenseRef.dateDepense | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.montant">Montant</span></dt>
+          <dd>
+            <span>{{ depenseRef.montant }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.motif">Motif</span></dt>
+          <dd>
+            <span>{{ depenseRef.motif }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.referencePiece">Reference Piece</span></dt>
+          <dd>
+            <span>{{ depenseRef.referencePiece }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.statut">Statut</span></dt>
+          <dd>
+            <span>{{ depenseRef.statut }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.validerPar">Valider Par</span></dt>
+          <dd>
+            <span>{{ depenseRef.validerPar }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.dateValidation">Date Validation</span></dt>
+          <dd>
+            <span>{{ depenseRef.dateValidation | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.entiteFinanciere">Entite Financiere</span></dt>
+          <dd>
+            @if (depense()!.entiteFinanciere) {
+              <div>
+                <a [routerLink]="['/entite-financiere', depense()!.entiteFinanciere?.id, 'view']">{{ depenseRef.entiteFinanciere?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.caisse">Caisse</span></dt>
+          <dd>
+            @if (depense()!.caisse) {
+              <div>
+                <a [routerLink]="['/caisse', depense()!.caisse?.id, 'view']">{{ depenseRef.caisse?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.depense.categorie">Categorie</span></dt>
+          <dd>
+            @if (depense()!.categorie) {
+              <div>
+                <a [routerLink]="['/categorie', depense()!.categorie?.id, 'view']">{{ depenseRef.categorie?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/depense', depenseRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

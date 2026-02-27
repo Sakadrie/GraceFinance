@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-ecriture-comptable-heading"
+        data-cy="EcritureComptableCreateUpdateHeading"
+        jhiTranslate="graceFinanceApp.ecritureComptable.home.createOrEditLabel"
+      >
+        Créer ou éditer un Ecriture Comptable
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="graceFinanceApp.ecritureComptable.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let dateComptableRef = editForm.get('dateComptable')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_dateComptable" jhiTranslate="graceFinanceApp.ecritureComptable.dateComptable"
+            >Date Comptable</label
+          >
+          <div class="input-group">
+            <input
+              id="field_dateComptable"
+              data-cy="dateComptable"
+              type="text"
+              class="form-control"
+              name="dateComptable"
+              ngbDatepicker
+              #dateComptableDp="ngbDatepicker"
+              formControlName="dateComptable"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateComptableDp.toggle()">
+              <fa-icon icon="calendar-alt"></fa-icon>
+            </button>
+          </div>
+          @if (dateComptableRef.invalid && (dateComptableRef.dirty || dateComptableRef.touched)) {
+            <div>
+              @if (editForm.get('dateComptable')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        @let numeroPieceRef = editForm.get('numeroPiece')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_numeroPiece" jhiTranslate="graceFinanceApp.ecritureComptable.numeroPiece"
+            >Numero Piece</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="numeroPiece"
+            id="field_numeroPiece"
+            data-cy="numeroPiece"
+            formControlName="numeroPiece"
+          />
+          @if (numeroPieceRef.invalid && (numeroPieceRef.dirty || numeroPieceRef.touched)) {
+            <div>
+              @if (editForm.get('numeroPiece')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">Ce champ est obligatoire.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_libelle" jhiTranslate="graceFinanceApp.ecritureComptable.libelle">Libelle</label>
+          <input type="text" class="form-control" name="libelle" id="field_libelle" data-cy="libelle" formControlName="libelle" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_referenceExterne" jhiTranslate="graceFinanceApp.ecritureComptable.referenceExterne"
+            >Reference Externe</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="referenceExterne"
+            id="field_referenceExterne"
+            data-cy="referenceExterne"
+            formControlName="referenceExterne"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Annuler</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Sauvegarder</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

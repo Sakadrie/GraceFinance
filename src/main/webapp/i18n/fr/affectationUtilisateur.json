@@ -1,0 +1,28 @@
+{
+  "graceFinanceApp": {
+    "affectationUtilisateur": {
+      "home": {
+        "title": "AffectationUtilisateurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Affectation Utilisateur",
+        "createOrEditLabel": "Créer ou éditer un Affectation Utilisateur",
+        "notFound": "Aucun Affectation Utilisateur trouvé"
+      },
+      "created": "Un nouveau Affectation Utilisateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Affectation Utilisateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Affectation Utilisateur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Affectation Utilisateur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Affectation Utilisateur"
+      },
+      "id": "ID",
+      "actif": "Actif",
+      "dateAffectation": "Date Affectation",
+      "user": "User",
+      "entiteFinanciere": "Entite Financiere",
+      "profil": "Profil"
+    }
+  }
+}

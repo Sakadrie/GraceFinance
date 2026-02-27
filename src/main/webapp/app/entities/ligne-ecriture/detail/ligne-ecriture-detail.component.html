@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (ligneEcriture(); as ligneEcritureRef) {
+      <div>
+        <h2 data-cy="ligneEcritureDetailsHeading"><span jhiTranslate="graceFinanceApp.ligneEcriture.detail.title">Ligne Ecriture</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ ligneEcritureRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ligneEcriture.montant">Montant</span></dt>
+          <dd>
+            <span>{{ ligneEcritureRef.montant }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ligneEcriture.sens">Sens</span></dt>
+          <dd>
+            <span>{{ ligneEcritureRef.sens }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ligneEcriture.libelle">Libelle</span></dt>
+          <dd>
+            <span>{{ ligneEcritureRef.libelle }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ligneEcriture.ecriture">Ecriture</span></dt>
+          <dd>
+            @if (ligneEcriture()!.ecriture) {
+              <div>
+                <a [routerLink]="['/ecriture-comptable', ligneEcriture()!.ecriture?.id, 'view']">{{ ligneEcritureRef.ecriture?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.ligneEcriture.compte">Compte</span></dt>
+          <dd>
+            @if (ligneEcriture()!.compte) {
+              <div>
+                <a [routerLink]="['/compte-comptable', ligneEcriture()!.compte?.id, 'view']">{{ ligneEcritureRef.compte?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/ligne-ecriture', ligneEcritureRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

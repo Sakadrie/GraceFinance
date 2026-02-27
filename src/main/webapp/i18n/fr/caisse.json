@@ -1,0 +1,30 @@
+{
+  "graceFinanceApp": {
+    "caisse": {
+      "home": {
+        "title": "Caisses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Caisse",
+        "createOrEditLabel": "Créer ou éditer un Caisse",
+        "notFound": "Aucun Caisse trouvé"
+      },
+      "created": "Un nouveau Caisse a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Caisse avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Caisse avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Caisse {{ id }} ?"
+      },
+      "detail": {
+        "title": "Caisse"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "code": "Code",
+      "type": "Type",
+      "devise": "Devise",
+      "solde": "Solde",
+      "actif": "Actif",
+      "entiteFinanciere": "Entite Financiere"
+    }
+  }
+}

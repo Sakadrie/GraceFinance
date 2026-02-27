@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20260226094911"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Profil",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "droit",
+      "otherEntityRelationshipName": "profil",
+      "relationshipName": "droit",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "affectationUtilisateur",
+      "otherEntityRelationshipName": "profil",
+      "relationshipName": "affectation",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

@@ -1,0 +1,70 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (entiteFinanciere(); as entiteFinanciereRef) {
+      <div>
+        <h2 data-cy="entiteFinanciereDetailsHeading">
+          <span jhiTranslate="graceFinanceApp.entiteFinanciere.detail.title">Entite Financiere</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ entiteFinanciereRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.nom">Nom</span></dt>
+          <dd>
+            <span>{{ entiteFinanciereRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.code">Code</span></dt>
+          <dd>
+            <span>{{ entiteFinanciereRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.type">Type</span></dt>
+          <dd>
+            <span>{{ entiteFinanciereRef.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.description">Description</span></dt>
+          <dd>
+            <span>{{ entiteFinanciereRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.actif">Actif</span></dt>
+          <dd>
+            <span>{{ entiteFinanciereRef.actif }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.egliseLiee">Eglise Liee</span></dt>
+          <dd>
+            @for (egliseLiee of entiteFinanciereRef.egliseLiees; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/entite-financiere', egliseLiee.id, 'view']">{{ egliseLiee?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.entiteFinanciere.structureLiee">Structure Liee</span></dt>
+          <dd>
+            @for (structureLiee of entiteFinanciereRef.structureLiees; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/entite-financiere', structureLiee.id, 'view']">{{ structureLiee?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/entite-financiere', entiteFinanciereRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

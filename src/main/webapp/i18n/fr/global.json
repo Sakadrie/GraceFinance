@@ -8,7 +8,18 @@
       "entities": {
         "main": "Entités",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "entiteFinanciere": "Entite Financiere",
+        "caisse": "Caisse",
+        "categorie": "Categorie",
+        "recette": "Recette",
+        "depense": "Depense",
+        "transfert": "Transfert",
+        "droit": "Droit",
+        "profil": "Profil",
+        "affectationUtilisateur": "Affectation Utilisateur",
+        "compteComptable": "Compte Comptable",
+        "ecritureComptable": "Ecriture Comptable",
+        "ligneEcriture": "Ligne Ecriture"
       },
       "account": {
         "main": "Compte",

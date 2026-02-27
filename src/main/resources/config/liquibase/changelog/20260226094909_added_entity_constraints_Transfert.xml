@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity Transfert.
+    -->
+    <changeSet id="20260226094909-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="entite_financiere_source_id"
+                                 baseTableName="transfert"
+                                 constraintName="fk_transfert__entite_financiere_source_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entite_financiere"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="caisse_source_id"
+                                 baseTableName="transfert"
+                                 constraintName="fk_transfert__caisse_source_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="caisse"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="caisse_destination_id"
+                                 baseTableName="transfert"
+                                 constraintName="fk_transfert__caisse_destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="caisse"
+                                 />
+    </changeSet>
+</databaseChangeLog>

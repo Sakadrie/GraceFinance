@@ -1,0 +1,28 @@
+{
+  "graceFinanceApp": {
+    "ligneEcriture": {
+      "home": {
+        "title": "LigneEcritures",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Ligne Ecriture",
+        "createOrEditLabel": "Créer ou éditer un Ligne Ecriture",
+        "notFound": "Aucun Ligne Ecriture trouvé"
+      },
+      "created": "Un nouveau Ligne Ecriture a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Ligne Ecriture avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Ligne Ecriture avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Ligne Ecriture {{ id }} ?"
+      },
+      "detail": {
+        "title": "Ligne Ecriture"
+      },
+      "id": "ID",
+      "montant": "Montant",
+      "sens": "Sens",
+      "libelle": "Libelle",
+      "ecriture": "Ecriture",
+      "compte": "Compte"
+    }
+  }
+}

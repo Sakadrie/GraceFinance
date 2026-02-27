@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity AffectationUtilisateur.
+    -->
+    <changeSet id="20260226094912-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="affectation_utilisateur"
+                                 constraintName="fk_affectation_utilisateur__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="entite_financiere_id"
+                                 baseTableName="affectation_utilisateur"
+                                 constraintName="fk_affectation_utilisateur__entite_financiere_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entite_financiere"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="affectation_utilisateur_id"
+                                 baseTableName="rel_affectation_utilisateur__profil"
+                                 constraintName="fk_rel_affectation_utilisateur___affectation_utilisateur_a2_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="affectation_utilisateur"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="profil_id"
+                                 baseTableName="rel_affectation_utilisateur__profil"
+                                 constraintName="fk_rel_affectation_utilisateur__profil__profil_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profil"
+                                 />
+    </changeSet>
+</databaseChangeLog>

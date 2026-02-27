@@ -1,0 +1,34 @@
+{
+  "graceFinanceApp": {
+    "transfert": {
+      "home": {
+        "title": "Transferts",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Transfert",
+        "createOrEditLabel": "Créer ou éditer un Transfert",
+        "notFound": "Aucun Transfert trouvé"
+      },
+      "created": "Un nouveau Transfert a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Transfert avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Transfert avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Transfert {{ id }} ?"
+      },
+      "detail": {
+        "title": "Transfert"
+      },
+      "id": "ID",
+      "code": "Code",
+      "dateTransfert": "Date Transfert",
+      "montant": "Montant",
+      "motif": "Motif",
+      "typeTransfert": "Type Transfert",
+      "statut": "Statut",
+      "validerPar": "Valider Par",
+      "dateValidation": "Date Validation",
+      "entiteFinanciereSource": "Entite Financiere Source",
+      "caisseSource": "Caisse Source",
+      "caisseDestination": "Caisse Destination"
+    }
+  }
+}

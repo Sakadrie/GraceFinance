@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (recette(); as recetteRef) {
+      <div>
+        <h2 data-cy="recetteDetailsHeading"><span jhiTranslate="graceFinanceApp.recette.detail.title">Recette</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ recetteRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.code">Code</span></dt>
+          <dd>
+            <span>{{ recetteRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.dateRecette">Date Recette</span></dt>
+          <dd>
+            <span>{{ recetteRef.dateRecette | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.montant">Montant</span></dt>
+          <dd>
+            <span>{{ recetteRef.montant }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.typeRecette">Type Recette</span></dt>
+          <dd>
+            <span>{{ recetteRef.typeRecette }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.anonyme">Anonyme</span></dt>
+          <dd>
+            <span>{{ recetteRef.anonyme }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.membreNom">Membre Nom</span></dt>
+          <dd>
+            <span>{{ recetteRef.membreNom }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.motif">Motif</span></dt>
+          <dd>
+            <span>{{ recetteRef.motif }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.referencePiece">Reference Piece</span></dt>
+          <dd>
+            <span>{{ recetteRef.referencePiece }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.statut">Statut</span></dt>
+          <dd>
+            <span>{{ recetteRef.statut }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.entiteFinanciere">Entite Financiere</span></dt>
+          <dd>
+            @if (recette()!.entiteFinanciere) {
+              <div>
+                <a [routerLink]="['/entite-financiere', recette()!.entiteFinanciere?.id, 'view']">{{ recetteRef.entiteFinanciere?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.caisse">Caisse</span></dt>
+          <dd>
+            @if (recette()!.caisse) {
+              <div>
+                <a [routerLink]="['/caisse', recette()!.caisse?.id, 'view']">{{ recetteRef.caisse?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.recette.categorie">Categorie</span></dt>
+          <dd>
+            @if (recette()!.categorie) {
+              <div>
+                <a [routerLink]="['/categorie', recette()!.categorie?.id, 'view']">{{ recetteRef.categorie?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/recette', recetteRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

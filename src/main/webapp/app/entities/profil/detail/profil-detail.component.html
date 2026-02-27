@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (profil(); as profilRef) {
+      <div>
+        <h2 data-cy="profilDetailsHeading"><span jhiTranslate="graceFinanceApp.profil.detail.title">Profil</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ profilRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.profil.nom">Nom</span></dt>
+          <dd>
+            <span>{{ profilRef.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.profil.code">Code</span></dt>
+          <dd>
+            <span>{{ profilRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.profil.description">Description</span></dt>
+          <dd>
+            <span>{{ profilRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.profil.droit">Droit</span></dt>
+          <dd>
+            @for (droit of profilRef.droits; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/droit', droit.id, 'view']">{{ droit?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="graceFinanceApp.profil.affectation">Affectation</span></dt>
+          <dd>
+            @for (affectation of profilRef.affectations; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/affectation-utilisateur', affectation.id, 'view']">{{ affectation?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/profil', profilRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

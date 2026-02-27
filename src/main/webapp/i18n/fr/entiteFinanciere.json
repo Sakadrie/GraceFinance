@@ -1,0 +1,30 @@
+{
+  "graceFinanceApp": {
+    "entiteFinanciere": {
+      "home": {
+        "title": "EntiteFinancieres",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Entite Financiere",
+        "createOrEditLabel": "Créer ou éditer un Entite Financiere",
+        "notFound": "Aucun Entite Financiere trouvé"
+      },
+      "created": "Un nouveau Entite Financiere a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Entite Financiere avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Entite Financiere avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Entite Financiere {{ id }} ?"
+      },
+      "detail": {
+        "title": "Entite Financiere"
+      },
+      "id": "ID",
+      "nom": "Nom",
+      "code": "Code",
+      "type": "Type",
+      "description": "Description",
+      "actif": "Actif",
+      "egliseLiee": "Eglise Liee",
+      "structureLiee": "Structure Liee"
+    }
+  }
+}
