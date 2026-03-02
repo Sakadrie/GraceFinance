@@ -13,6 +13,20 @@ declare var $: any;
   styleUrl: './admin-layout.component.scss',
 })
 export class AdminLayoutComponent {
+  /** menu transmis au composant sidebar */
+  menu = [
+    { title: 'Dashboard', icon: 'fas fa-home', route: '/dashboard' },
+    {
+      title: 'Administration',
+      icon: 'fas fa-cog',
+      children: [
+        { title: 'Sécurité', route: '/administration/security', icon: 'fas fa-user-shield' },
+        { title: 'Transferts', route: '/administration/referentiel/transfert', icon: 'fas fa-exchange-alt' },
+        { title: 'Lignes écriture', route: '/administration/principal/ligne-ecriture', icon: 'fas fa-file-invoice' },
+      ],
+    },
+  ];
+
   ngOnInit(): void {
     this.initKaiadmin();
   }

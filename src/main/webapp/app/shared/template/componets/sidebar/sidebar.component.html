@@ -29,7 +29,7 @@
             <p>Dashboard</p>
             <span class="caret"></span>
           </a>
-          <div class="collapse" id="dashboard">
+          <!-- <div class="collapse" id="dashboard">
             <ul class="nav nav-collapse">
               <li>
                 <a href="../demo1/index.html">
@@ -37,237 +37,349 @@
                 </a>
               </li>
             </ul>
-          </div>
+          </div> -->
+        </li>
+        <!-- Référentiel and Caisse grouped for better structure -->
+        <!-- Referentiel section -->
+
+        <!-- Caisse section with specific items -->
+        <li class="nav-section">
+          <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+          <h4 class="text-section">Caisse</h4>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/compte-comptable" routerLinkActive="active">
+            <i class="fas fa-book"></i>
+            <p>Compte comptable</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/depense" routerLinkActive="active">
+            <i class="fas fa-money-bill-wave"></i>
+            <p>Dépense</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/ecriture-comptable" routerLinkActive="active">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <p>Écriture comptable</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/entite-financiere" routerLinkActive="active">
+            <i class="fas fa-building"></i>
+            <p>Entité financière</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/ligne-ecriture" routerLinkActive="active">
+            <i class="fas fa-file-alt"></i>
+            <p>Ligne écriture</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/recette" routerLinkActive="active">
+            <i class="fas fa-receipt"></i>
+            <p>Recette</p>
+          </a>
         </li>
         <li class="nav-section">
           <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
           </span>
-          <h4 class="text-section">Components</h4>
+          <h4 class="text-section">Référentiel</h4>
         </li>
         <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#base">
-            <i class="fas fa-layer-group"></i>
-            <p>Base</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="base">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="components/avatars.html">
-                  <span class="sub-item">Avatars</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/buttons.html">
-                  <span class="sub-item">Buttons</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/gridsystem.html">
-                  <span class="sub-item">Grid System</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/panels.html">
-                  <span class="sub-item">Panels</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/notifications.html">
-                  <span class="sub-item">Notifications</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/sweetalert.html">
-                  <span class="sub-item">Sweet Alert</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/font-awesome-icons.html">
-                  <span class="sub-item">Font Awesome Icons</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/simple-line-icons.html">
-                  <span class="sub-item">Simple Line Icons</span>
-                </a>
-              </li>
-              <li>
-                <a href="components/typography.html">
-                  <span class="sub-item">Typography</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#sidebarLayouts">
-            <i class="fas fa-th-list"></i>
-            <p>Sidebar Layouts</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="sidebarLayouts">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="sidebar-style-2.html">
-                  <span class="sub-item">Sidebar Style 2</span>
-                </a>
-              </li>
-              <li>
-                <a href="icon-menu.html">
-                  <span class="sub-item">Icon Menu</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#forms">
-            <i class="fas fa-pen-square"></i>
-            <p>Forms</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="forms">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="forms/forms.html">
-                  <span class="sub-item">Basic Form</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#tables">
-            <i class="fas fa-table"></i>
-            <p>Tables</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="tables">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="tables/tables.html">
-                  <span class="sub-item">Basic Table</span>
-                </a>
-              </li>
-              <li>
-                <a href="tables/datatables.html">
-                  <span class="sub-item">Datatables</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#maps">
-            <i class="fas fa-map-marker-alt"></i>
-            <p>Maps</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="maps">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="maps/googlemaps.html">
-                  <span class="sub-item">Google Maps</span>
-                </a>
-              </li>
-              <li>
-                <a href="maps/jsvectormap.html">
-                  <span class="sub-item">Jsvectormap</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#charts">
-            <i class="far fa-chart-bar"></i>
-            <p>Charts</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="charts">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="charts/charts.html">
-                  <span class="sub-item">Chart Js</span>
-                </a>
-              </li>
-              <li>
-                <a href="charts/sparkline.html">
-                  <span class="sub-item">Sparkline</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a href="widgets.html">
-            <i class="fas fa-desktop"></i>
-            <p>Widgets</p>
-            <span class="badge badge-success">4</span>
+          <a routerLink="/caisse/categorie" routerLinkActive="active">
+            <i class="fas fa-tags"></i>
+            <p>Catégorie</p>
           </a>
         </li>
         <li class="nav-item">
-          <a href="../../documentation/index.html">
-            <i class="fas fa-file"></i>
-            <p>Documentation</p>
-            <span class="badge badge-secondary">1</span>
+          <a routerLink="/administration/referentiel/transfert" routerLinkActive="active">
+            <i class="fas fa-exchange-alt"></i>
+            <p>Transferts</p>
+          </a>
+        </li>
+        <li class="nav-section">
+          <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+          <h4 class="text-section">Sécurité</h4>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/caisse/compte-utilisateur" routerLinkActive="active">
+            <i class="fas fa-user"></i>
+            <p>Compte utilisateur</p>
           </a>
         </li>
         <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#submenu">
-            <i class="fas fa-bars"></i>
-            <p>Menu Levels</p>
-            <span class="caret"></span>
+          <a routerLink="/administration/referentiel/profil" routerLinkActive="active">
+            <i class="fas fa-user-cog"></i>
+            <p>Profil</p>
           </a>
-          <div class="collapse" id="submenu">
-            <ul class="nav nav-collapse">
-              <li>
-                <a data-bs-toggle="collapse" href="#subnav1">
-                  <span class="sub-item">Level 1</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="subnav1">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Level 2</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Level 2</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a data-bs-toggle="collapse" href="#subnav2">
-                  <span class="sub-item">Level 1</span>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="subnav2">
-                  <ul class="nav nav-collapse subnav">
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Level 2</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>
-              <li>
-                <a href="#">
-                  <span class="sub-item">Level 1</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/administration/referentiel/droit" routerLinkActive="active">
+            <i class="fas fa-key"></i>
+            <p>Droits</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/administration/referentiel/affection" routerLinkActive="active">
+            <i class="fas fa-user-tag"></i>
+            <p>Affectation utilisateur</p>
+          </a>
         </li>
       </ul>
     </div>
   </div>
 </div>
 <!-- End Sidebar -->
+
+<!-- 
+<div class="nav-bottom collapse navbar-collapse" id="menuHeader">
+  <nav class="navbar navbar-header navbar-expand-lg navbar-light">
+    <div class="container d-flex flex-row">
+      <ul class="navbar-nav nav page-navigation page-navigation-secondary">
+        <h3 class="title-menu bg-primary d-flex d-lg-none">
+          Menu
+          <a href="#" class="close-menu toggle-page-navigation" data-bs-toggle="collapse" data-bs-target="#menuHeader"
+            aria-expanded="false" aria-controls="menuHeader"> <i class="fas fa-times"></i></a>
+        </h3>
+        <li class="nav-item dropdown submenu active">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="link-icon icon-screen-desktop"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+          <div class="dropdown-menu navbar-dropdown animated fadeIn">
+            <ul>
+              <li>
+                <a href="../demo1/index.html">Dashboard 1</a>
+              </li>
+              <li>
+                <a href="../demo2/index.html">Dashboard 2</a>
+              </li>
+              <li>
+                <a href="../demo3/index.html">Dashboard 3</a>
+              </li>
+              <li>
+                <a href="../demo4/index.html">Dashboard 4</a>
+              </li>
+              <li>
+                <a href="../demo5/index.html">Dashboard 5</a>
+              </li>
+              <li>
+                <a href="../demo6/index.html">Dashboard 6</a>
+              </li>
+              <li>
+                <a href="../demo7/index.html">Dashboard 7</a>
+              </li>
+              <li>
+                <a href="../demo8/index.html">Dashboard 8</a>
+              </li>
+              <li>
+                <a href="../demo9/index.html">Dashboard 9</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item dropdown submenu">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="link-icon icon-grid"></i>
+            <span class="menu-title">Apps</span>
+          </a>
+          <div class="dropdown-menu navbar-dropdown animated fadeIn">
+            <ul>
+              <li>
+                <a href="widgets.html">Widgets</a>
+              </li>
+              <li>
+                <a href="invoice.html">Invoice</a>
+              </li>
+              <li>
+                <a href="calendar.html">Calendar</a>
+              </li>
+              <li>
+                <a href="email-inbox.html">Email Inbox</a>
+              </li>
+              <li>
+                <a href="email-detail.html">Email Detail</a>
+              </li>
+              <li>
+                <a href="email-compose.html">Email Compose</a>
+              </li>
+              <li>
+                <a href="messages.html">Messages</a>
+              </li>
+              <li>
+                <a href="conversations.html">Conversations</a>
+              </li>
+              <li>
+                <a href="404.html">404</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item dropdown submenu">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="link-icon icon-disc"></i>
+            <span class="menu-title">Finance</span>
+          </a>
+          <div class="dropdown-menu navbar-dropdown animated fadeIn">
+            <ul>
+              <li>
+                <a href="starter-template.html">Annual Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">HR Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">Finance Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">Revenue Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">IPO Report</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item dropdown submenu mega-menu">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="link-icon icon-film"></i>
+            <span class="menu-title">Project</span>
+          </a>
+          <div class="dropdown-menu navbar-dropdown animated fadeIn">
+            <div class="col-group-wrapper row">
+              <div class="col-group col-md-4">
+                <div class="row">
+                  <div class="col-12">
+                    <p class="category-heading">Basic Elements</p>
+                    <div class="submenu-item">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <ul>
+                            <li><a href="#">Accordion</a></li>
+                            <li><a href="#">Buttons</a></li>
+                            <li><a href="#">Badges</a></li>
+                            <li><a href="#">Breadcrumbs</a></li>
+                            <li><a href="#">Dropdown</a></li>
+                            <li><a href="#">Modals</a></li>
+                          </ul>
+                        </div>
+                        <div class="col-md-6">
+                          <ul>
+                            <li><a href="#">Progress bar</a></li>
+                            <li><a href="#">Pagination</a></li>
+                            <li><a href="#">Tabs</a></li>
+                            <li><a href="#">Typography</a></li>
+                            <li><a href="#">Tooltip</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-group col-md-4">
+                <div class="row">
+                  <div class="col-12">
+                    <p class="category-heading">Advanced Elements</p>
+                    <div class="submenu-item">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <ul>
+                            <li><a href="#">Datatables</a></li>
+                            <li><a href="#">Carousel</a></li>
+                            <li><a href="#">Clipboard</a></li>
+                            <li><a href="#">Chart.js</a></li>
+                            <li><a href="#">Loader</a></li>
+                            <li><a href="#">Slider</a></li>
+                          </ul>
+                        </div>
+                        <div class="col-md-6">
+                          <ul>
+                            <li><a href="#">Popup</a></li>
+                            <li><a href="#">Notification</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-group col-md-4">
+                <p class="category-heading">Icons</p>
+                <ul class="submenu-item">
+                  <li><a href="#">Font Awesome</a></li>
+                  <li><a class="3">Simple Line Icons</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item dropdown submenu">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="link-icon icon-book-open"></i>
+            <span class="menu-title">HR</span>
+          </a>
+          <div class="dropdown-menu navbar-dropdown animated fadeIn">
+            <ul>
+              <li>
+                <a href="starter-template.html">Annual Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">HR Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">Finance Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">Revenue Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">IPO Report</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item dropdown submenu">
+          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="link-icon icon-pie-chart"></i>
+            <span class="menu-title">Revenue</span>
+          </a>
+          <div class="dropdown-menu navbar-dropdown animated fadeIn">
+            <ul>
+              <li>
+                <a href="starter-template.html">Annual Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">HR Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">Finance Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">Revenue Report</a>
+              </li>
+              <li>
+                <a href="starter-template.html">IPO Report</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      <div class="body-overlay"></div>
+    </div>
+  </nav>
+</div> -->
