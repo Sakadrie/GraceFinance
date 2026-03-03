@@ -1,37 +1,37 @@
 import { Route } from '@angular/router';
 import { LISTE_ADMINISTRATION_ROUTES } from 'app/shared/constants/liste.constants';
-import { AffectationUtilisateurComponent } from './affectation-utilisateur.component';
+import { RecetteComponent } from './recette.component';
 
-export const AFFECTATION_UTILISATEUR_ROUTE: Route[] = [
+export const RCETTE_ROUTE: Route[] = [
   {
     path: '',
-    component: AffectationUtilisateurComponent,
-    title: LISTE_ADMINISTRATION_ROUTES.SECURITY.AFFECTATION_UTILISATEUR.TITRE,
+    component: RecetteComponent,
+    title: LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.TITRE,
     // resolve: {
     //   allGroupeProduit: allGroupeProduitResolve,
     // },
   },
   // {
-  //   path: `${LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.DETAIL.PATH}:id`,
+  //   path: `${LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.DETAIL.PATH}:id`,
   //   // component: DetailsClasseProduitComponent,
-  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.DETAIL.TITRE,
+  //   title: LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.DETAIL.TITRE,
   //   // resolve: {
   //   //   classeProduit: classeProduitResolve,
   //   // },
   // },
   // {
-  //   path: `${LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.EDIT.PATH}:id`,
+  //   path: `${LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.EDIT.PATH}:id`,
   //   // component: CreateUpdateClasseProduitComponent,
-  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.EDIT.TITRE,
+  //   title: LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.EDIT.TITRE,
   //   // resolve: {
   //   //   classeProduit: classeProduitResolve,
   //   //   allGroupeProduit: allGroupeProduitResolve,
   //   // },
   // },
   // {
-  //   path: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.ADD.PATH,
+  //   path: LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.ADD.PATH,
   //   // component: CreateUpdateClasseProduitComponent,
-  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.ADD.TITRE,
+  //   title: LISTE_ADMINISTRATION_ROUTES.PRINCIPAL.RECETTE.ADD.TITRE,
   //   // resolve: {
   //   //   allGroupeProduit: allGroupeProduitResolve,
   //   // },

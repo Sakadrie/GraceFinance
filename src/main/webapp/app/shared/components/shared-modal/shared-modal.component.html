@@ -1,0 +1,25 @@
+<div class="modal fade show d-block" style="background: rgba(0, 0, 0, 0.5)" tabindex="-1">
+  <div class="modal-dialog modal-{{ size }} modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 [translateValues]="titleTransValues" class="modal-title" jhiTranslate="{{ title }}">{{ title }}</h5>
+        <button (click)="onAction('close')" aria-label="Close" class="btn-close" type="button"></button>
+      </div>
+
+      <div class="modal-body" style="max-height: 78vh; overflow: auto">
+        <ng-container #contentContainer></ng-container>
+      </div>
+
+      <div class="modal-footer">
+        @for (btn of actions; track btn.value) {
+          <button (click)="onAction(btn.value)" [ngClass]="btn.color || 'btn-secondary'" class="btn" type="button">
+            @if (btn.icon) {
+              <i [class]="btn.icon + ' me-2'"></i>
+            }
+            {{ btn.label }}
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</div>

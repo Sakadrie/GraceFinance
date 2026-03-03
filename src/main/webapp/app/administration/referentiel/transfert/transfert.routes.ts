@@ -1,12 +1,12 @@
 import { Route } from '@angular/router';
 import { LISTE_ADMINISTRATION_ROUTES } from 'app/shared/constants/liste.constants';
-import { AffectationUtilisateurComponent } from './affectation-utilisateur.component';
+import { TransfertComponent } from './transfert.component';
 
-export const AFFECTATION_UTILISATEUR_ROUTE: Route[] = [
+export const TRANSFERT_ROUTE: Route[] = [
   {
     path: '',
-    component: AffectationUtilisateurComponent,
-    title: LISTE_ADMINISTRATION_ROUTES.SECURITY.AFFECTATION_UTILISATEUR.TITRE,
+    component: TransfertComponent,
+    title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.TITRE,
     // resolve: {
     //   allGroupeProduit: allGroupeProduitResolve,
     // },

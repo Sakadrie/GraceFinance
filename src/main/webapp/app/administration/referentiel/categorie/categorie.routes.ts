@@ -1,37 +1,37 @@
 import { Route } from '@angular/router';
 import { LISTE_ADMINISTRATION_ROUTES } from 'app/shared/constants/liste.constants';
-import { AffectationUtilisateurComponent } from './affectation-utilisateur.component';
+import { CategorieComponent } from './categorie.component';
 
-export const AFFECTATION_UTILISATEUR_ROUTE: Route[] = [
+export const CATEGORIE_ROUTE: Route[] = [
   {
     path: '',
-    component: AffectationUtilisateurComponent,
-    title: LISTE_ADMINISTRATION_ROUTES.SECURITY.AFFECTATION_UTILISATEUR.TITRE,
+    component: CategorieComponent,
+    title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.TITRE,
     // resolve: {
     //   allGroupeProduit: allGroupeProduitResolve,
     // },
   },
   // {
-  //   path: `${LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.DETAIL.PATH}:id`,
+  //   path: `${LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.DETAIL.PATH}:id`,
   //   // component: DetailsClasseProduitComponent,
-  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.DETAIL.TITRE,
+  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.DETAIL.TITRE,
   //   // resolve: {
   //   //   classeProduit: classeProduitResolve,
   //   // },
   // },
   // {
-  //   path: `${LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.EDIT.PATH}:id`,
+  //   path: `${LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.EDIT.PATH}:id`,
   //   // component: CreateUpdateClasseProduitComponent,
-  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.EDIT.TITRE,
+  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.EDIT.TITRE,
   //   // resolve: {
   //   //   classeProduit: classeProduitResolve,
   //   //   allGroupeProduit: allGroupeProduitResolve,
   //   // },
   // },
   // {
-  //   path: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.ADD.PATH,
+  //   path: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.ADD.PATH,
   //   // component: CreateUpdateClasseProduitComponent,
-  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.TRANSFERT.ADD.TITRE,
+  //   title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.ADD.TITRE,
   //   // resolve: {
   //   //   allGroupeProduit: allGroupeProduitResolve,
   //   // },

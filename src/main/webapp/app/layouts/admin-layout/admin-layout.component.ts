@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { SidebarComponent } from 'app/shared/template/componets/sidebar/sidebar.component';
 import { HeaderComponent } from 'app/shared/template/componets/header/header.component';
-import { DashboardComponent } from 'app/administration/dashboard/dashboard/dashboard.component';
 import { FooterComponent } from 'app/shared/template/componets/footer/footer.component';
-import { DashboardRoutingModule } from 'app/administration/dashboard/dashboard.routes';
 import { RouterModule } from '@angular/router';
 declare var $: any;
 @Component({
@@ -14,18 +12,6 @@ declare var $: any;
 })
 export class AdminLayoutComponent {
   /** menu transmis au composant sidebar */
-  menu = [
-    { title: 'Dashboard', icon: 'fas fa-home', route: '/dashboard' },
-    {
-      title: 'Administration',
-      icon: 'fas fa-cog',
-      children: [
-        { title: 'Sécurité', route: '/administration/security', icon: 'fas fa-user-shield' },
-        { title: 'Transferts', route: '/administration/referentiel/transfert', icon: 'fas fa-exchange-alt' },
-        { title: 'Lignes écriture', route: '/administration/principal/ligne-ecriture', icon: 'fas fa-file-invoice' },
-      ],
-    },
-  ];
 
   ngOnInit(): void {
     this.initKaiadmin();

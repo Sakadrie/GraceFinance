@@ -1,0 +1,130 @@
+/* Sidebar toggle animation */
+.sidebar {
+  transition: all 0.3s ease;
+  width: 250px;
+
+  &.sidebar-hidden {
+    width: 80px;
+
+    .sidebar-wrapper {
+      overflow-x: hidden;
+    }
+
+    /* Masquer le texte dans les items de navigation */
+    .nav-item p,
+    .text-section {
+      display: none;
+    }
+
+    /* Centrer les icônes */
+    .nav-item {
+      text-align: center;
+
+      a {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
+
+      i {
+        display: block;
+        margin: 0 auto;
+        font-size: 18px;
+      }
+
+      .badge {
+        display: none;
+      }
+
+      .caret {
+        display: none;
+      }
+    }
+
+    /* Centrer le logo */
+    .logo-header {
+      justify-content: center;
+
+      .logo img {
+        display: block;
+      }
+    }
+
+    /* Afficher uniquement les icônes mini */
+    .sidebar-mini-icon {
+      display: flex !important;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+}
+
+/* Toggle buttons styling */
+.btn-toggle {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Icon animations */
+.gg-menu-right,
+.gg-menu-left,
+.gg-more-vertical-alt {
+  transition: transform 0.3s ease;
+}
+
+.sidebar-hidden .gg-menu-right {
+  transform: rotate(180deg);
+}
+
+.sidebar-hidden .gg-menu-left {
+  transform: rotate(-180deg);
+}
+
+/* Navigation items styling */
+.nav-secondary {
+  .nav-item {
+    a {
+      transition: all 0.3s ease;
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 4px;
+      margin: 5px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      &:hover {
+        background-color: rgba(22, 27, 43, 0.5);
+      }
+
+      /* Styling pour l'item actif */
+      &.active {
+        background-color: #161b2b;
+        color: #ffffff;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(14, 14, 15, 0.3);
+
+        i {
+          color: #ffffff;
+        }
+
+        p {
+          color: #ffffff;
+        }
+      }
+    }
+
+    /* Dans la mode réduite */
+    &.active a {
+      background-color: #161b2b;
+      justify-content: center;
+    }
+  }
+}
