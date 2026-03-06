@@ -4,11 +4,11 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService } from 'app/entities/entite-financiere/service/entite-financiere.service';
-import { ICaisse } from 'app/entities/caisse/caisse.model';
+import { ICaisse } from 'app/shared/model/principal/caisse.model';
 import { CaisseService } from 'app/entities/caisse/service/caisse.service';
-import { ITransfert } from '../transfert.model';
+import { ITransfert } from '../../../shared/model/referentiel/transfert.model';
 import { TransfertService } from '../service/transfert.service';
 import { TransfertFormService } from './transfert-form.service';
 

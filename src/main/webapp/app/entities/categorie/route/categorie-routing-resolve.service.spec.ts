@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { ICategorie } from '../categorie.model';
+import { ICategorie } from '../../../shared/model/referentiel/categorie.model';
 import { CategorieService } from '../service/categorie.service';
 
 import categorieResolve from './categorie-routing-resolve.service';

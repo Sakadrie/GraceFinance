@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ICompteComptable, NewCompteComptable } from '../compte-comptable.model';
+import { ICompteComptable, NewCompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 
 /**
  * A partial Type with required key is used as form input.

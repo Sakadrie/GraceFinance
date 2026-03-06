@@ -7,9 +7,9 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IEcritureComptable } from 'app/entities/ecriture-comptable/ecriture-comptable.model';
+import { IEcritureComptable } from 'app/shared/model/principal/ecriture-comptable.model';
 import { EcritureComptableService } from 'app/entities/ecriture-comptable/service/ecriture-comptable.service';
-import { ICompteComptable } from 'app/entities/compte-comptable/compte-comptable.model';
+import { ICompteComptable } from 'app/shared/model/principal/compte-comptable.model';
 import { CompteComptableService } from 'app/entities/compte-comptable/service/compte-comptable.service';
 import { LigneEcritureService } from '../service/ligne-ecriture.service';
 import { ILigneEcriture } from '../ligne-ecriture.model';

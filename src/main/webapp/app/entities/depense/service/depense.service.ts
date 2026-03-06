@@ -8,7 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IDepense, NewDepense } from '../depense.model';
+import { IDepense, NewDepense } from '../../../shared/model/principal/depense.model';
 
 export type PartialUpdateDepense = Partial<IDepense> & Pick<IDepense, 'id'>;
 

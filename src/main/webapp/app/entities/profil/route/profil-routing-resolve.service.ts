@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IProfil } from '../profil.model';
+import { IProfil } from '../../../shared/model/security/profil.model';
 import { ProfilService } from '../service/profil.service';
 
 const profilResolve = (route: ActivatedRouteSnapshot): Observable<null | IProfil> => {

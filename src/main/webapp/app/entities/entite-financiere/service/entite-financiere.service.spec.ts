@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-import { IEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../entite-financiere.test-samples';
 
 import { EntiteFinanciereService } from './entite-financiere.service';

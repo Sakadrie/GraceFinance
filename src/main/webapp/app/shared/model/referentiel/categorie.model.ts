@@ -1,4 +1,4 @@
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
 
 export interface ICategorie {
   id: number;

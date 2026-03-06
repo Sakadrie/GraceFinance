@@ -1,6 +1,6 @@
 import dayjs from 'dayjs/esm';
 
-import { ITransfert, NewTransfert } from './transfert.model';
+import { ITransfert, NewTransfert } from '../../shared/model/referentiel/transfert.model';
 
 export const sampleWithRequiredData: ITransfert = {
   id: 7543,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IDroit, NewDroit } from '../droit.model';
+import { IDroit, NewDroit } from '../../../shared/model/security/droit.model';
 
 /**
  * A partial Type with required key is used as form input.

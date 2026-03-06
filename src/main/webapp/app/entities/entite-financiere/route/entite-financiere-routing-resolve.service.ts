@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService } from '../service/entite-financiere.service';
 
 const entiteFinanciereResolve = (route: ActivatedRouteSnapshot): Observable<null | IEntiteFinanciere> => {

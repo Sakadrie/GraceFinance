@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { IProfil } from '../profil.model';
+import { IProfil } from '../../../shared/model/security/profil.model';
 
 @Component({
   selector: 'jhi-profil-detail',

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ICategorie, NewCategorie } from '../categorie.model';
+import { ICategorie, NewCategorie } from '../../../shared/model/referentiel/categorie.model';
 
 export type PartialUpdateCategorie = Partial<ICategorie> & Pick<ICategorie, 'id'>;
 

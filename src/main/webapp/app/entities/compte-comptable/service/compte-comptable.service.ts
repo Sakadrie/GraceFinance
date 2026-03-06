@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ICompteComptable, NewCompteComptable } from '../compte-comptable.model';
+import { ICompteComptable, NewCompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 
 export type PartialUpdateCompteComptable = Partial<ICompteComptable> & Pick<ICompteComptable, 'id'>;
 

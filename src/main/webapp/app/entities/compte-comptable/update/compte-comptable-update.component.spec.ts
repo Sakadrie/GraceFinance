@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
 import { CompteComptableService } from '../service/compte-comptable.service';
-import { ICompteComptable } from '../compte-comptable.model';
+import { ICompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 import { CompteComptableFormService } from './compte-comptable-form.service';
 
 import { CompteComptableUpdateComponent } from './compte-comptable-update.component';

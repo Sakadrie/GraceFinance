@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
-import { IEcritureComptable } from '../ecriture-comptable.model';
+import { IEcritureComptable } from '../../../shared/model/principal/ecriture-comptable.model';
 
 import { EcritureComptableService, EntityArrayResponseType } from '../service/ecriture-comptable.service';
 import { EcritureComptableDeleteDialogComponent } from '../delete/ecriture-comptable-delete-dialog.component';

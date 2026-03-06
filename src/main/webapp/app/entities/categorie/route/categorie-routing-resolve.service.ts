@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ICategorie } from '../categorie.model';
+import { ICategorie } from '../../../shared/model/referentiel/categorie.model';
 import { CategorieService } from '../service/categorie.service';
 
 const categorieResolve = (route: ActivatedRouteSnapshot): Observable<null | ICategorie> => {

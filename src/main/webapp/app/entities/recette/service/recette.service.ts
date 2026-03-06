@@ -8,7 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IRecette, NewRecette } from '../recette.model';
+import { IRecette, NewRecette } from '../../../shared/model/principal/recette.model';
 
 export type PartialUpdateRecette = Partial<IRecette> & Pick<IRecette, 'id'>;
 

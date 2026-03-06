@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IEcritureComptable } from '../ecriture-comptable.model';
+import { IEcritureComptable } from '../../../shared/model/principal/ecriture-comptable.model';
 import { EcritureComptableService } from '../service/ecriture-comptable.service';
 
 const ecritureComptableResolve = (route: ActivatedRouteSnapshot): Observable<null | IEcritureComptable> => {

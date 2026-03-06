@@ -7,9 +7,9 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService } from 'app/entities/entite-financiere/service/entite-financiere.service';
-import { ICaisse } from '../caisse.model';
+import { ICaisse } from '../../../shared/model/principal/caisse.model';
 import { CaisseService } from '../service/caisse.service';
 import { CaisseFormGroup, CaisseFormService } from './caisse-form.service';
 

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
-import { ICompteComptable } from '../compte-comptable.model';
+import { ICompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 
 import { CompteComptableService, EntityArrayResponseType } from '../service/compte-comptable.service';
 import { CompteComptableDeleteDialogComponent } from '../delete/compte-comptable-delete-dialog.component';

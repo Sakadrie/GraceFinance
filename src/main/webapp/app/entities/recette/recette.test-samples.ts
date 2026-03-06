@@ -1,6 +1,6 @@
 import dayjs from 'dayjs/esm';
 
-import { IRecette, NewRecette } from './recette.model';
+import { IRecette, NewRecette } from '../../shared/model/principal/recette.model';
 
 export const sampleWithRequiredData: IRecette = {
   id: 4656,

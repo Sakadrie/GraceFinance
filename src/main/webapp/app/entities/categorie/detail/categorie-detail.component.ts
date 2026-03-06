@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { ICategorie } from '../categorie.model';
+import { ICategorie } from '../../../shared/model/referentiel/categorie.model';
 
 @Component({
   selector: 'jhi-categorie-detail',

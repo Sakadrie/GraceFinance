@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
-import { IDepense } from '../depense.model';
+import { IDepense } from '../../../shared/model/principal/depense.model';
 
 @Component({
   selector: 'jhi-depense-detail',

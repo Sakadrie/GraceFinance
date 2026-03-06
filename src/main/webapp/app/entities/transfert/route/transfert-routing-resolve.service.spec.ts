@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { ITransfert } from '../transfert.model';
+import { ITransfert } from '../../../shared/model/referentiel/transfert.model';
 import { TransfertService } from '../service/transfert.service';
 
 import transfertResolve from './transfert-routing-resolve.service';

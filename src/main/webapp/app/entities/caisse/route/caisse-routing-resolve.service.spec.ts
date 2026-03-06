@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { ICaisse } from '../caisse.model';
+import { ICaisse } from '../../../shared/model/principal/caisse.model';
 import { CaisseService } from '../service/caisse.service';
 
 import caisseResolve from './caisse-routing-resolve.service';

@@ -1,4 +1,4 @@
-import { ICompteComptable, NewCompteComptable } from './compte-comptable.model';
+import { ICompteComptable, NewCompteComptable } from '../../shared/model/principal/compte-comptable.model';
 
 export const sampleWithRequiredData: ICompteComptable = {
   id: 15720,

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
 import { EcritureComptableService } from '../service/ecriture-comptable.service';
-import { IEcritureComptable } from '../ecriture-comptable.model';
+import { IEcritureComptable } from '../../../shared/model/principal/ecriture-comptable.model';
 import { EcritureComptableFormService } from './ecriture-comptable-form.service';
 
 import { EcritureComptableUpdateComponent } from './ecriture-comptable-update.component';

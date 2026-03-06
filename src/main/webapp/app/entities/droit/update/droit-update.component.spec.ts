@@ -4,10 +4,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
-import { IProfil } from 'app/entities/profil/profil.model';
+import { IProfil } from 'app/shared/model/security/profil.model';
 import { ProfilService } from 'app/entities/profil/service/profil.service';
 import { DroitService } from '../service/droit.service';
-import { IDroit } from '../droit.model';
+import { IDroit } from '../../../shared/model/security/droit.model';
 import { DroitFormService } from './droit-form.service';
 
 import { DroitUpdateComponent } from './droit-update.component';

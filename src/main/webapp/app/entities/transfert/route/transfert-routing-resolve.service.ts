@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ITransfert } from '../transfert.model';
+import { ITransfert } from '../../../shared/model/referentiel/transfert.model';
 import { TransfertService } from '../service/transfert.service';
 
 const transfertResolve = (route: ActivatedRouteSnapshot): Observable<null | ITransfert> => {

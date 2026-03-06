@@ -1,0 +1,1069 @@
+@if (config.data.length) {
+  <div [ngClass]="[config.responsive ? 'table-responsive' : '', config.additionalDivClass || '']">
+    <table
+      class="table text-nowrap"
+      [ngClass]="[
+        config.striped ? 'table-striped' : '',
+        config.hover ? 'table-hover' : '',
+        config.colorClass || '',
+        config.tableBorderClass || '',
+        config.additionalTableClass || '',
+      ]"
+    >
+      <thead [ngClass]="[config.tableHeadColorClass || '']">
+        <tr>
+          <!-- Colonne checkbox en-tête -->
+          <th *ngIf="config.isWithCheckboxes" class="text-center align-middle" style="width: 1%">
+            <input
+              type="checkbox"
+              [checked]="allRowsSelected"
+              [indeterminate]="someRowsSelected"
+              (change)="onToggleAllRows($event)"
+              aria-label="Tout sélectionner"
+            />
+          </th>
+          <th *ngIf="config.displayDetailsDepliant && (config?.rowDetailTemplate || hasDetailColumns || hasTableColumns)"></th>
+          <th *ngFor="let col of sortedFilterColumns" [ngClass]="col.cellClass" [style]="col.cellStyle">
+            <span (click)="onSort(col)" style="cursor: pointer" *ngIf="col.sortable">
+              <span jhiTranslate="{{ col.label }}">{{ col.label }}</span>
+              <i class="fa fa-sort"></i>
+            </span>
+            <span *ngIf="!col.sortable" jhiTranslate="{{ col.label }}">{{ col.label }}</span>
+          </th>
+          <th *ngIf="config?.actions?.length">
+            <span jhiTranslate="main.components.sharedListTable.actions">Actions</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let row of pagedData; let i = index">
+          <!-- Ligne principale -->
+          <tr>
+            <!-- Colonne checkbox par ligne -->
+            <td *ngIf="config.isWithCheckboxes" class="text-center align-middle" style="width: 1%">
+              <input type="checkbox" [(ngModel)]="row.isSelected" aria-label="Sélectionner la ligne" />
+            </td>
+            <!-- Bouton d'expansion sur la première ligne si dépliant -->
+            <td
+              *ngIf="config.displayDetailsDepliant && (config?.rowDetailTemplate || hasDetailColumns || hasTableColumns)"
+              class="text-center align-middle"
+              style="width: 1%; white-space: nowrap"
+            >
+              <button class="btn btn-link btn-sm p-0" (click)="toggleRowDetail(i)">
+                {{ expandedRows.has(i) ? '−' : '+' }}
+              </button>
+            </td>
+            <td *ngFor="let col of sortedFilterColumns" [ngClass]="col.cellClass" [style]="col.cellStyle">
+              <ng-container *ngIf="!col.cellTemplate">
+                <ng-container [ngSwitch]="col.type">
+                  <span *ngSwitchCase="'text'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      @if (!col.isWithColumnDataTranslate) {
+                        {{
+                          col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                            ? row[col.subObject][col.subSubObject][col.key]
+                            : col.subObject != null && row[col.subObject] != null
+                              ? row[col.subObject][col.key]
+                              : row[col.key]
+                        }}
+                      }
+                      @if (col.isWithColumnDataTranslate) {
+                        {{
+                          col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                            ? (row[col.subObject][col.subSubObject][col.key] | translate)
+                            : col.subObject != null && row[col.subObject] != null
+                              ? (row[col.subObject][col.key] | translate)
+                              : (row[col.key] | translate)
+                        }}
+                      }
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'joinProperty'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      @if (!col.isWithColumnDataTranslate) {
+                        <span
+                          [innerHTML]="
+                            col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                              ? (row[col.subObject][col.subSubObject][col.key]
+                                | joinPropertyHtml
+                                  : col.joinPropertyName || ''
+                                  : col.joinPropertySeparator
+                                  : col.joinPropertyListProperty
+                                  : col.joinPropertySortOrder
+                                  : col.joinPropertySortPath
+                                  : col.joinPropertySpanClasses
+                                  : col.joinPropertySeparatorClasses
+                                  : col.joinPropertyMaxItems
+                                  : col.joinPropertyOverflowIndicator
+                                  : col.joinPropertyOverflowClasses
+                                  : col.joinPropertyShowMoreCount)
+                              : col.subObject != null && row[col.subObject] != null
+                                ? (row[col.subObject][col.key]
+                                  | joinPropertyHtml
+                                    : col.joinPropertyName || ''
+                                    : col.joinPropertySeparator
+                                    : col.joinPropertyListProperty
+                                    : col.joinPropertySortOrder
+                                    : col.joinPropertySortPath
+                                    : col.joinPropertySpanClasses
+                                    : col.joinPropertySeparatorClasses
+                                    : col.joinPropertyMaxItems
+                                    : col.joinPropertyOverflowIndicator
+                                    : col.joinPropertyOverflowClasses
+                                    : col.joinPropertyShowMoreCount)
+                                : (row[col.key]
+                                  | joinPropertyHtml
+                                    : col.joinPropertyName || ''
+                                    : col.joinPropertySeparator
+                                    : col.joinPropertyListProperty
+                                    : col.joinPropertySortOrder
+                                    : col.joinPropertySortPath
+                                    : col.joinPropertySpanClasses
+                                    : col.joinPropertySeparatorClasses
+                                    : col.joinPropertyMaxItems
+                                    : col.joinPropertyOverflowIndicator
+                                    : col.joinPropertyOverflowClasses
+                                    : col.joinPropertyShowMoreCount)
+                          "
+                        ></span>
+                      }
+                      @if (col.isWithColumnDataTranslate) {
+                        <span
+                          [innerHTML]="
+                            col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                              ? (row[col.subObject][col.subSubObject][col.key]
+                                | translate
+                                | joinPropertyHtml
+                                  : col.joinPropertyName || ''
+                                  : col.joinPropertySeparator
+                                  : col.joinPropertyListProperty
+                                  : col.joinPropertySortOrder
+                                  : col.joinPropertySortPath
+                                  : col.joinPropertySpanClasses
+                                  : col.joinPropertySeparatorClasses
+                                  : col.joinPropertyMaxItems
+                                  : col.joinPropertyOverflowIndicator
+                                  : col.joinPropertyOverflowClasses
+                                  : col.joinPropertyShowMoreCount)
+                              : col.subObject != null && row[col.subObject] != null
+                                ? (row[col.subObject][col.key]
+                                  | translate
+                                  | joinPropertyHtml
+                                    : col.joinPropertyName || ''
+                                    : col.joinPropertySeparator
+                                    : col.joinPropertyListProperty
+                                    : col.joinPropertySortOrder
+                                    : col.joinPropertySortPath
+                                    : col.joinPropertySpanClasses
+                                    : col.joinPropertySeparatorClasses
+                                    : col.joinPropertyMaxItems
+                                    : col.joinPropertyOverflowIndicator
+                                    : col.joinPropertyOverflowClasses
+                                    : col.joinPropertyShowMoreCount)
+                                : (row[col.key]
+                                  | translate
+                                  | joinPropertyHtml
+                                    : col.joinPropertyName || ''
+                                    : col.joinPropertySeparator
+                                    : col.joinPropertyListProperty
+                                    : col.joinPropertySortOrder
+                                    : col.joinPropertySortPath
+                                    : col.joinPropertySpanClasses
+                                    : col.joinPropertySeparatorClasses
+                                    : col.joinPropertyMaxItems
+                                    : col.joinPropertyOverflowIndicator
+                                    : col.joinPropertyOverflowClasses
+                                    : col.joinPropertyShowMoreCount)
+                          "
+                        ></span>
+                      }
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'wysiwyg'">
+                    <div
+                      [innerHTML]="
+                        getSanitizedHtml(
+                          col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                            ? row[col.subObject][col.subSubObject][col.key]
+                            : col.subObject != null && row[col.subObject] != null
+                              ? row[col.subObject][col.key]
+                              : row[col.key]
+                        )
+                      "
+                    ></div>
+                  </span>
+                  <span *ngSwitchCase="'number'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key]
+                            | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key] | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                            : (row[col.key] | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'floatNumber'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key]
+                            | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key]
+                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                            : (row[col.key] | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'date'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key] | formatMediumDate)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key] | formatMediumDate)
+                            : (row[col.key] | formatMediumDate)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'datetime'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key] | formatMediumDatetime)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key] | formatMediumDatetime)
+                            : (row[col.key] | formatMediumDatetime)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'currency'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key] | currency)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key] | currency)
+                            : (row[col.key] | currency)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'boolean'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? row[col.subObject][col.subSubObject][col.key]
+                            ? '✔️'
+                            : '❌'
+                          : col.subObject != null && row[col.subObject] != null
+                            ? row[col.subObject][col.key]
+                              ? '✔️'
+                              : '❌'
+                            : row[col.key]
+                              ? '✔️'
+                              : '❌'
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'percent'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key] | percent)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key] | percent)
+                            : (row[col.key] | percent)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'bytes'">
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? (row[col.subObject][col.subSubObject][col.key] | formatBytes)
+                          : col.subObject != null && row[col.subObject] != null
+                            ? (row[col.subObject][col.key] | formatBytes)
+                            : (row[col.key] | formatBytes)
+                      }}
+                    </span>
+                  </span>
+                  <span *ngSwitchCase="'download'">
+                    <a
+                      *ngIf="
+                        (col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject]?.[col.key]) ||
+                        (col.subObject != null && row[col.subObject]?.[col.key]) ||
+                        row[col.key]
+                      "
+                      [href]="
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject]?.[col.key]
+                          ? row[col.subObject][col.subSubObject][col.key]
+                          : col.subObject != null && row[col.subObject]?.[col.key]
+                            ? row[col.subObject][col.key]
+                            : row[col.key]
+                      "
+                      target="_blank"
+                      rel="noopener"
+                      ngbTooltip="{{ 'main.labels.download' | translate }}"
+                      class="btn btn-link p-0"
+                    >
+                      <i class="fa fa-download"></i>
+                    </a>
+                  </span>
+                  <span *ngSwitchDefault>
+                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                      {{
+                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                          ? row[col.subObject][col.subSubObject][col.key]
+                          : col.subObject != null && row[col.subObject] != null
+                            ? row[col.subObject][col.key]
+                            : row[col.key]
+                      }}
+                    </span>
+                  </span>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="col.cellTemplate">
+                <ng-container *ngTemplateOutlet="col.cellTemplate; context: { $implicit: row }"></ng-container>
+              </ng-container>
+            </td>
+            <td
+              *ngIf="config?.actions?.length"
+              [ngClass]="config.actionsColClasses || 'text-center align-middle'"
+              style="white-space: nowrap"
+            >
+              <!-- Affichage boutons si styleActions=button ou par défaut -->
+              <ng-container *ngIf="!config.styleActions || config.styleActions === 'button'">
+                <ng-container *ngFor="let act of config.actions">
+                  <button
+                    type="button"
+                    class="btn btn-sm me-1"
+                    [ngClass]="act.color || 'btn-primary'"
+                    (click)="onAction(act.id, row)"
+                    ngbTooltip="{{ act.label | translate }}"
+                    *ngIf="!act.actionPredicate || act.actionPredicate(row)"
+                  >
+                    <i *ngIf="act.icon" [class]="act.icon"></i>
+                    @if (act.isLabel) {
+                      {{ act.label | translate }}
+                    }
+                  </button>
+                </ng-container>
+              </ng-container>
+              <!-- Affichage dropdown avec NgbDropdown si styleActions=dropdown -->
+              <ng-container *ngIf="config.styleActions === 'dropdown'">
+                <div ngbDropdown #dropdown="ngbDropdown">
+                  <button class="btn btn-secondary btn-sm dropdown-toggle" ngbDropdownToggle type="button">
+                    <span jhiTranslate="main.components.sharedListTable.buttonActions">Actions</span>
+                  </button>
+                  <div ngbDropdownMenu>
+                    <ng-container *ngFor="let act of config.actions">
+                      @if (!act.actionPredicate || act.actionPredicate(row)) {
+                        @if (act.authorities?.length) {
+                          <button
+                            class="dropdown-item"
+                            *jhiHasAnyAuthority="act.authorities!"
+                            (click)="onAction(act.id, row); dropdown.close()"
+                          >
+                            <i *ngIf="act.icon" [class]="act.icon"></i> {{ act.label | translate }}
+                          </button>
+                        }
+                        @if (!act.authorities?.length) {
+                          <button
+                            class="dropdown-item"
+                            type="button"
+                            (click)="onAction(act.id, row); $event.preventDefault(); dropdown.close()"
+                          >
+                            <i *ngIf="act.icon" [class]="act.icon"></i> {{ act.label | translate }}
+                          </button>
+                        }
+                      }
+                    </ng-container>
+                  </div>
+                </div>
+              </ng-container>
+            </td>
+          </tr>
+          <!-- Ligne détails dépliante -->
+          <tr
+            *ngIf="
+              config.displayDetailsDepliant && (config?.rowDetailTemplate || hasDetailColumns || hasTableColumns) && expandedRows.has(i)
+            "
+          >
+            <td [attr.colspan]="sortedColumns.length + (config.actions?.length ? 1 : 0) + 1" class="p-0">
+              <div class="collapse show">
+                <!-- Si rowDetailTemplate fourni, l'utiliser -->
+                <ng-container *ngIf="config.rowDetailTemplate">
+                  <ng-container *ngTemplateOutlet="config.rowDetailTemplate; context: { $implicit: row }"></ng-container>
+                </ng-container>
+                <!-- Sinon, affichage par défaut avec colonnes isInDetail -->
+                <ng-container *ngIf="!config.rowDetailTemplate && hasDetailColumns">
+                  <div class="p-3 bg-light border rounded">
+                    <dl class="row mb-0">
+                      <ng-container *ngFor="let pair of getDetailColumnPairs(sortedColumns)">
+                        <div class="row mb-2 g-2">
+                          <ng-container *ngFor="let col of pair">
+                            <ng-container *ngIf="col">
+                              <dt class="col-12 col-md-2 fw-bold">{{ (col.label | translate) || col.key }}</dt>
+                              <dd class="col-12 col-md-4">
+                                <ng-container [ngSwitch]="col.type">
+                                  <span *ngSwitchCase="'text'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      @if (!col.isWithColumnDataTranslate) {
+                                        {{
+                                          col.subObject != null &&
+                                          col.subSubObject != null &&
+                                          row[col.subObject]?.[col.subSubObject] != null
+                                            ? row[col.subObject][col.subSubObject][col.key]
+                                            : col.subObject != null && row[col.subObject] != null
+                                              ? row[col.subObject][col.key]
+                                              : row[col.key]
+                                        }}
+                                      }
+                                      @if (col.isWithColumnDataTranslate) {
+                                        {{
+                                          col.subObject != null &&
+                                          col.subSubObject != null &&
+                                          row[col.subObject]?.[col.subSubObject] != null
+                                            ? (row[col.subObject][col.subSubObject][col.key] | translate)
+                                            : col.subObject != null && row[col.subObject] != null
+                                              ? (row[col.subObject][col.key] | translate)
+                                              : (row[col.key] | translate)
+                                        }}
+                                      }
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'joinProperty'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      @if (!col.isWithColumnDataTranslate) {
+                                        <span
+                                          [innerHTML]="
+                                            col.subObject != null &&
+                                            col.subSubObject != null &&
+                                            row[col.subObject]?.[col.subSubObject] != null
+                                              ? (row[col.subObject][col.subSubObject][col.key]
+                                                | joinPropertyHtml
+                                                  : col.joinPropertyName || ''
+                                                  : col.joinPropertySeparator
+                                                  : col.joinPropertyListProperty
+                                                  : col.joinPropertySortOrder
+                                                  : col.joinPropertySortPath
+                                                  : col.joinPropertySpanClasses
+                                                  : col.joinPropertySeparatorClasses
+                                                  : col.joinPropertyMaxItemsDepliant
+                                                  : col.joinPropertyOverflowIndicatorDepliant
+                                                  : col.joinPropertyOverflowClassesDepliant
+                                                  : col.joinPropertyShowMoreCountDepliant)
+                                              : col.subObject != null && row[col.subObject] != null
+                                                ? (row[col.subObject][col.key]
+                                                  | joinPropertyHtml
+                                                    : col.joinPropertyName || ''
+                                                    : col.joinPropertySeparator
+                                                    : col.joinPropertyListProperty
+                                                    : col.joinPropertySortOrder
+                                                    : col.joinPropertySortPath
+                                                    : col.joinPropertySpanClasses
+                                                    : col.joinPropertyMaxItemsDepliant
+                                                    : col.joinPropertyOverflowIndicatorDepliant
+                                                    : col.joinPropertyOverflowClassesDepliant
+                                                    : col.joinPropertyShowMoreCountDepliant)
+                                                : (row[col.key]
+                                                  | joinPropertyHtml
+                                                    : col.joinPropertyName || ''
+                                                    : col.joinPropertySeparator
+                                                    : col.joinPropertyListProperty
+                                                    : col.joinPropertySortOrder
+                                                    : col.joinPropertySortPath
+                                                    : col.joinPropertySpanClasses
+                                                    : col.joinPropertySeparatorClasses
+                                                    : col.joinPropertyMaxItemsDepliant
+                                                    : col.joinPropertyOverflowIndicatorDepliant
+                                                    : col.joinPropertyOverflowClassesDepliant
+                                                    : col.joinPropertyShowMoreCountDepliant)
+                                          "
+                                        ></span>
+                                      }
+                                      @if (col.isWithColumnDataTranslate) {
+                                        <span
+                                          [innerHTML]="
+                                            col.subObject != null &&
+                                            col.subSubObject != null &&
+                                            row[col.subObject]?.[col.subSubObject] != null
+                                              ? (row[col.subObject][col.subSubObject][col.key]
+                                                | translate
+                                                | joinPropertyHtml
+                                                  : col.joinPropertyName || ''
+                                                  : col.joinPropertySeparator
+                                                  : col.joinPropertyListProperty
+                                                  : col.joinPropertySortOrder
+                                                  : col.joinPropertySortPath
+                                                  : col.joinPropertySpanClasses
+                                                  : col.joinPropertySeparatorClasses
+                                                  : col.joinPropertyMaxItemsDepliant
+                                                  : col.joinPropertyOverflowIndicatorDepliant
+                                                  : col.joinPropertyOverflowClassesDepliant
+                                                  : col.joinPropertyShowMoreCountDepliant)
+                                              : col.subObject != null && row[col.subObject] != null
+                                                ? (row[col.subObject][col.key]
+                                                  | translate
+                                                  | joinPropertyHtml
+                                                    : col.joinPropertyName || ''
+                                                    : col.joinPropertySeparator
+                                                    : col.joinPropertyListProperty
+                                                    : col.joinPropertySortOrder
+                                                    : col.joinPropertySortPath
+                                                    : col.joinPropertySpanClasses
+                                                    : col.joinPropertySeparatorClasses
+                                                    : col.joinPropertyMaxItemsDepliant
+                                                    : col.joinPropertyOverflowIndicatorDepliant
+                                                    : col.joinPropertyOverflowClassesDepliant
+                                                    : col.joinPropertyShowMoreCountDepliant)
+                                                : (row[col.key]
+                                                  | translate
+                                                  | joinPropertyHtml
+                                                    : col.joinPropertyName || ''
+                                                    : col.joinPropertySeparator
+                                                    : col.joinPropertyListProperty
+                                                    : col.joinPropertySortOrder
+                                                    : col.joinPropertySortPath
+                                                    : col.joinPropertySpanClasses
+                                                    : col.joinPropertySeparatorClasses
+                                                    : col.joinPropertyMaxItemsDepliant
+                                                    : col.joinPropertyOverflowIndicatorDepliant
+                                                    : col.joinPropertyOverflowClassesDepliant
+                                                    : col.joinPropertyShowMoreCountDepliant)
+                                          "
+                                        ></span>
+                                      }
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'wysiwyg'">
+                                    <div
+                                      class="contenu-cell"
+                                      [ngClass]="col.cellClass"
+                                      [innerHTML]="
+                                        getSanitizedHtml(
+                                          col.subObject != null &&
+                                            col.subSubObject != null &&
+                                            row[col.subObject]?.[col.subSubObject] != null
+                                            ? row[col.subObject][col.subSubObject][col.key]
+                                            : col.subObject != null && row[col.subObject] != null
+                                              ? row[col.subObject][col.key]
+                                              : row[col.key] != null
+                                                ? row[col.key]
+                                                : ''
+                                        )
+                                      "
+                                    ></div>
+                                  </span>
+                                  <span *ngSwitchCase="'json'">
+                                    <div
+                                      class="contenu-cell"
+                                      [ngClass]="col.cellClass"
+                                      [innerHTML]="
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key] | prettyJson)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key] | prettyJson)
+                                            : row[col.key] != null
+                                              ? (row[col.key] | prettyJson)
+                                              : ''
+                                      "
+                                    ></div>
+                                  </span>
+                                  <span *ngSwitchCase="'number'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key]
+                                            | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                            : (row[col.key] | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'floatNumber'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key]
+                                            | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                            : (row[col.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'date'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key] | formatMediumDate)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key] | formatMediumDate)
+                                            : (row[col.key] | formatMediumDate)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'datetime'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key] | formatMediumDatetime)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key] | formatMediumDatetime)
+                                            : (row[col.key] | formatMediumDatetime)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'currency'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key] | currency)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key] | currency)
+                                            : (row[col.key] | currency)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'boolean'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? row[col.subObject][col.subSubObject][col.key]
+                                            ? '✔️'
+                                            : '❌'
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? row[col.subObject][col.key]
+                                              ? '✔️'
+                                              : '❌'
+                                            : row[col.key]
+                                              ? '✔️'
+                                              : '❌'
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'percent'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key] | percent)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key] | percent)
+                                            : (row[col.key] | percent)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'bytes'">
+                                    <span [ngClass]="col.cellClass" ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                          ? (row[col.subObject][col.subSubObject][col.key] | formatBytes)
+                                          : col.subObject != null && row[col.subObject] != null
+                                            ? (row[col.subObject][col.key] | formatBytes)
+                                            : (row[col.key] | formatBytes)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'download'">
+                                    <a
+                                      *ngIf="
+                                        (col.subObject != null &&
+                                          col.subSubObject != null &&
+                                          row[col.subObject]?.[col.subSubObject]?.[col.key]) ||
+                                        (col.subObject != null && row[col.subObject]?.[col.key]) ||
+                                        row[col.key]
+                                      "
+                                      [href]="
+                                        col.subObject != null &&
+                                        col.subSubObject != null &&
+                                        row[col.subObject]?.[col.subSubObject]?.[col.key]
+                                          ? row[col.subObject][col.subSubObject][col.key]
+                                          : col.subObject != null && row[col.subObject]?.[col.key]
+                                            ? row[col.subObject][col.key]
+                                            : row[col.key]
+                                      "
+                                      target="_blank"
+                                      rel="noopener"
+                                      ngbTooltip="{{ 'main.labels.download' | translate }}"
+                                      class="btn btn-link p-0"
+                                    >
+                                      <i class="fa fa-download"></i>
+                                    </a>
+                                  </span>
+                                  <span [ngClass]="col.cellClass" *ngSwitchDefault>
+                                    {{
+                                      col.subObject != null && col.subSubObject != null && row[col.subObject]?.[col.subSubObject] != null
+                                        ? row[col.subObject][col.subSubObject][col.key]
+                                        : col.subObject != null && row[col.subObject] != null
+                                          ? row[col.subObject][col.key]
+                                          : row[col.key]
+                                    }}
+                                  </span>
+                                </ng-container>
+                              </dd>
+                            </ng-container>
+                          </ng-container>
+                        </div>
+                      </ng-container>
+                    </dl>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="hasTableColumns">
+                  <ng-container *ngFor="let col of tableColumns">
+                    <ng-container *ngIf="parseJsonArrayString(row[col.key])?.length">
+                      <h5 class="mt-3">{{ (col.label | translate) || col.key }}</h5>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                          <thead>
+                            <tr>
+                              <th *ngFor="let imbCol of col.imbeddedTableColumns" [ngClass]="imbCol.cellClass" [style]="imbCol.cellStyle">
+                                {{ (imbCol.label | translate) || imbCol.key }}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let imbRow of parseJsonArrayString(row[col.key])">
+                              <td *ngFor="let imbCol of col.imbeddedTableColumns" [ngClass]="imbCol.cellClass" [style]="imbCol.cellStyle">
+                                <ng-container [ngSwitch]="imbCol.type">
+                                  <span *ngSwitchCase="'text'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? imbRow[imbCol.subObject][imbCol.key]
+                                            : imbRow[imbCol.key]
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'number'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                            | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                            : (imbRow[imbCol.key] | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'floatNumber'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject]
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                            | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                            : (imbRow[imbCol.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'date'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | formatMediumDate)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | formatMediumDate)
+                                            : (imbRow[imbCol.key] | formatMediumDate)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'datetime'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | formatMediumDatetime)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | formatMediumDatetime)
+                                            : (imbRow[imbCol.key] | formatMediumDatetime)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'currency'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | currency)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | currency)
+                                            : (imbRow[imbCol.key] | currency)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'boolean'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                            ? '✔️'
+                                            : '❌'
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? imbRow[imbCol.subObject][imbCol.key]
+                                              ? '✔️'
+                                              : '❌'
+                                            : imbRow[imbCol.key]
+                                              ? '✔️'
+                                              : '❌'
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'percent'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | percent)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | percent)
+                                            : (imbRow[imbCol.key] | percent)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchDefault>
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? imbRow[imbCol.subObject][imbCol.key]
+                                            : imbRow[imbCol.key]
+                                      }}
+                                    </span>
+                                  </span>
+                                </ng-container>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </ng-container>
+                    <ng-container *ngIf="checkIfIsArrayOfObjects(row[col.key]) && row[col.key]?.length">
+                      <h5 class="mt-3">{{ (col.label | translate) || col.key }}</h5>
+                      <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                          <thead>
+                            <tr>
+                              <th *ngFor="let imbCol of col.imbeddedTableColumns" [ngClass]="imbCol.cellClass" [style]="imbCol.cellStyle">
+                                {{ (imbCol.label | translate) || imbCol.key }}
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let imbRow of row[col.key]">
+                              <td *ngFor="let imbCol of col.imbeddedTableColumns" [ngClass]="imbCol.cellClass" [style]="imbCol.cellStyle">
+                                <ng-container [ngSwitch]="imbCol.type">
+                                  <span *ngSwitchCase="'text'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? imbRow[imbCol.subObject][imbCol.key]
+                                            : imbRow[imbCol.key]
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'number'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                            | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                            : (imbRow[imbCol.key] | numberDivider: config.thousandSeparator : config.decimalSeparator : 0)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'floatNumber'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject]
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                            | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                            : (imbRow[imbCol.key]
+                                              | numberDivider: config.thousandSeparator : config.decimalSeparator : config.decimalDigits)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'date'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | formatMediumDate)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | formatMediumDate)
+                                            : (imbRow[imbCol.key] | formatMediumDate)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'datetime'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | formatMediumDatetime)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | formatMediumDatetime)
+                                            : (imbRow[imbCol.key] | formatMediumDatetime)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'currency'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | currency)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | currency)
+                                            : (imbRow[imbCol.key] | currency)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'boolean'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                            ? '✔️'
+                                            : '❌'
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? imbRow[imbCol.subObject][imbCol.key]
+                                              ? '✔️'
+                                              : '❌'
+                                            : imbRow[imbCol.key]
+                                              ? '✔️'
+                                              : '❌'
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchCase="'percent'">
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? (imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key] | percent)
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? (imbRow[imbCol.subObject][imbCol.key] | percent)
+                                            : (imbRow[imbCol.key] | percent)
+                                      }}
+                                    </span>
+                                  </span>
+                                  <span *ngSwitchDefault>
+                                    <span ngbTooltip jhiClickToCopy [isEnabled]="col.isWithClickToCopy">
+                                      {{
+                                        imbCol.subObject != null &&
+                                        imbCol.subSubObject != null &&
+                                        imbRow[imbCol.subObject]?.[imbCol.subSubObject] != null
+                                          ? imbRow[imbCol.subObject][imbCol.subSubObject][imbCol.key]
+                                          : imbCol.subObject != null && imbRow[imbCol.subObject] != null
+                                            ? imbRow[imbCol.subObject][imbCol.key]
+                                            : imbRow[imbCol.key]
+                                      }}
+                                    </span>
+                                  </span>
+                                </ng-container>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </ng-container>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+
+    @if (!config.hidePagination) {
+      <!-- Pagination serveur/parent -->
+      <div *ngIf="totalItems > 0" class="mt-2">
+        <div class="d-flex justify-content-center">
+          <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: pageSize }"></jhi-item-count>
+        </div>
+        <div class="d-flex justify-content-center">
+          <ngb-pagination
+            [collectionSize]="totalItems"
+            [page]="page"
+            [pageSize]="pageSize"
+            [maxSize]="5"
+            [rotate]="true"
+            [boundaryLinks]="true"
+            (pageChange)="onPageChange($event)"
+          ></ngb-pagination>
+        </div>
+        <!-- <div class="d-flex justify-content-center mt-2">
+          <label for="pageSizeSelect">Lignes par page :</label>
+          <select id="pageSizeSelect" class="form-select form-select-sm w-auto d-inline mx-2" [ngModel]="pageSize" (ngModelChange)="onPageSizeChange($event)">
+            <option *ngFor="let size of pageSizes" [ngValue]="size">{{size}}</option>
+          </select>
+        </div> -->
+      </div>
+    }
+  </div>
+}
+@if (config.isNotWithInitialSearch && !config.data.length) {
+  <div class="alert alert-info text-center" role="alert">
+    <span jhiTranslate="main.components.sharedListTable.pleaseMakeASearch">
+      <strong>Veuillez effectuer une recherche pour afficher des données.</strong>
+    </span>
+  </div>
+}
+@if (!config.data.length && !config.isNotWithInitialSearch) {
+  <div class="alert alert-info text-center" role="alert">
+    <span jhiTranslate="main.components.sharedListTable.noData">
+      <strong>Aucune donnée à afficher.</strong>
+    </span>
+  </div>
+}

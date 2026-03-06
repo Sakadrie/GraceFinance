@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IAffectationUtilisateur, NewAffectationUtilisateur } from '../affectation-utilisateur.model';
+import { IAffectationUtilisateur, NewAffectationUtilisateur } from '../../../shared/model/security/affectation-utilisateur.model';
 
 /**
  * A partial Type with required key is used as form input.

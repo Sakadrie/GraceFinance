@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ICategorie, NewCategorie } from '../categorie.model';
+import { ICategorie, NewCategorie } from '../../../shared/model/referentiel/categorie.model';
 
 /**
  * A partial Type with required key is used as form input.

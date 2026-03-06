@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IAffectationUtilisateur } from '../affectation-utilisateur.model';
+import { IAffectationUtilisateur } from '../../../shared/model/security/affectation-utilisateur.model';
 import { AffectationUtilisateurService } from '../service/affectation-utilisateur.service';
 
 @Component({

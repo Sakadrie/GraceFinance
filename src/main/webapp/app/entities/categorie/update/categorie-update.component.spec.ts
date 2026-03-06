@@ -4,10 +4,10 @@ import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService } from 'app/entities/entite-financiere/service/entite-financiere.service';
 import { CategorieService } from '../service/categorie.service';
-import { ICategorie } from '../categorie.model';
+import { ICategorie } from '../../../shared/model/referentiel/categorie.model';
 import { CategorieFormService } from './categorie-form.service';
 
 import { CategorieUpdateComponent } from './categorie-update.component';

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject, from, of } from 'rxjs';
 
 import { EntiteFinanciereService } from '../service/entite-financiere.service';
-import { IEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereFormService } from './entite-financiere-form.service';
 
 import { EntiteFinanciereUpdateComponent } from './entite-financiere-update.component';

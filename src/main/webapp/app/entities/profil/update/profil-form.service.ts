@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IProfil, NewProfil } from '../profil.model';
+import { IProfil, NewProfil } from '../../../shared/model/security/profil.model';
 
 /**
  * A partial Type with required key is used as form input.

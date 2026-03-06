@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
-import { ICategorie } from '../categorie.model';
+import { ICategorie } from '../../../shared/model/referentiel/categorie.model';
 
 import { CategorieService, EntityArrayResponseType } from '../service/categorie.service';
 import { CategorieDeleteDialogComponent } from '../delete/categorie-delete-dialog.component';

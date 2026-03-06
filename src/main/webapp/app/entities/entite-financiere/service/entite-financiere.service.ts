@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IEntiteFinanciere, NewEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere, NewEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 
 export type PartialUpdateEntiteFinanciere = Partial<IEntiteFinanciere> & Pick<IEntiteFinanciere, 'id'>;
 

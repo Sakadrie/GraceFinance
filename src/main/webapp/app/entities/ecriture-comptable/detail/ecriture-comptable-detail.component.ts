@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormatMediumDatePipe } from 'app/shared/date';
-import { IEcritureComptable } from '../ecriture-comptable.model';
+import { IEcritureComptable } from '../../../shared/model/principal/ecriture-comptable.model';
 
 @Component({
   selector: 'jhi-ecriture-comptable-detail',

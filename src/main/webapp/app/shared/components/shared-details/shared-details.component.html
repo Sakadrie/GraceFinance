@@ -1,1 +1,269 @@
-<p>shared-details works!</p>
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4 shared-details">
+    <!-- XS: <576px -->
+    <div
+      *ngFor="let row of listeRowsXs; let i = index"
+      class="row align-items-center py-2 border-bottom d-flex d-sm-none"
+      [ngClass]="{ 'mb-3': i < listeRowsXs.length - 1 }"
+    >
+      <div *ngFor="let col of row" class="col col-{{ 12 / config.itemsPerRowXs }}">
+        <div class="detail-label fw-bold text-secondary small mb-1">
+          <i class="bi bi-dot me-1 text-primary"></i>{{ col.label | translate }}
+        </div>
+        @if (col.type != 'download' && col.type != 'text' && col.type != 'wysiwyg' && col.type != 'joinProperty' && col.type != 'json') {
+          <div class="detail-value">
+            <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ formatValue(col) }}</span>
+          </div>
+        }
+        @if (col.type == 'wysiwyg' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <div class="contenu-cell" [innerHTML]="getSanitizedHtml(config.data?.[col.key])"></div>
+          </div>
+        }
+        @if (col.type == 'json' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <div class="contenu-cell" [innerHTML]="config.data?.[col.key] | prettyJson"></div>
+          </div>
+        }
+        @if (col.type == 'joinProperty' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <span
+              [innerHTML]="
+                config.data?.[col.key]
+                  | joinPropertyHtml
+                    : col.joinPropertyName || ''
+                    : col.joinPropertySeparator
+                    : col.joinPropertyListProperty
+                    : col.joinPropertySortOrder
+                    : col.joinPropertySortPath
+                    : col.joinPropertySpanClasses
+                    : col.joinPropertySeparatorClasses
+              "
+            ></span>
+          </div>
+        }
+        @if (col.type == 'text' && config.data?.[col.key]) {
+          <div class="detail-value">
+            @if (col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{
+                config.data?.[col.key] | translate
+              }}</span>
+            }
+            @if (!col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ config.data?.[col.key] }}</span>
+            }
+          </div>
+        }
+        @if (col.type == 'download') {
+          <div class="detail-value">
+            <a
+              *ngIf="config.data != null && config.data[col.key] != null"
+              [href]="config.data[col.key]"
+              target="_blank"
+              rel="noopener"
+              ngbTooltip="{{ 'main.labels.download' | translate }}"
+              class="btn btn-link p-0"
+            >
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+    <!-- SM: ≥576px & <768px -->
+    <div
+      *ngFor="let row of listeRowsSm; let i = index"
+      class="row align-items-center py-2 border-bottom d-none d-sm-flex d-md-none d-lg-none"
+      [ngClass]="{ 'mb-3': i < listeRowsSm.length - 1 }"
+    >
+      <div *ngFor="let col of row" class="col col-sm-{{ 12 / config.itemsPerRowSm }}">
+        <div class="detail-label fw-bold text-secondary small mb-1">
+          <i class="bi bi-dot me-1 text-primary"></i>{{ col.label | translate }}
+        </div>
+        @if (col.type != 'download' && col.type != 'text' && col.type != 'wysiwyg' && col.type != 'joinProperty') {
+          <div class="detail-value">
+            <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ formatValue(col) }}</span>
+          </div>
+        }
+        @if (col.type == 'wysiwyg' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <div class="contenu-cell" [innerHTML]="getSanitizedHtml(config.data?.[col.key])"></div>
+          </div>
+        }
+        @if (col.type == 'joinProperty' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <span
+              [innerHTML]="
+                config.data?.[col.key]
+                  | joinPropertyHtml
+                    : col.joinPropertyName || ''
+                    : col.joinPropertySeparator
+                    : col.joinPropertyListProperty
+                    : col.joinPropertySortOrder
+                    : col.joinPropertySortPath
+                    : col.joinPropertySpanClasses
+                    : col.joinPropertySeparatorClasses
+              "
+            ></span>
+          </div>
+        }
+        @if (col.type == 'text' && config.data?.[col.key]) {
+          <div class="detail-value">
+            @if (col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{
+                config.data?.[col.key] | translate
+              }}</span>
+            }
+            @if (!col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ config.data?.[col.key] }}</span>
+            }
+          </div>
+        }
+        @if (col.type == 'download') {
+          <div class="detail-value">
+            <a
+              *ngIf="config.data != null && config.data[col.key] != null"
+              [href]="config.data[col.key]"
+              target="_blank"
+              rel="noopener"
+              ngbTooltip="{{ 'main.labels.download' | translate }}"
+              class="btn btn-link p-0"
+            >
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+    <!-- MD: ≥768px & <992px -->
+    <div
+      *ngFor="let row of listeRowsMd; let i = index"
+      class="row align-items-center py-2 border-bottom d-none d-md-flex d-lg-none"
+      [ngClass]="{ 'mb-3': i < listeRowsMd.length - 1 }"
+    >
+      <div *ngFor="let col of row" class="col col-md-{{ 12 / config.itemsPerRowMd }}">
+        <div class="detail-label fw-bold text-secondary small mb-1">
+          <i class="bi bi-dot me-1 text-primary"></i>{{ col.label | translate }}
+        </div>
+        @if (col.type != 'download' && col.type != 'text' && col.type != 'wysiwyg' && col.type != 'joinProperty') {
+          <div class="detail-value">
+            <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ formatValue(col) }}</span>
+          </div>
+        }
+        @if (col.type == 'wysiwyg' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <div class="contenu-cell" [innerHTML]="getSanitizedHtml(config.data?.[col.key])"></div>
+          </div>
+        }
+        @if (col.type == 'joinProperty' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <span
+              [innerHTML]="
+                config.data?.[col.key]
+                  | joinPropertyHtml
+                    : col.joinPropertyName || ''
+                    : col.joinPropertySeparator
+                    : col.joinPropertyListProperty
+                    : col.joinPropertySortOrder
+                    : col.joinPropertySortPath
+                    : col.joinPropertySpanClasses
+                    : col.joinPropertySeparatorClasses
+              "
+            ></span>
+          </div>
+        }
+        @if (col.type == 'text' && config.data?.[col.key]) {
+          <div class="detail-value">
+            @if (col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{
+                config.data?.[col.key] | translate
+              }}</span>
+            }
+            @if (!col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ config.data?.[col.key] }}</span>
+            }
+          </div>
+        }
+        @if (col.type == 'download') {
+          <div class="detail-value">
+            <a
+              *ngIf="config.data != null && config.data[col.key] != null"
+              [href]="config.data[col.key]"
+              target="_blank"
+              rel="noopener"
+              ngbTooltip="{{ 'main.labels.download' | translate }}"
+              class="btn btn-link p-0"
+            >
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+    <!-- LG: ≥992px -->
+    <div
+      *ngFor="let row of listeRowsLg; let i = index"
+      class="row align-items-center py-2 border-bottom d-none d-lg-flex"
+      [ngClass]="{ 'mb-3': i < listeRowsLg.length - 1 }"
+    >
+      <div *ngFor="let col of row" class="col col-lg-{{ 12 / config.itemsPerRowLg }}">
+        <div class="detail-label fw-bold text-secondary small mb-1">
+          <i class="bi bi-dot me-1 text-primary"></i>{{ col.label | translate }}
+        </div>
+        @if (col.type != 'download' && col.type != 'text' && col.type != 'wysiwyg' && col.type != 'joinProperty') {
+          <div class="detail-value">
+            <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ formatValue(col) }}</span>
+          </div>
+        }
+        @if (col.type == 'wysiwyg' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <div class="contenu-cell" [innerHTML]="getSanitizedHtml(config.data?.[col.key])"></div>
+          </div>
+        }
+        @if (col.type == 'joinProperty' && config.data?.[col.key]) {
+          <div class="detail-value">
+            <span
+              [innerHTML]="
+                config.data?.[col.key]
+                  | joinPropertyHtml
+                    : col.joinPropertyName || ''
+                    : col.joinPropertySeparator
+                    : col.joinPropertyListProperty
+                    : col.joinPropertySortOrder
+                    : col.joinPropertySortPath
+                    : col.joinPropertySpanClasses
+                    : col.joinPropertySeparatorClasses
+              "
+            ></span>
+          </div>
+        }
+        @if (col.type == 'text' && config.data?.[col.key]) {
+          <div class="detail-value">
+            @if (col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{
+                config.data?.[col.key] | translate
+              }}</span>
+            }
+            @if (!col.isWithColumnDataTranslate) {
+              <span class="badge bg-light text-dark px-3 py-2 shadow-sm" ngbTooltip jhiClickToCopy>{{ config.data?.[col.key] }}</span>
+            }
+          </div>
+        }
+        @if (col.type == 'download') {
+          <div class="detail-value">
+            <a
+              *ngIf="config.data != null && config.data[col.key] != null"
+              [href]="config.data[col.key]"
+              target="_blank"
+              rel="noopener"
+              ngbTooltip="{{ 'main.labels.download' | translate }}"
+              class="btn btn-link p-0"
+            >
+              <i class="fa fa-download"></i>
+            </a>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

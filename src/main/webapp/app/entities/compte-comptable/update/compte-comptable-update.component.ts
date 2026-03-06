@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ICompteComptable } from '../compte-comptable.model';
+import { ICompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 import { CompteComptableService } from '../service/compte-comptable.service';
 import { CompteComptableFormGroup, CompteComptableFormService } from './compte-comptable-form.service';
 

@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { IDroit } from '../droit.model';
+import { IDroit } from '../../../shared/model/security/droit.model';
 
 @Component({
   selector: 'jhi-droit-detail',

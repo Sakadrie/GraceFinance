@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IDroit } from '../droit.model';
+import { IDroit } from '../../../shared/model/security/droit.model';
 import { DroitService } from '../service/droit.service';
 
 const droitResolve = (route: ActivatedRouteSnapshot): Observable<null | IDroit> => {

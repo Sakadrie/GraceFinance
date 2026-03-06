@@ -1,4 +1,4 @@
-import { IProfil } from 'app/entities/profil/profil.model';
+import { IProfil } from 'app/shared/model/security/profil.model';
 
 export interface IDroit {
   id: number;

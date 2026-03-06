@@ -1,7 +1,7 @@
 import dayjs from 'dayjs/esm';
 import { IUser } from 'app/entities/user/user.model';
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
-import { IProfil } from 'app/entities/profil/profil.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
+import { IProfil } from 'app/shared/model/security/profil.model';
 
 export interface IAffectationUtilisateur {
   id: number;

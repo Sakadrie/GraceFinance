@@ -1,5 +1,5 @@
-import { IDroit } from 'app/entities/droit/droit.model';
-import { IAffectationUtilisateur } from 'app/entities/affectation-utilisateur/affectation-utilisateur.model';
+import { IDroit } from 'app/shared/model/security/droit.model';
+import { IAffectationUtilisateur } from 'app/shared/model/security/affectation-utilisateur.model';
 
 export interface IProfil {
   id: number;

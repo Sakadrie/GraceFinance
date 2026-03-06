@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
 import { FormatMediumDatePipe } from 'app/shared/date';
-import { IRecette } from '../recette.model';
+import { IRecette } from '../../../shared/model/principal/recette.model';
 
 @Component({
   selector: 'jhi-recette-detail',

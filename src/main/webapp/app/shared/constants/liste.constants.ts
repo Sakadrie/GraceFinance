@@ -1,3 +1,34 @@
+export const FILE_SIZE_MAX_SIGNATURE = 153600; // 150Kb en octet
+export const SNACKBAR_DURATION = 5000; // In milliseconds
+export const ID_PARAM_LOCK_DURATION = 7;
+export const HEADER_PREFIX = 'X-bescapp-';
+export const DEFAULT_LANGUAGE = 'fr';
+export const PREFERRED_LANGUAGES = ['fr', 'en'];
+export const PREFERRED_COUNTRIES = ['bf', 'ml', 'ne'];
+
+export const SKIP_INTERCEPTOR = { 'Skip-Interceptor': 'true' };
+export const IS_QUERY_PARAM = { isQuery: 'true' };
+
+export const MESSAGE_TITLE_SUCCESS = 'main.constants.messageTitleSuccess';
+export const MESSAGE_TITLE_ERROR = 'main.constants.messageTitleError';
+export const MESSAGE_TITLE_WARN = 'main.constants.messageTitleWarn';
+export const MESSAGE_TITLE_INFO = 'main.constants.messageTitleInfo';
+export const MESSAGE_SERVER_ERROR_CONTACT_ADMIN = "Une erreur serveur est survenue, merci de contacter l'administrateur";
+export const SWAL_CONFIRMATION_TITLE = 'main.components.AlertConfirmation.title';
+export const SWAL_MENTION_IRREVERSIBLE = 'main.components.AlertConfirmation.irreversibleMention';
+export const SWAL_TEXT_BTN_CONFIRME = 'main.components.AlertConfirmation.confirmButtonLabel';
+export const SWAL_TEXT_BTN_CANCEL = 'main.components.AlertConfirmation.cancelButtonLabel';
+export const SWAL_TEXT_CONFIRMATION_ENREGISTREMENT = 'Voulez-vous vraiment enregistrer les données saisie ?';
+
+export const IS_TRANSLATION_ENABLED_ON_TOAST = true;
+
+export enum EnumIconAlert {
+  SUCCESS = 'success',
+  ERROR = 'error',
+  WARNING = 'warning',
+  INFO = 'info',
+  QUESTION = 'question',
+}
 export const LISTE_ADMINISTRATION_ROUTES = {
   PATH: 'admin',
 

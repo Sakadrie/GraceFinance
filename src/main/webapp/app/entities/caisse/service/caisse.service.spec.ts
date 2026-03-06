@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-import { ICaisse } from '../caisse.model';
+import { ICaisse } from '../../../shared/model/principal/caisse.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../caisse.test-samples';
 
 import { CaisseService } from './caisse.service';

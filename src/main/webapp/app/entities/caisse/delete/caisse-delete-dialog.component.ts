@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { ICaisse } from '../caisse.model';
+import { ICaisse } from '../../../shared/model/principal/caisse.model';
 import { CaisseService } from '../service/caisse.service';
 
 @Component({

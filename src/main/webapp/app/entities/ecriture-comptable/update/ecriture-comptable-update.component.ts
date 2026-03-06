@@ -7,7 +7,7 @@ import { finalize } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IEcritureComptable } from '../ecriture-comptable.model';
+import { IEcritureComptable } from '../../../shared/model/principal/ecriture-comptable.model';
 import { EcritureComptableService } from '../service/ecriture-comptable.service';
 import { EcritureComptableFormGroup, EcritureComptableFormService } from './ecriture-comptable-form.service';
 

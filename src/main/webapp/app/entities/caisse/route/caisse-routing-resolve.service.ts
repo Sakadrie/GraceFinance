@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { ICaisse } from '../caisse.model';
+import { ICaisse } from '../../../shared/model/principal/caisse.model';
 import { CaisseService } from '../service/caisse.service';
 
 const caisseResolve = (route: ActivatedRouteSnapshot): Observable<null | ICaisse> => {

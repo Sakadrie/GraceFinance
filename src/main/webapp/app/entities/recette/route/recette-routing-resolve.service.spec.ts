@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { IRecette } from '../recette.model';
+import { IRecette } from '../../../shared/model/principal/recette.model';
 import { RecetteService } from '../service/recette.service';
 
 import recetteResolve from './recette-routing-resolve.service';

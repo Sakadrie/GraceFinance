@@ -1,6 +1,6 @@
 import dayjs from 'dayjs/esm';
 
-import { IDepense, NewDepense } from './depense.model';
+import { IDepense, NewDepense } from '../../shared/model/principal/depense.model';
 
 export const sampleWithRequiredData: IDepense = {
   id: 29021,

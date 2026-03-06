@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { IDepense } from '../depense.model';
+import { IDepense } from '../../../shared/model/principal/depense.model';
 import { DepenseService } from '../service/depense.service';
 
 import depenseResolve from './depense-routing-resolve.service';

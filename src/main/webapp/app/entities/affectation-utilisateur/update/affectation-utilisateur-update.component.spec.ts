@@ -6,11 +6,11 @@ import { Subject, from, of } from 'rxjs';
 
 import { IUser } from 'app/entities/user/user.model';
 import { UserService } from 'app/entities/user/service/user.service';
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService } from 'app/entities/entite-financiere/service/entite-financiere.service';
-import { IProfil } from 'app/entities/profil/profil.model';
+import { IProfil } from 'app/shared/model/security/profil.model';
 import { ProfilService } from 'app/entities/profil/service/profil.service';
-import { IAffectationUtilisateur } from '../affectation-utilisateur.model';
+import { IAffectationUtilisateur } from '../../../shared/model/security/affectation-utilisateur.model';
 import { AffectationUtilisateurService } from '../service/affectation-utilisateur.service';
 import { AffectationUtilisateurFormService } from './affectation-utilisateur-form.service';
 

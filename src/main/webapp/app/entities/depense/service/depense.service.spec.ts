@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
-import { IDepense } from '../depense.model';
+import { IDepense } from '../../../shared/model/principal/depense.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../depense.test-samples';
 
 import { DepenseService, RestDepense } from './depense.service';

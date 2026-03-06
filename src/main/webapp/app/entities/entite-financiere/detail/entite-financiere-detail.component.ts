@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import SharedModule from 'app/shared/shared.module';
-import { IEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 
 @Component({
   selector: 'jhi-entite-financiere-detail',

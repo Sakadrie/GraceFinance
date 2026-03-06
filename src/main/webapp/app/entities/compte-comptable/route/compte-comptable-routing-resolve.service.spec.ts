@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { ICompteComptable } from '../compte-comptable.model';
+import { ICompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 import { CompteComptableService } from '../service/compte-comptable.service';
 
 import compteComptableResolve from './compte-comptable-routing-resolve.service';

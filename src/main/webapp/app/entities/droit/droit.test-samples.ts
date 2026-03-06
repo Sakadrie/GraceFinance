@@ -1,4 +1,4 @@
-import { IDroit, NewDroit } from './droit.model';
+import { IDroit, NewDroit } from '../../shared/model/security/droit.model';
 
 export const sampleWithRequiredData: IDroit = {
   id: 24080,

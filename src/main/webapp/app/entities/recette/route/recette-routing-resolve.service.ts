@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IRecette } from '../recette.model';
+import { IRecette } from '../../../shared/model/principal/recette.model';
 import { RecetteService } from '../service/recette.service';
 
 const recetteResolve = (route: ActivatedRouteSnapshot): Observable<null | IRecette> => {

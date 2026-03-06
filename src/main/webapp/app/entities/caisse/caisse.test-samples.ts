@@ -1,4 +1,4 @@
-import { ICaisse, NewCaisse } from './caisse.model';
+import { ICaisse, NewCaisse } from '../../shared/model/principal/caisse.model';
 
 export const sampleWithRequiredData: ICaisse = {
   id: 11058,

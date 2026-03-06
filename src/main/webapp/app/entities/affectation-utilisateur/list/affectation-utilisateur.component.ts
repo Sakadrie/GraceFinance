@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { FilterComponent, FilterOptions, IFilterOption, IFilterOptions } from 'app/shared/filter';
-import { IAffectationUtilisateur } from '../affectation-utilisateur.model';
+import { IAffectationUtilisateur } from '../../../shared/model/security/affectation-utilisateur.model';
 
 import { AffectationUtilisateurService, EntityArrayResponseType } from '../service/affectation-utilisateur.service';
 import { AffectationUtilisateurDeleteDialogComponent } from '../delete/affectation-utilisateur-delete-dialog.component';

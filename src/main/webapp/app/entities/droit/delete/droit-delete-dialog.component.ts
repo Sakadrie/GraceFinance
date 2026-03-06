@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IDroit } from '../droit.model';
+import { IDroit } from '../../../shared/model/security/droit.model';
 import { DroitService } from '../service/droit.service';
 
 @Component({

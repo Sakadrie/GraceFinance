@@ -1,0 +1,207 @@
+<div class="addContainer">
+  <!--<div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          {{dialogTitle}}
+        </div>
+      </div>
+    </div>
+    <button (click)="dialogRef.close()" aria-label="Close dialog" class="modal-close-button" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>-->
+
+  <div mat-dialog-content>
+    <div class="text-center mt-2 mb-3">
+      <div *ngIf="icon" class="mb-3">
+        <div *ngIf="icon == enumIconAlert.QUESTION">
+          <mat-icon class="mat-icon-alert" style="color: rgb(29, 106, 239)">question_mark</mat-icon>
+        </div>
+        <div *ngIf="icon == enumIconAlert.INFO">
+          <mat-icon class="mat-icon-alert" style="color: rgb(52, 234, 253)">info_i</mat-icon>
+        </div>
+        <div *ngIf="icon == enumIconAlert.WARNING">
+          <mat-icon class="mat-icon-alert" style="color: rgb(252, 177, 4)">priority_high</mat-icon>
+        </div>
+        <div *ngIf="icon == enumIconAlert.ERROR">
+          <mat-icon class="mat-icon-alert" style="color: rgb(211, 5, 5)">close</mat-icon>
+        </div>
+        <div *ngIf="icon == enumIconAlert.SUCCESS">
+          <mat-icon class="mat-icon-alert" style="color: rgb(63, 158, 11)">check</mat-icon>
+        </div>
+      </div>
+
+      <h3 *ngIf="title" class="text-bold" jhiTranslate="{{ title || 'main.components.AlertConfirmation.title' }}">{{ title }}</h3>
+
+      <form #confirmForm="ngForm" autocomplete="off" class="mb-3" name="confirmForm" novalidate role="form">
+        @if (contentString) {
+          <h6 [innerHTML]="contentString | translate: { value: contentMsgValue }" class="mb-4"></h6>
+        }
+        @if (contentHtml) {
+          <h6 [innerHTML]="contentHtml" class="mb-4"></h6>
+        }
+
+        <div *ngIf="inputType" class="ml-3 mr-3">
+          <span *ngIf="inputType == enumInputType.TEXT">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>{{ inputLabel || 'main.components.AlertConfirmation.textInputLabel' | translate }}</mat-label>
+              <input
+                (keyup.enter)="confirmer()"
+                [(ngModel)]="valueConfirme"
+                [maxlength]="maxLength"
+                [required]="isInputRequired"
+                id="valueConfirme"
+                matInput
+                name="valueConfirme"
+                type="text"
+              />
+            </mat-form-field>
+          </span>
+
+          <span *ngIf="inputType == enumInputType.NUMBER">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>{{ inputLabel || 'main.components.AlertConfirmation.numberInputLabel' | translate }}</mat-label>
+              <input
+                (keyup.enter)="confirmer()"
+                [(ngModel)]="valueConfirme"
+                [maxlength]="maxLength"
+                [required]="isInputRequired"
+                id="valueConfirme"
+                matInput
+                name="valueConfirme"
+                type="number"
+              />
+            </mat-form-field>
+          </span>
+
+          <span *ngIf="inputType == enumInputType.TEXTAREA">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>{{ inputLabel || 'main.components.AlertConfirmation.textareaInputLabel' | translate }}</mat-label>
+              <textarea
+                (keyup.enter)="confirmer()"
+                [(ngModel)]="valueConfirme"
+                [maxLength]="maxLength"
+                [required]="isInputRequired"
+                [rows]="rowCount"
+                id="valueConfirme"
+                matInput
+                name="valueConfirme"
+              >
+              </textarea>
+            </mat-form-field>
+          </span>
+
+          <span *ngIf="inputType == enumInputType.SELECT">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>{{ inputLabel || 'main.components.AlertConfirmation.selectInputLabel' | translate }}</mat-label>
+              <mat-select [(ngModel)]="valueConfirme" [required]="isInputRequired" id="valueConfirme" name="valueConfirme">
+                <mat-option *ngFor="let item of inputSelectOptions" [value]="item.id">{{ item.libelle }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+
+          <span *ngIf="inputType == enumInputType.DATE">
+            <mat-form-field appearance="outline" class="example-full-width">
+              <mat-label>{{ inputLabel || 'main.components.AlertConfirmation.dateInputLabel' | translate }}</mat-label>
+              <input
+                (keyup.enter)="confirmer()"
+                [(ngModel)]="valueConfirme"
+                [matDatepicker]="picker"
+                [required]="isInputRequired"
+                id="valueConfirme"
+                matInput
+                name="valueConfirme"
+              />
+              <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </span>
+
+          <span *ngIf="inputType == enumInputType.RADIO">
+            <mat-label class="msr-3">{{ inputLabel || 'main.components.AlertConfirmation.radioInputLabel' | translate }} : </mat-label>
+            <mat-radio-group
+              [(ngModel)]="valueConfirme"
+              [required]="isInputRequired"
+              aria-label="Choisir"
+              id="valueConfirmeYes"
+              name="valueConfirme"
+            >
+              <mat-radio-button [value]="true">{{ 'main.components.AlertConfirmation.oui' | translate }}</mat-radio-button>
+              <mat-radio-button [value]="false">{{ 'main.components.AlertConfirmation.non' | translate }}</mat-radio-button>
+            </mat-radio-group>
+          </span>
+        </div>
+
+        <!--<div [hidden]="!(confirmForm.controls.valueConfirme?.dirty!)">
+          <mat-error *ngIf="confirmForm.controls.valueConfirme?.errors?.required">
+            Le champs est obligatoire
+          </mat-error>
+          <mat-error *ngIf="confirmForm.controls.valueConfirme?.errors?.maxlength">
+            Ce champ ne doit pas exc&eacute;der {{maxLength}} caract&egrave;res
+          </mat-error>
+        </div>-->
+      </form>
+
+      <div *ngIf="isAddMentionIrreversible" class="text-danger fw-bold font-size-lg mt-3 mb-4">
+        {{ mentionIrreversible | translate }}
+      </div>
+
+      <div>
+        <span *ngIf="icon != enumIconAlert.QUESTION">
+          <button (click)="dialogRef.close('OK')" [mat-dialog-close]="1" color="primary" mat-raised-button>
+            <mat-icon>check</mat-icon> D'accord
+          </button>
+        </span>
+        <span *ngIf="icon == enumIconAlert.QUESTION && !reverseButtons">
+          <button
+            (click)="dialogRef.close()"
+            *ngIf="showCancelButton"
+            [mat-dialog-close]="1"
+            class="m-r-15"
+            color="{{ cancelBtnColor }}"
+            mat-raised-button
+          >
+            <mat-icon>close</mat-icon>
+            {{ cancelBtnText | translate }}
+          </button>
+          <button
+            (click)="confirmer()"
+            [class]="confirmeBtnColor === 'success' ? 'success-button' : ''"
+            [disabled]="confirmForm.form.invalid"
+            [mat-dialog-close]="1"
+            color="{{ confirmeBtnColor }}"
+            mat-raised-button
+          >
+            <mat-icon>check</mat-icon>
+            {{ confirmeBtnText | translate }}
+          </button>
+        </span>
+        <span *ngIf="icon == enumIconAlert.QUESTION && reverseButtons">
+          <button
+            (click)="confirmer()"
+            [class]="confirmeBtnColor === 'success' ? 'success-button' : ''"
+            [disabled]="confirmForm.form.invalid"
+            [mat-dialog-close]="1"
+            class="m-r-15"
+            color="{{ confirmeBtnColor }}"
+            mat-raised-button
+          >
+            <mat-icon>check</mat-icon>
+            {{ confirmeBtnText | translate }}
+          </button>
+          <button
+            (click)="dialogRef.close()"
+            *ngIf="showCancelButton"
+            [mat-dialog-close]="1"
+            color="{{ cancelBtnColor }}"
+            mat-raised-button
+          >
+            <mat-icon>close</mat-icon>
+            {{ cancelBtnText | translate }}
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,12 +7,12 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IDroit } from 'app/entities/droit/droit.model';
+import { IDroit } from 'app/shared/model/security/droit.model';
 import { DroitService } from 'app/entities/droit/service/droit.service';
-import { IAffectationUtilisateur } from 'app/entities/affectation-utilisateur/affectation-utilisateur.model';
+import { IAffectationUtilisateur } from 'app/shared/model/security/affectation-utilisateur.model';
 import { AffectationUtilisateurService } from 'app/entities/affectation-utilisateur/service/affectation-utilisateur.service';
 import { ProfilService } from '../service/profil.service';
-import { IProfil } from '../profil.model';
+import { IProfil } from '../../../shared/model/security/profil.model';
 import { ProfilFormGroup, ProfilFormService } from './profil-form.service';
 
 @Component({

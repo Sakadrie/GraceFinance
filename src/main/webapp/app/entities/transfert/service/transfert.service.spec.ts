@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
-import { ITransfert } from '../transfert.model';
+import { ITransfert } from '../../../shared/model/referentiel/transfert.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../transfert.test-samples';
 
 import { RestTransfert, TransfertService } from './transfert.service';

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { ITransfert } from '../transfert.model';
+import { ITransfert } from '../../../shared/model/referentiel/transfert.model';
 import { TransfertService } from '../service/transfert.service';
 
 @Component({

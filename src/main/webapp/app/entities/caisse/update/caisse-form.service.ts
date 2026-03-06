@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ICaisse, NewCaisse } from '../caisse.model';
+import { ICaisse, NewCaisse } from '../../../shared/model/principal/caisse.model';
 
 /**
  * A partial Type with required key is used as form input.

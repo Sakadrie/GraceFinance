@@ -7,9 +7,9 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IProfil } from 'app/entities/profil/profil.model';
+import { IProfil } from 'app/shared/model/security/profil.model';
 import { ProfilService } from 'app/entities/profil/service/profil.service';
-import { IDroit } from '../droit.model';
+import { IDroit } from '../../../shared/model/security/droit.model';
 import { DroitService } from '../service/droit.service';
 import { DroitFormGroup, DroitFormService } from './droit-form.service';
 

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IProfil, NewProfil } from '../profil.model';
+import { IProfil, NewProfil } from '../../../shared/model/security/profil.model';
 
 export type PartialUpdateProfil = Partial<IProfil> & Pick<IProfil, 'id'>;
 

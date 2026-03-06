@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
 
-import { ICompteComptable } from '../compte-comptable.model';
+import { ICompteComptable } from '../../../shared/model/principal/compte-comptable.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../compte-comptable.test-samples';
 
 import { CompteComptableService } from './compte-comptable.service';

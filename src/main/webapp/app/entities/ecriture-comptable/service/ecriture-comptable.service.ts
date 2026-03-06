@@ -8,7 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { IEcritureComptable, NewEcritureComptable } from '../ecriture-comptable.model';
+import { IEcritureComptable, NewEcritureComptable } from '../../../shared/model/principal/ecriture-comptable.model';
 
 export type PartialUpdateEcritureComptable = Partial<IEcritureComptable> & Pick<IEcritureComptable, 'id'>;
 

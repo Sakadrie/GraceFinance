@@ -2,6 +2,11 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
+import { NgbTooltip } from '@ng-bootstrap/ng-bootstrap';
+import { JoinPropertyHtmlPipe } from 'app/shared/pipe/join-property-html.pipe';
+import PrettyJsonPipe from 'app/shared/pipe/pretty-json.pipe';
 
 export interface SharedDetailsColumn {
   order: number;
@@ -42,7 +47,14 @@ export interface SharedDetailsColumn {
   standalone: true,
   templateUrl: './shared-details.component.html',
   styleUrls: ['./shared-details.component.scss'],
-  // imports: [CommonModule, TranslatePipe, NgbTooltip, ClickToCopyDirective, JoinPropertyHtmlPipe, PrettyJsonPipe],
+  imports: [
+    CommonModule,
+    TranslatePipe,
+    NgbTooltip,
+    JoinPropertyHtmlPipe,
+    PrettyJsonPipe,
+    // ClickToCopyDirective
+  ],
 })
 export class SharedDetailsComponent implements OnInit {
   @Input() config: {

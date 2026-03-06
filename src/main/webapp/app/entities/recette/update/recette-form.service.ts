@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IRecette, NewRecette } from '../recette.model';
+import { IRecette, NewRecette } from '../../../shared/model/principal/recette.model';
 
 /**
  * A partial Type with required key is used as form input.

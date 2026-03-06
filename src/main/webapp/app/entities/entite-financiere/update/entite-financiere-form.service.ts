@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IEntiteFinanciere, NewEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere, NewEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 
 /**
  * A partial Type with required key is used as form input.

@@ -8,7 +8,7 @@ import { isPresent } from 'app/core/util/operators';
 import { DATE_FORMAT } from 'app/config/input.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ITransfert, NewTransfert } from '../transfert.model';
+import { ITransfert, NewTransfert } from '../../../shared/model/referentiel/transfert.model';
 
 export type PartialUpdateTransfert = Partial<ITransfert> & Pick<ITransfert, 'id'>;
 

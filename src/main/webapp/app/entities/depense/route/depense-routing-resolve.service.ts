@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IDepense } from '../depense.model';
+import { IDepense } from '../../../shared/model/principal/depense.model';
 import { DepenseService } from '../service/depense.service';
 
 const depenseResolve = (route: ActivatedRouteSnapshot): Observable<null | IDepense> => {

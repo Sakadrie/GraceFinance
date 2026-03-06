@@ -1,0 +1,206 @@
+<div class="modal fade modal-stacked show d-block" style="background: rgba(0, 0, 0, 0.55)" tabindex="-1">
+  <div class="modal-dialog modal-{{ size }} modal-dialog-centered">
+    <div [@fadeInOut] class="modal-content">
+      <div class="text-center mt-4 mb-3">
+        <!-- Bloc d'icône -->
+        @if (icon) {
+          <div class="mb-3 text-center">
+            <i [attr.data-refresh]="icon" [ngClass]="getIconClass(icon)" [style.color]="getIconColor(icon)" [style.fontSize]="'6em'"></i>
+          </div>
+        }
+        <!--@if (icon) {
+          <div class="mb-3">
+            <i [ngClass]="{
+              'fas': true,
+              'fa-question': icon === enumIconAlert.QUESTION,
+              'fa-exclamation': icon === enumIconAlert.INFO,
+              'fa-exclamation-triangle': icon === enumIconAlert.WARNING,
+              'fa-times': icon === enumIconAlert.ERROR,
+              'fa-check': icon === enumIconAlert.SUCCESS,
+              'animated-icon': true
+            }" [style.color]="getIconColor(icon)" [style.fontSize]="'6em'"></i>
+          </div>
+        }-->
+
+        @if (title) {
+          <h3 class="fw-bold" jhiTranslate="{{ title || 'main.components.AlertConfirmation.title' }}">{{ title }}</h3>
+        }
+
+        <!-- Formulaire -->
+        <form #editFormValue="ngForm" autocomplete="off" class="mb-3" novalidate>
+          <!-- Si c’est une simple chaîne traduisible -->
+          <!--    @if (contentString && !(contentHtml instanceof HTMLElement)) {-->
+          @if (contentString && !contentHtml) {
+            <div [innerHTML]="contentString | translate: { value: contentMsgValue }" class="fs-5 fw-semibold mb-4 p-2"></div>
+          }
+
+          <!-- Si c’est du HTML ou un élément -->
+          @if (contentHtml) {
+            <div [innerHTML]="contentHtml" class="fs-5 fw-semibold mb-4 p-2"></div>
+          }
+
+          @if (inputType) {
+            <div class="mx-3">
+              <!-- Champ texte -->
+              @if (inputType === enumInputType.TEXT) {
+                <input
+                  #valueConfirmeCtrl="ngModel"
+                  (keyup.enter)="confirmer()"
+                  [(ngModel)]="valueConfirme"
+                  [jhiFormControlState]="valueConfirmeCtrl"
+                  [maxlength]="maxLength"
+                  [placeholder]="inputPlaceholder || 'main.placeholders.defaultPlaceholder' | translate"
+                  [required]="isInputRequired"
+                  class="form-control form-control-sm text-uppercase"
+                  name="valueConfirme"
+                  type="text"
+                />
+              }
+
+              <!-- Champ numérique -->
+              @if (inputType === enumInputType.NUMBER) {
+                <input
+                  #valueConfirmeCtrl="ngModel"
+                  (keyup.enter)="confirmer()"
+                  [(ngModel)]="valueConfirme"
+                  [jhiFormControlState]="valueConfirmeCtrl"
+                  [placeholder]="inputPlaceholder || 'main.placeholders.defaultPlaceholder' | translate"
+                  [required]="isInputRequired"
+                  class="form-control form-control-sm text-end"
+                  mask="separator"
+                  name="valueConfirme"
+                  thousandSeparator=" "
+                />
+              }
+
+              <!-- Zone de texte -->
+              @if (inputType === enumInputType.TEXTAREA) {
+                <textarea
+                  #valueConfirmeCtrl="ngModel"
+                  (keyup.enter)="confirmer()"
+                  [(ngModel)]="valueConfirme"
+                  [jhiFormControlState]="valueConfirmeCtrl"
+                  [maxlength]="maxLength"
+                  [placeholder]="inputPlaceholder || 'main.placeholders.defaultPlaceholder' | translate"
+                  [required]="isInputRequired"
+                  [rows]="rowCount"
+                  class="form-control text-uppercase"
+                  name="valueConfirme"
+                ></textarea>
+              }
+
+              <!-- Liste déroulante -->
+              @if (inputType === enumInputType.SELECT) {
+                <select
+                  #valueConfirmeCtrl="ngModel"
+                  [(ngModel)]="valueConfirme"
+                  [jhiFormControlState]="valueConfirmeCtrl"
+                  [required]="isInputRequired"
+                  class="form-control form-control-sm"
+                  name="valueConfirme"
+                >
+                  <option [ngValue]="undefined">{{ inputPlaceholder || 'main.placeholders.select' | translate }}</option>
+                  @for (item of inputSelectOptions; track item.id) {
+                    <option [ngValue]="item.id">{{ item.libelle }}</option>
+                  }
+                </select>
+              }
+
+              <!-- Datepicker -->
+              @if (inputType === enumInputType.DATE) {
+                <!--<div class="input-group">
+                  <input #valueConfirmeCtrl="ngModel" #date_val="bsDatepicker" (keyup.enter)="confirmer()"
+                          [(ngModel)]="valueConfirme" [bsConfig]="{ isAnimated: true, adaptivePosition: true }"
+                         [jhiFormControlState]="valueConfirmeCtrl" [placeholder]="inputPlaceholder || 'main.placeholders.defaultPlaceholder' | translate"
+                         [required]="isInputRequired" bsDatepicker class="form-control form-control-sm"
+                         name="valueConfirme" type="text"/>
+                  <button (click)="date_val.toggle()" class="btn btn-sm btn-outline-secondary" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                  </button>
+                </div>-->
+              }
+
+              <!-- Radio -->
+              @if (inputType === enumInputType.RADIO) {
+                <div class="row justify-content-center mt-2">
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        #valueConfirmeCtrl="ngModel"
+                        [(ngModel)]="valueConfirme"
+                        [value]="true"
+                        class="form-check-input"
+                        name="valueConfirme"
+                        type="radio"
+                      />
+                      <label class="form-check-label fw-bold">OUI</label>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        #valueConfirmeCtrl="ngModel"
+                        [(ngModel)]="valueConfirme"
+                        [value]="false"
+                        class="form-check-input"
+                        name="valueConfirme"
+                        type="radio"
+                      />
+                      <label class="form-check-label fw-bold">NON</label>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+
+          <!-- Validation -->
+          <!--@if (valueConfirmeCtrl.dirty && valueConfirmeCtrl.invalid) {
+            <div class="text-danger small mt-1">
+              @if (valueConfirmeCtrl.errors?.['required']) {
+                <div>Ce champ est obligatoire.</div>
+              }
+              @if (valueConfirmeCtrl.errors?.maxlength) {
+                <div>Ce champ ne doit pas excéder {{ maxLength }} caractères.</div>
+              }
+            </div>
+          }-->
+        </form>
+
+        <!-- Mention irréversible -->
+        @if (isAddMentionIrreversible) {
+          <div class="text-danger fw-bold fs-5 mt-3 mb-4">
+            {{ mentionIrreversible | translate }}
+          </div>
+        }
+
+        <!-- Boutons -->
+        <div class="mb-3">
+          @if (icon !== enumIconAlert.QUESTION) {
+            <button (click)="annuler()" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> {{ okBtnText | translate }}</button>
+          }
+          @if (icon === enumIconAlert.QUESTION && !reverseButtons) {
+            @if (showCancelButton) {
+              <button (click)="annuler()" [class]="'btn btn-sm btn-' + cancelBtnColor">
+                <i class="fas fa-ban"></i> {{ cancelBtnText | translate }}
+              </button>
+            }
+            <button (click)="confirmer()" [class]="'ms-2 btn btn-sm btn-' + confirmeBtnColor" [disabled]="editFormValue.form.invalid">
+              <i class="fas fa-check"></i> {{ confirmeBtnText | translate }}
+            </button>
+          }
+          @if (icon === enumIconAlert.QUESTION && reverseButtons) {
+            <button (click)="confirmer()" [class]="'me-2 btn btn-sm btn-' + confirmeBtnColor" [disabled]="editFormValue.form.invalid">
+              <i class="fas fa-check"></i> {{ confirmeBtnText | translate }}
+            </button>
+            @if (showCancelButton) {
+              <button (click)="annuler()" [class]="'btn btn-sm btn-' + cancelBtnColor">
+                <i class="fas fa-ban"></i> {{ cancelBtnText | translate }}
+              </button>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

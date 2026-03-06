@@ -8,14 +8,14 @@ import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directiv
 import { FormatMediumDatePipe, FormatMediumDatetimePipe } from 'app/shared/date';
 import { TranslateDirective } from 'app/shared/language';
 import { ItemCountComponent } from 'app/shared/pagination';
-// import { CurrencyPipe } from 'app/shared/pipe/currency.pipe';
-// import FormatBytesPipe from 'app/shared/pipe/format-bytes.pipe';
-// import { NumberDividerPipe } from 'app/shared/pipe/number-divider.pipe';
-// import { PercentPipe } from 'app/shared/pipe/percent.pipe';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-// import { ClickToCopyDirective } from 'app/shared/directive/click-to-copy.directive';
-// import { JoinPropertyHtmlPipe } from 'app/shared/pipe/join-property-html.pipe';
-// import PrettyJsonPipe from 'app/shared/pipe/pretty-json.pipe';
+import { ClickToCopyDirective } from 'app/shared/directive/click-to-copy.directive';
+import { CurrencyPipe } from 'app/shared/pipe/currency.pipe';
+import { PercentPipe } from 'app/shared/pipe/percent.pipe';
+import { NumberDividerPipe } from 'app/shared/pipe/number-divider.pipe';
+import FormatBytesPipe from 'app/shared/pipe/format-bytes.pipe';
+import { JoinPropertyHtmlPipe } from 'app/shared/pipe/join-property-html.pipe';
+import PrettyJsonPipe from 'app/shared/pipe/pretty-json.pipe';
 
 export interface SelectableRow extends Record<string, any> {
   isSelected?: boolean;
@@ -128,16 +128,16 @@ export interface SharedListTableInput {
     NgSwitchDefault,
     FormatMediumDatePipe,
     FormatMediumDatetimePipe,
-    // CurrencyPipe,
-    // PercentPipe,
-    // NumberDividerPipe,
+    CurrencyPipe,
+    PercentPipe,
+    NumberDividerPipe,
     HasAnyAuthorityDirective,
     TranslatePipe,
-    // FormatBytesPipe,
+    FormatBytesPipe,
     NgbTooltip,
-    // ClickToCopyDirective,
-    // JoinPropertyHtmlPipe,
-    // PrettyJsonPipe,
+    ClickToCopyDirective,
+    JoinPropertyHtmlPipe,
+    PrettyJsonPipe,
   ],
   styleUrls: ['./shared-list-table.component.scss'],
 })

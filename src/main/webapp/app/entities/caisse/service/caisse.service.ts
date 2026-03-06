@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
-import { ICaisse, NewCaisse } from '../caisse.model';
+import { ICaisse, NewCaisse } from '../../../shared/model/principal/caisse.model';
 
 export type PartialUpdateCaisse = Partial<ICaisse> & Pick<ICaisse, 'id'>;
 

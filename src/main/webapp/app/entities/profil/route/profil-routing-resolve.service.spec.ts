@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { IProfil } from '../profil.model';
+import { IProfil } from '../../../shared/model/security/profil.model';
 import { ProfilService } from '../service/profil.service';
 
 import profilResolve from './profil-routing-resolve.service';

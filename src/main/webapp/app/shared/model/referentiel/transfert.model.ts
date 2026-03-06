@@ -1,6 +1,6 @@
 import dayjs from 'dayjs/esm';
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
-import { ICaisse } from 'app/entities/caisse/caisse.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
+import { ICaisse } from 'app/shared/model/principal/caisse.model';
 
 export interface ITransfert {
   id: number;

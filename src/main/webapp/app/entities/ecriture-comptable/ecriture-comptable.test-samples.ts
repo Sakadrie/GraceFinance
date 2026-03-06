@@ -1,6 +1,6 @@
 import dayjs from 'dayjs/esm';
 
-import { IEcritureComptable, NewEcritureComptable } from './ecriture-comptable.model';
+import { IEcritureComptable, NewEcritureComptable } from '../../shared/model/principal/ecriture-comptable.model';
 
 export const sampleWithRequiredData: IEcritureComptable = {
   id: 22443,

@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IProfil } from '../profil.model';
+import { IProfil } from '../../../shared/model/security/profil.model';
 import { ProfilService } from '../service/profil.service';
 
 @Component({

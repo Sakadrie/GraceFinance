@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
 import { ITEM_DELETED_EVENT } from 'app/config/navigation.constants';
-import { IRecette } from '../recette.model';
+import { IRecette } from '../../../shared/model/principal/recette.model';
 import { RecetteService } from '../service/recette.service';
 
 @Component({

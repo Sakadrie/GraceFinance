@@ -3,7 +3,7 @@ import { HttpResponse, provideHttpClient } from '@angular/common/http';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router, convertToParamMap } from '@angular/router';
 import { of } from 'rxjs';
 
-import { IAffectationUtilisateur } from '../affectation-utilisateur.model';
+import { IAffectationUtilisateur } from '../../../shared/model/security/affectation-utilisateur.model';
 import { AffectationUtilisateurService } from '../service/affectation-utilisateur.service';
 
 import affectationUtilisateurResolve from './affectation-utilisateur-routing-resolve.service';

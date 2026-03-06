@@ -3,7 +3,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideHttpClient } from '@angular/common/http';
 
 import { DATE_FORMAT } from 'app/config/input.constants';
-import { IRecette } from '../recette.model';
+import { IRecette } from '../../../shared/model/principal/recette.model';
 import { sampleWithFullData, sampleWithNewData, sampleWithPartialData, sampleWithRequiredData } from '../recette.test-samples';
 
 import { RecetteService, RestRecette } from './recette.service';

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
-import { IDroit } from '../droit.model';
+import { IDroit } from '../../../shared/model/security/droit.model';
 import { DroitService, EntityArrayResponseType } from '../service/droit.service';
 import { DroitDeleteDialogComponent } from '../delete/droit-delete-dialog.component';
 

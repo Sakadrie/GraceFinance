@@ -1,6 +1,6 @@
 import dayjs from 'dayjs/esm';
 
-import { IAffectationUtilisateur, NewAffectationUtilisateur } from './affectation-utilisateur.model';
+import { IAffectationUtilisateur, NewAffectationUtilisateur } from '../../shared/model/security/affectation-utilisateur.model';
 
 export const sampleWithRequiredData: IAffectationUtilisateur = {
   id: 4789,

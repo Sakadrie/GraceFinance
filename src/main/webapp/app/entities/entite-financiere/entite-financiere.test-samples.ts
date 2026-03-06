@@ -1,4 +1,4 @@
-import { IEntiteFinanciere, NewEntiteFinanciere } from './entite-financiere.model';
+import { IEntiteFinanciere, NewEntiteFinanciere } from '../../shared/model/principal/entite-financiere.model';
 
 export const sampleWithRequiredData: IEntiteFinanciere = {
   id: 30243,

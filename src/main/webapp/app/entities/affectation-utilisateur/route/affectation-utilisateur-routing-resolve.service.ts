@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { EMPTY, Observable, of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 
-import { IAffectationUtilisateur } from '../affectation-utilisateur.model';
+import { IAffectationUtilisateur } from '../../../shared/model/security/affectation-utilisateur.model';
 import { AffectationUtilisateurService } from '../service/affectation-utilisateur.service';
 
 const affectationUtilisateurResolve = (route: ActivatedRouteSnapshot): Observable<null | IAffectationUtilisateur> => {

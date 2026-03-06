@@ -1,4 +1,4 @@
-import { ICategorie, NewCategorie } from './categorie.model';
+import { ICategorie, NewCategorie } from '../../shared/model/referentiel/categorie.model';
 
 export const sampleWithRequiredData: ICategorie = {
   id: 24162,

@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
-import { IEntiteFinanciere } from '../entite-financiere.model';
+import { IEntiteFinanciere } from '../../../shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService, EntityArrayResponseType } from '../service/entite-financiere.service';
 import { EntiteFinanciereDeleteDialogComponent } from '../delete/entite-financiere-delete-dialog.component';
 

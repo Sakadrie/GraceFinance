@@ -1,4 +1,4 @@
-import { IProfil, NewProfil } from './profil.model';
+import { IProfil, NewProfil } from '../../shared/model/security/profil.model';
 
 export const sampleWithRequiredData: IProfil = {
   id: 21388,

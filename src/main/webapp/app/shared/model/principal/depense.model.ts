@@ -1,7 +1,7 @@
 import dayjs from 'dayjs/esm';
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
-import { ICaisse } from 'app/entities/caisse/caisse.model';
-import { ICategorie } from 'app/entities/categorie/categorie.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
+import { ICaisse } from 'app/shared/model/principal/caisse.model';
+import { ICategorie } from 'app/shared/model/referentiel/categorie.model';
 
 export interface IDepense {
   id: number;

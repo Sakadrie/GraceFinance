@@ -7,14 +7,14 @@ import { finalize, map } from 'rxjs/operators';
 import SharedModule from 'app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { IEntiteFinanciere } from 'app/entities/entite-financiere/entite-financiere.model';
+import { IEntiteFinanciere } from 'app/shared/model/principal/entite-financiere.model';
 import { EntiteFinanciereService } from 'app/entities/entite-financiere/service/entite-financiere.service';
-import { ICaisse } from 'app/entities/caisse/caisse.model';
+import { ICaisse } from 'app/shared/model/principal/caisse.model';
 import { CaisseService } from 'app/entities/caisse/service/caisse.service';
-import { ICategorie } from 'app/entities/categorie/categorie.model';
+import { ICategorie } from 'app/shared/model/referentiel/categorie.model';
 import { CategorieService } from 'app/entities/categorie/service/categorie.service';
 import { DepenseService } from '../service/depense.service';
-import { IDepense } from '../depense.model';
+import { IDepense } from '../../../shared/model/principal/depense.model';
 import { DepenseFormGroup, DepenseFormService } from './depense-form.service';
 
 @Component({
