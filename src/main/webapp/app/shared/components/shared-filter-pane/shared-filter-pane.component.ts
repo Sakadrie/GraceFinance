@@ -1,7 +1,13 @@
 import { NgIf, NgFor, NgClass } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { OrderByIndexPipe } from '../../pipe/order-by-index.pipe';
+import TranslateDirective from 'app/shared/language/translate.directive';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+// import { MatFormField, MatLabel, MatOption, MatSelect } from '@angular/material/form-field';
+// import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
 
 export interface SharedFilterInputOption {
   label: string;
@@ -73,20 +79,20 @@ export interface SharedFilterPaneConfig {
   styleUrl: './shared-filter-pane.component.scss',
   standalone: true,
   imports: [
-    // NgIf,
-    // FormsModule,
-    // NgFor,
-    // OrderByIndexPipe,
-    // TranslateDirective,
+    NgIf,
+    FormsModule,
+    NgFor,
+    OrderByIndexPipe,
+    TranslateDirective,
     // MatFormField,
     // MatLabel,
     // MatOption,
     // MatSelect,
-    // TranslatePipe,
-    // NgClass,
-    // NgxMaskDirective,
-    // NgSelectModule,
-    // DynamicLabelDirective,
+    TranslatePipe,
+    NgClass,
+    OrderByIndexPipe,
+    MatFormField,
+    MatSelectModule,
   ],
   // providers: [provideNgxMask(), DynamicLabelDirective],
 })
@@ -102,8 +108,7 @@ export class SharedFilterPaneComponent implements OnInit {
   filterErrors: Record<string, string> = {};
   filterErrorsTranslatedValues: Record<string, any> = {};
 
-  constructor() // private globalService: GlobalService
-  {}
+  constructor() {} // private globalService: GlobalService
 
   ngOnInit(): void {
     // this.initializeFilterFromLocalStorage();

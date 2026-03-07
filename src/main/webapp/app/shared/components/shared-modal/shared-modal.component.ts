@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, ViewChild, ViewContainerRef } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
 import { TranslateDirective } from 'app/shared/language';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'jhi-shared-modal',
   standalone: true,
-  imports: [CommonModule, TranslateDirective, TranslatePipe],
+  imports: [CommonModule, TranslateDirective],
   templateUrl: './shared-modal.component.html',
 })
 export class SharedModalComponent {

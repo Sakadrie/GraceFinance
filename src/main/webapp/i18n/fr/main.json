@@ -1,0 +1,943 @@
+{
+  "main": {
+    "public": {
+      "publicHeader": {
+        "home": "Accueil",
+        "supports": "Supports",
+        "zones": "Zones",
+        "contact": "Contact",
+        "signin": "Se connecter",
+        "signup": "S'inscrire",
+        "dashboard": "Tableau de bord",
+        "logout": "Se déconnecter",
+        "monCompte": "Mon compte",
+        "documentations": "Documentations",
+        "verifierConnaissement": "Vérifier un connaissement",
+        "ressourcesUtiles": "Ressources utiles",
+        "codeImo": "Code IMO",
+        "codeSh": "Code SH",
+        "portsChargements": "Ports de chargements"
+      },
+      "publicFooter": {
+        "copyright": "Copyright © ",
+        "designWith": "Conçu avec",
+        "by": "par",
+        "allRightsReserved": "Tous droits réservés",
+        "description": "La plateforme nationale de suivi électronique des cargaisons (BESC) pour le Burkina Faso, opérée par le Conseil Burkinabé des Chargeurs du Burkina Faso.",
+        "navigation": "Navigation",
+        "resources": "Ressources",
+        "contact": "Contact",
+        "followUs": "Suivez-nous",
+        "address": "Avenue du Président Charles de Gaulle, Ouagadougou, Burkina Faso",
+        "demandeCompte": "Demande de compte",
+        "verifierConnaissement": "Vérifier un connaissement",
+        "codeImo": "Codes IMO",
+        "codeSh": "Codes SH",
+        "portsChargements": "Ports de chargements",
+        "documentations": "Documentations",
+        "zones": "Zones",
+        "contact_link": "Contact"
+      },
+      "home": {
+        "title": "Accueil"
+      },
+      "supports": {
+        "title": "Supports"
+      },
+      "ressourcesUtiles": {
+        "title": "Ressources utiles",
+        "codeImo": {
+          "title": "Code IMO"
+        },
+        "codeSh": {
+          "title": "Code SH"
+        },
+        "portsChargements": {
+          "title": "Ports de chargements"
+        }
+      },
+      "documentations": {
+        "title": "Documentations"
+      },
+      "verifierConnaissement": {
+        "title": "Vérifier un connaissement"
+      },
+      "zones": {
+        "title": "Zones"
+      },
+      "contact": {
+        "title": "Contact"
+      }
+    },
+    "admin": {
+      "adminHeader": {
+        "globalSearchPlaceholder": "Recherche...",
+        "monCompte": "Mon compte",
+        "mettreAJourMotDePasse": "Mettre à jour le mot de passe",
+        "filtreOrganisation": "Filtre d'organisation",
+        "sousComptes": "Sous-comptes",
+        "acteurOrganisation": "Acteurs",
+        "profil": "Profil",
+        "editProfile": "Modifier le profil",
+        "accountSetting": "Paramètres du compte",
+        "settingNotifications": "Paramètres de notification",
+        "acteursOrganisation": "Acteurs Organisations",
+        "accueil": "Accueil",
+        "deconnexion": "Déconnexion"
+      },
+      "notificationSidebar": {},
+      "sidemenu": {
+        "main": "Principal",
+        "securiteReferentiel": "Sécurité & Référentiel",
+        "dashboard": "Tableau de bord",
+        "security": "Sécurité",
+        "users": "Utilisateurs",
+        "demandeUsers": "Demandes d'inscription",
+        "audit": "Audit",
+        "tracabiliteSysteme": "Traçabilité du système",
+        "email": "Email",
+        "notification": "Notification",
+        "userTracking": "Suivi des utilisateurs",
+        "profils": "Profils",
+        "permissions": "Permissions",
+        "referentiel": "Référentiel",
+        "organisation": "Organisations",
+        "incoterm": "Incoterm",
+        "typeFretPayment": "Type de paiement de fret",
+        "page": "Pages",
+        "typeOrganisation": "Types d'organisation",
+        "pays": "Pays",
+        "typeCargaison": "Types de Cargaison",
+        "classeProduit": "Classes de Produit",
+        "groupeProduit": "Groupes de Produit",
+        "divisionProduit": "Divisions de Produit",
+        "sectionProduit": "Sections de Produit",
+        "produits": "Produits",
+        "moyenPaiement": "Moyens de paiement",
+        "devise": "Devises",
+        "typeTransactionPoint": "Types de transaction",
+        "typeNavire": "Types de Navire",
+        "classificationImo": "Classification IMO",
+        "typeConteneur": "Type de Conteneur",
+        "typeChargement": "Type de Chargement",
+        "typePieceJointe": "Type de Pièce Jointe",
+        "typeNotification": "Type de Notification",
+        "typeVehicule": "Type de Véhicule",
+        "marqueVehicule": "Marque de Véhicule",
+        "demandeAjoutNavire": "Demande d'Ajout de Navire",
+        "navire": "Navire",
+        "port": "Port",
+        "ville": "Ville",
+        "fichier": "Fichier",
+        "support": "Support",
+        "supportsEtNouvelles": "Supports et nouvelles",
+        "statistiques": "Statistiques",
+        "objetContact": "Objets de contact",
+        "compteBancaire": "Comptes bancaires",
+        "formulaireContact": "Formulaires de contact",
+        "gestionDocuments": "Gestion des documents",
+        "gestionVideos": "Gestion des vidéos",
+        "faqs": "FAQs",
+        "tarifs": "Tarifs",
+        "manuels": "Manuels",
+        "reglementations": "Réglementations",
+        "manuelsVideos": "Manuels des vidéos",
+        "acteurs": "Acteurs",
+        "zones": "Zones",
+        "besc": "BESC",
+        "payment": "Crédits",
+        "news": "Nouvelles",
+        "notifications": "Notifications",
+        "settings": "Paramètres",
+        "superAdmin": "Super Admin",
+        "template": "Modèle",
+        "advancedUi": "Interface utilisateur avancée",
+        "accordion": "Accordéon",
+        "carousel": "Carrousel",
+        "modals": "Modals",
+        "timeline": "Chronologie",
+        "sweetAlert": "Sweet Alert",
+        "ratings": "Évaluations",
+        "search": "Recherche",
+        "userlist": "Liste des utilisateurs",
+        "blogPage": "Page de blog",
+        "blog": "Blog",
+        "blogDetails": "Détails du blog",
+        "blogPost": "Publier un blog",
+        "offcanvas": "Offcanvas",
+        "placeholders": "Espace réservé",
+        "swiperJs": "Swiper JS",
+        "elements": "Éléments",
+        "alerts": "Alertes",
+        "avatar": "Avatar",
+        "breadCrumbs": "Fil d'Ariane",
+        "buttons": "Boutons",
+        "buttonGroup": "Groupe de boutons",
+        "badge": "Badge",
+        "dropDown": "Menu déroulant",
+        "listGroup": "Groupe de listes",
+        "linksInteractions": "Liens et interactions",
+        "navbar": "Barre de navigation",
+        "imagesFigures": "Images et figures",
+        "pagination": "Pagination",
+        "popovers": "Popovers",
+        "progress": "Progression",
+        "spinners": "Spinners",
+        "typography": "Typographie",
+        "tooltips": "Info-bulles",
+        "toasts": "Toasts",
+        "tags": "Tags",
+        "navAndTabs": "Onglets et navigation",
+        "scrollSpy": "Scroll Spy",
+        "objectFit": "Object Fit",
+        "icons": "Icônes",
+        "charts": "Graphiques",
+        "echartChart": "Echart Chart",
+        "forms": "Formulaires",
+        "formElements": "Éléments de formulaire",
+        "inputs": "Entrées",
+        "checksRadios": "Cases à cocher et boutons radio",
+        "inputGroups": "Groupes d'entrées",
+        "formSelect": "Sélection de formulaire",
+        "rangeSlider": "Curseur de plage",
+        "inputMasks": "Masques d'entrée",
+        "fileUploads": "Téléchargements de fichiers",
+        "dateTimePicker": "Sélecteur de date et d'heure",
+        "colorPicker": "Sélecteur de couleur",
+        "floatingLabels": "Étiquettes flottantes",
+        "formLayouts": "Mises en page de formulaire",
+        "formEditors": "Éditeurs de formulaire",
+        "quillEditor": "Éditeur Quill",
+        "formValidation": "Validation de formulaire",
+        "select2": "Select2",
+        "tables": "Tables",
+        "basicTables": "Tables de base",
+        "maps": "Cartes",
+        "leafletMaps": "Cartes Leaflet",
+        "pages": "Pages",
+        "editProfile": "Modifier le profil",
+        "aboutUs": "À propos de nous",
+        "invoice": "Facture",
+        "pricing": "Tarification",
+        "gallery": "Galerie",
+        "todotasks": "Tâches à faire",
+        "emptyPage": "Page vide",
+        "mail": "Mail",
+        "mailCompose": "Envoi de mail",
+        "mailRead": "Lire le mail",
+        "mailSettings": "Paramètres du mail",
+        "chat": "Chat",
+        "ecommerce": "E-commerce",
+        "products": "Produits",
+        "productDetails": "Détails du produit",
+        "cart": "Panier",
+        "checkout": "Passer à la caisse",
+        "wishlist": "Liste de souhaits",
+        "utilities": "Utilitaires",
+        "breakpoints": "Points de rupture",
+        "colors": "Couleurs",
+        "columns": "Colonnes",
+        "flex": "Flex",
+        "gutters": "Gouttières",
+        "helpers": "Aides",
+        "position": "Position",
+        "additionalContent": "Contenu supplémentaire",
+        "example": "Exemple",
+        "examples": "Exemples",
+        "referentiel1": "Référentiel 1",
+        "referentiel2": "Référentiel 2",
+        "referentiel3": "Référentiel 3",
+        "tracker": "Suivi utilisateur",
+        "metrics": "Métriques",
+        "health": "Santé",
+        "configuration": "Configuration",
+        "logs": "Journaux",
+        "apidocs": "API",
+        "database": "Base de données",
+        "lieu": "Lieu",
+        "type": "Type",
+        "types": "Types",
+        "produit": "Produit",
+        "demandeAjoutReferentiel": "Demande d'ajout au référentiel",
+        "demandeAjoutActeur": "Demande d'ajout d'acteur"
+      },
+      "adminFooter": {
+        "copyright": "Copyright © ",
+        "designWith": "Conçu avec",
+        "by": "par",
+        "allRightsReserved": "Tous droits réservés"
+      },
+      "dashboard": {
+        "title": "Tableau de bord"
+      },
+      "monCompte": {
+        "accountSetting": {
+          "title": "Paramètres du compte"
+        },
+        "editProfile": {
+          "title": "Modifier le profil"
+        },
+        "profil": {
+          "title": "Profil"
+        },
+        "settingNotifications": {
+          "title": "Paramètres de notification"
+        },
+        "filtreOrganisation": {
+          "title": "Filtre d'organisation"
+        },
+        "updatePassword": {
+          "title": "Mettre à jour le mot de passe"
+        },
+        "sousCompte": {
+          "title": "Sous-comptes"
+        },
+        "acteurOrganisation": {
+          "title": "Acteurs",
+          "add": {
+            "title": "Ajouter un acteur organisation"
+          },
+          "edit": {
+            "title": "Modifier l'acteur organisation",
+            "titleWithId": "Modifier l'acteur organisation [{{idLibelle}}: {{id}}]"
+          }
+        }
+      },
+      "security": {
+        "users": {
+          "title": "Gestion des utilisateurs",
+          "detail": {
+            "title": "Détails compte utilisateur",
+            "titleWithId": "Détails du compte utilisateur [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter un compte utilisateur"
+          },
+          "edit": {
+            "title": "Modifier un compte utilisateur",
+            "titleWithId": "Modification du compte utilisateur [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "demandeUsers": {
+          "title": "Demandes d'inscription",
+          "detail": {
+            "title": "Détails de l'inscription",
+            "titleWithId": "Détails de l'inscription [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "profil": {
+          "title": "Profil",
+          "detail": {
+            "title": "Détails du profil",
+            "titleWithId": "Détails du profil [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter un profil"
+          },
+          "edit": {
+            "title": "Modifier un profil",
+            "titleWithId": "Modification du profil [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "permission": {
+          "title": "Gestion des permissions"
+        },
+        "audit": {
+          "title": "Traçabilité du système"
+        },
+        "email": {
+          "title": "Email"
+        },
+        "notification": {
+          "title": "Notification"
+        },
+        "userTracking": {
+          "title": "Suivi des utilisateurs"
+        }
+      },
+      "referentiel": {
+        "fichier": {
+          "title": "Fichier"
+        },
+        "categorie": {
+          "title": "Organisations",
+          "detail": {
+            "title": "Détails de l'organisation",
+            "titleWithId": "Détails de l'organisation [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter une organisation"
+          },
+          "edit": {
+            "title": "Modifier l'organisation",
+            "titleWithId": "Modifier l'organisation [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "transfert": {
+          "title": "Incoterm",
+          "detail": {
+            "title": "Détails de l'incoterm",
+            "titleWithId": "Détails de l'incoterm [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter un incoterm"
+          },
+          "edit": {
+            "title": "Modifier l'incoterm",
+            "titleWithId": "Modifier l'incoterm [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "produit": {
+          "title": "Produit",
+          "detail": {
+            "title": "Détails du produit",
+            "titleWithId": "Détails du produit [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter un produit"
+          },
+          "edit": {
+            "title": "Modifier le produit",
+            "titleWithId": "Modifier le produit [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "classeProduit": {
+          "title": "Classe de produit",
+          "detail": {
+            "title": "Détails de la classe de produit",
+            "titleWithId": "Détails de la classe de produit [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter une classe de produit"
+          },
+          "edit": {
+            "title": "Modifier la classe de produit",
+            "titleWithId": "Modifier la classe de produit [{{idLibelle}}: {{id}}]"
+          }
+        },
+        "groupeProduit": {
+          "title": "Groupe de produit",
+          "detail": {
+            "title": "Détails du groupe de produit",
+            "titleWithId": "Détails du groupe de produit [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter un groupe de produit"
+          },
+          "edit": {
+            "title": "Modifier le groupe de produit",
+            "titleWithId": "Modifier le groupe de produit [{{idLibelle}}: {{id}}]"
+          }
+        },
+
+        "ville": {
+          "title": "Ville",
+          "detail": {
+            "title": "Détails de la ville",
+            "titleWithId": "Détails de la ville [{{idLibelle}}: {{id}}]"
+          },
+          "add": {
+            "title": "Ajouter une ville"
+          },
+          "edit": {
+            "title": "Modifier la ville",
+            "titleWithId": "Modifier la ville [{{idLibelle}}: {{id}}]"
+          }
+        }
+      },
+
+      "formulaireContact": {
+        "title": "Formulaire de contact",
+        "detail": {
+          "title": "Détails du formulaire de contact",
+          "titleWithId": "Détails du formulaire de contact [{{idLibelle}}: {{id}}]"
+        }
+      },
+      "settings": {
+        "title": "Paramètres"
+      },
+      "superAdmin": {
+        "template": {},
+        "example": {
+          "exampleEntity": {
+            "title": "Example Entity",
+            "detail": {
+              "title": "Détails de l'entité d'exemple",
+              "titleWithId": "Détails de l'entité d'exemple [{{idLibelle}}: {{id}}]"
+            },
+            "add": {
+              "title": "Ajouter une entité d'exemple"
+            },
+            "edit": {
+              "title": "Modifier une entité d'exemple",
+              "titleWithId": "Modifier une entité d'exemple [{{idLibelle}}: {{id}}]"
+            }
+          },
+          "referentiel1Entity": {
+            "title": "Referentiel 1 Entity"
+          },
+          "referentiel2Entity": {
+            "title": "Referentiel 2 Entity"
+          },
+          "referentiel3Entity": {
+            "title": "Referential 3 Entity",
+            "detail": {
+              "title": "Détails de l'entité référentielle 3",
+              "titleWithId": "Détails de l'entité référentielle 3 [{{idLibelle}}: {{id}}]"
+            },
+            "add": {
+              "title": "Ajouter une entité référentielle 3"
+            },
+            "edit": {
+              "title": "Modifier une entité référentielle 3",
+              "titleWithId": "Modifier une entité référentielle 3 [{{idLibelle}}: {{id}}]"
+            }
+          }
+        }
+      }
+    },
+    "authentication": {
+      "welcome": "Bon retour!",
+      "register": {
+        "title": "Faire une demande d'enregistrement"
+      },
+      "activate": {
+        "title": "Activer votre compte"
+      },
+      "login": {
+        "title": "Connectez-vous pour continuer",
+        "successSendOtp": "Un code de vérification vient de vous être envoyé par mail, merci de le saisir ci-dessous",
+        "username": "Nom d'utilisateur",
+        "usernamePlaceholder": "Saisir votre nom d'utilisateur",
+        "password": "Mot de passe",
+        "passwordPlaceholder": "Saisir votre mot de passe",
+        "action": "Se connecter",
+        "forgotPassword": "Mot de passe oublié ?",
+        "dontHaveAccount": "Vous n'avez pas de compte ?",
+        "haveAccount": "Vous avez déjà un compte ?",
+        "askAccount": "Demandez un compte",
+        "rememberMe": "Se souvenir de moi",
+        "lockTimeText": "Vous pouvez réessayer dans {{ lockTime }} secondes",
+        "waitToResendCode": "Vous pouvez renvoyer le code dans {{ lockTime }} secondes",
+        "dontReceiveCode": "Vous n'avez pas reçu le code, ",
+        "reSendCode": "Renvoyer le code",
+        "email": "E-mail",
+        "emailPlaceholder": "Saisir votre adresse e-mail",
+        "errorMessage": {
+          "serverError": "Un problème est survenu sur le serveur! Veuillez réessayer un peu plus tard",
+          "invalidCredentials": "Utilisateur ou mot de passe incorrect",
+          "notFoundCredentials": "Merci de renseigner vos identifiants valides",
+          "lockAfterManyAttempt": "Votre compte a été bloqué temporairement pour excès de tentatives de connexion erronées.",
+          "echecContactAdmin": "La connexion a échoué, merci de contacter l'administrateur",
+          "invalidCode": "Code de vérification invalide",
+          "notFoundCode": "Merci de renseigner le code de vérification"
+        },
+        "successMessage": {
+          "optSendSuccess": "Nous vous avons envoyé un code de vérification par email. Veuillez le saisir pour confirmer votre connexion"
+        }
+      },
+      "resetPasswordInit": {
+        "title": "Réinitialiser le mot de passe"
+      },
+      "resetPasswordFinish": {
+        "title": "Réinitialiser le mot de passe"
+      },
+      "changePassword": {
+        "title": "Changer votre mot de passe"
+      },
+      "definePassword": {
+        "title": "Définir votre mot de passe",
+        "newPassword": "Nouveau mot de passe",
+        "confirmPassword": "Confirmer le nouveau mot de passe",
+        "action": "Définir le mot de passe"
+      },
+      "forgotPassword": {
+        "title": "Mot de passe oublié !",
+        "subTitle": "Saisissez votre adresse e-mail pour réinitialiser votre mot de passe",
+        "successSend": "Un mail de réinitialisation vient de vous être envoyé, merci d'ouvrir le lien dans le mail",
+        "codeOtp": "Code de vérification",
+        "email": "E-mail",
+        "emailPlaceholder": "Saisir votre adresse e-mail",
+        "sendEmail": "Envoyer l'e-mail de réinitialisation",
+        "forgetIt": "Oublie ça, ",
+        "sendMeBack": "renvoyer moi",
+        "signinScreen": " à l'écran de connexion"
+      }
+    },
+    "toasts": {
+      "connexionReussie": "Bienvenue, {{username}} !",
+      "echecConnexion": "Échec de la connexion ! Vérifiez vos identifiants.",
+      "deconnexion": "Vous avez été déconnecté avec succès.",
+      "formInvalid": "Certaines données du formulaire sont invalides"
+    },
+    "tooltips": {
+      "noData": "Aucune donnée disponible"
+    },
+    "constants": {
+      "messageTitleSuccess": "OPERATION REUSSIE",
+      "messageTitleError": "OPERATION ECHOUE",
+      "messageTitleWarn": "ATTENTION",
+      "messageTitleInfo": "INFORMATION",
+      "codeLangue": {
+        "fr": "Français",
+        "en": "Anglais",
+        "zh-cn": "Chinois",
+        "zh_cn": "Chinois"
+      },
+      "support": {
+        "format": {
+          "document": "Document",
+          "video": "Vidéo"
+        },
+        "typeDocument": {
+          "faq": "FAQ",
+          "manuel": "Manuel",
+          "reglementations": "Réglementations",
+          "tarifs": "Tarifs"
+        }
+      },
+      "acteurs": {
+        "type": {
+          "transitaire": "Transitaire",
+          "transporteur": "Transporteur",
+          "expediteur": "Expéditeur",
+          "destinataire": "Destinataire",
+          "partie_notifiee": "Partie notifiée"
+        }
+      },
+      "moyenPaiement": {
+        "manuelOuAutomatique": {
+          "manuel": "Manuel",
+          "automatique": "Automatique"
+        }
+      },
+      "news": {
+        "type": {
+          "informations": "Informations",
+          "maj": "Mise à jour",
+          "alertes": "Alertes"
+        }
+      },
+      "pays": {
+        "continent": {
+          "afrique": "Afrique",
+          "amerique_sud": "Amérique du Sud",
+          "amerique_nord": "Amérique du Nord",
+          "asie": "Asie",
+          "europe": "Europe",
+          "oceanie": "Océanie"
+        }
+      },
+      "typeCargaison": {
+        "nature": {
+          "vrac": "Vrac",
+          "conteneurs": "Conteneur",
+          "conventionnel": "Conventionnel",
+          "roulier": "Roulier"
+        }
+      },
+      "formulaireContact": {
+        "statut": {
+          "nouveau": "Nouveau",
+          "transmis": "Transmis",
+          "traite": "Traité"
+        }
+      },
+      "paiementPoint": {
+        "statutPaiement": {
+          "en_verification": "En vérification",
+          "valide": "Validé",
+          "rejete": "Rejeté",
+          "echoue": "Échoué",
+          "annule_organisation": "Annulé par l'organisation",
+          "annule_systeme": "Annulé par le système"
+        }
+      },
+      "besc": {
+        "statut_besc": {
+          "en_edition": "En édition",
+          "a_valider": "À valider",
+          "retourner_pour_correction": "Retourné pour correction",
+          "rouvert_pour_correction": "Rouvert pour correction",
+          "valide": "Validé",
+          "accepte": "Accepté",
+          "rejete": "Rejeté"
+        },
+        "sous_statut": {
+          "demande_a_approuver": "Demande à approuver",
+          "demande_approuvee_a_valider": "Demande approuvée à valider",
+          "demande_approuvee_validee": "Demande approuvée validée",
+          "demande_rejetee": "Demande rejetée"
+        }
+      },
+      "listeStatutDemande": {
+        "enAttente": "En attente",
+        "approuve": "Approuvée",
+        "rejete": "Rejetée"
+      }
+    },
+    "components": {
+      "sharedListTable": {
+        "actions": "Actions",
+        "buttonActions": "Actions",
+        "noData": "<strong>Aucune donnée à afficher.</strong>",
+        "pleaseMakeASearch": "<strong>Veuillez effectuer une recherche pour afficher des données.</strong>"
+      },
+      "AlertConfirmation": {
+        "oui": "Oui",
+        "non": "Non",
+        "title": "Veuillez confirmer",
+        "content": "Êtes-vous sûr de vouloir poursuivre cette action ?",
+        "textInputLabel": "Veuillez saisir <strong>valeur</strong> pour confirmer.",
+        "numberInputLabel": "Veuillez saisir <strong>valeur</strong> pour confirmer.",
+        "textAreaInputLabel": "Veuillez saisir <strong>valeur</strong> pour confirmer.",
+        "selectInputLabel": "Veuillez sélectionner <strong>valeur</strong> pour confirmer.",
+        "dateInputLabel": "Veuillez saisir <strong>date</strong> pour confirmer.",
+        "radioInputLabel": "Veuillez sélectionner",
+        "irreversibleMention": "Cette action est irréversible.",
+        "okButtonLabel": "D'accord",
+        "cancelButtonLabel": "Annuler",
+        "confirmButtonLabel": "Confirmer",
+        "deleteTitle": "Suppression",
+        "deletedMessage": "Êtes-vous sûr de vouloir supprimer cet élément ?"
+      }
+    },
+    "breadCrumbs": {
+      "list": "Liste",
+      "details": "Détails",
+      "edit": "Modifier",
+      "create": "Créer",
+      "admin": "Admin",
+      "dashboard": "Dashboard",
+      "monCompte": "Mon compte",
+      "profil": "Profil",
+      "permission": "Permission",
+      "editProfile": "Modifier le profil",
+      "accountSetting": "Paramètres du compte",
+      "settingNotifications": "Paramètres de notification",
+      "security": "Sécurité",
+      "users": "Utilisateurs",
+      "demandeUsers": "Demandes d'inscription",
+      "audit": "Traçabilité du système",
+      "email": "Email",
+      "notification": "Notification",
+      "userTracking": "Suivi des utilisateurs",
+      "referentiel": "Référentiel",
+      "organisations": "Organisations",
+      "categorie": "Categorie",
+      "transfert": "Transfert",
+      "page": "Pages",
+      "typeOrganisation": "Type d'organisation",
+      "objetContact": "Objets de contact",
+      "compteBancaire": "Compte bancaire",
+      "formulaireContact": "Formulaire de contact",
+      "pays": "Pays",
+      "moyenPaiement": "Moyen de paiement",
+      "moyenPaiements": "Moyens de paiement",
+      "devises": "Devises",
+      "typeTransactionPoint": "Type de transaction",
+      "typeCargaison": "Type de cargaison",
+      "typeNotification": "Type de notification",
+      "classificationImo": "Classification IMO",
+      "typeConteneur": "Type de conteneur",
+      "typeChargement": "Type de chargement",
+      "typePieceJointe": "Type de pièce jointe",
+      "typeVehicule": "Type de véhicule",
+      "marqueVehicule": "Marque de véhicule",
+      "demandeAjoutNavire": "Demande d'ajout de navire",
+      "navire": "Navire",
+      "port": "Port",
+      "ville": "Ville",
+      "fichier": "Fichier",
+      "support": "Support",
+      "gestionDocuments": "Gestion des documents",
+      "gestionVideos": "Gestion des vidéos",
+      "document": "Document",
+      "faqs": "FAQs",
+      "tarifs": "Tarifs",
+      "reglementations": "Réglementations",
+      "manuels": "Manuels",
+      "manuelVideos": "Manuels des vidéos",
+      "besc": "BESC",
+      "import": "Importation",
+      "export": "Exportation",
+      "payment": "Crédits",
+      "news": "Nouvelles",
+      "notifications": "Notifications",
+      "acteurs": "Acteurs",
+      "zones": "Zones",
+      "lieu": "Lieu",
+      "type": "Type",
+      "produit": "Produit",
+      "produits": "Produits",
+      "classeProduit": "Classe de produit",
+      "groupeProduit": "Groupe de produit",
+      "divisionProduit": "Division de produit",
+      "sectionProduit": "Section de produit",
+      "typeNavire": "Type de navire",
+      "settings": "Paramètres",
+      "superAdmin": "Super Admin",
+      "template": "Template",
+      "example": "Exemple",
+      "exampleEntity": "Exemple d'entité",
+      "referentiel1Entity": "Entité de référence 1",
+      "referentiel2Entity": "Entité de référence 2",
+      "referentiel3Entity": "Entité de référence 3",
+      "demandeAjoutReferentiel": "Demande d'ajout de référentiel",
+      "demandeAjoutActeur": "Demande d'ajout d'acteur",
+      "miseAJourMotDePasse": "Mise à jour du mot de passe",
+      "modificationProfil": "Modification du profil",
+      "configurationFiltresOrganisation": "Configuration des filtres d'organisation",
+      "parametrageNotifications": "Paramétrage des notifications",
+      "gestionSousComptes": "Gestion des sous-comptes",
+      "gestionActeursOrganisation": "Gestion des acteurs de l'organisation",
+      "statistiques": "Statistiques"
+    },
+    "buttons": {
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "view": "Voir",
+      "add": "Ajouter",
+      "addBesc": "Ajouter un BESC",
+      "addBescExport": "Ajouter un BESC d'exportation",
+      "addBescImport": "Ajouter un BESC d'importation",
+      "back": "Retour",
+      "reset": "Réinitialiser",
+      "export": "Exporter",
+      "actions": "Actions",
+      "loadMore": "Charger plus",
+      "filterPanel": "Panneau de filtre",
+      "refreshData": "Rafraîchir les données",
+      "topCanvas": "Haut Offcanvas",
+      "bottomCanvas": "Bas Offcanvas",
+      "rightCanvas": "Droite Offcanvas",
+      "leftCanvas": "Gauche Offcanvas",
+      "showSystemData": "Afficher les données système",
+      "filter": "Filtrer",
+      "enable": "Activer",
+      "disable": "Désactiver",
+      "changeProfil": "Changer le profil",
+      "unlock": "Débloquer",
+      "downloadAll": "Tout télécharger",
+      "process": "Traitement",
+      "close": "Fermer",
+      "valid": "Valider",
+      "reject": "Rejeter",
+      "approve": "Approuver",
+      "avis": "Aviser",
+      "confirm": "Confirmer",
+      "return": "Retourner",
+      "configure": "Configurer",
+      "configureFilters": "Configurer les filtres"
+    },
+    "offcanvas": {
+      "defaultTitle": "Offcanvas",
+      "systemDataTitle": "Données système"
+    },
+    "placeholders": {
+      "defaultPlaceholder": "...",
+      "search": "Rechercher...",
+      "select": "Sélectionner...",
+      "comment": "Votre commentaire ici..."
+    },
+    "hints": {
+      "telephone": "Ex. : +226 70 00 00 00"
+    },
+    "validations": {
+      "required": "Ce champ est requis.",
+      "minLength": "La longueur minimale est de {{minLength}} caractères.",
+      "maxLength": "La longueur maximale est de {{maxLength}} caractères.",
+      "pattern": "Le format n'est pas valide.",
+      "patternWithExample": "Format invalide. Ex. : {{patternExample}}",
+      "email": "L'adresse e-mail n'est pas valide.",
+      "min": "La valeur minimale est {{min}}.",
+      "max": "La valeur maximale est {{max}}."
+    },
+    "ocr": {
+      "divergence": "Il y a une divergence entre la valeur détectée et la valeur saisie.",
+      "fillWith": "Remplir avec",
+      "scanInProgress": "Scan en cours",
+      "scanFailed": "Échec du scan OCR",
+      "useOcrValue": "Utiliser la valeur OCR"
+    },
+    "ngxEditor": {
+      "placeholder": "Tapez ici..."
+    },
+    "auditFields": {
+      "createdBy": "Créé par",
+      "createdDate": "Date de création",
+      "lastModifiedBy": "Dernière modification par",
+      "lastModifiedDate": "Date de dernière modification"
+    },
+    "labels": {
+      "seeMore": "Voir plus",
+      "seeLess": "Voir moins",
+      "filter": "Filtrer",
+      "clearFilters": "Effacer les filtres",
+      "applyFilters": "Appliquer les filtres",
+      "activeFilters": "Filtres actifs",
+      "noActiveFilters": "Aucun filtre actif",
+      "showMore": "Afficher plus",
+      "showLess": "Afficher moins",
+      "actions": "Actions",
+      "details": "Détails",
+      "noData": "Aucune donnée disponible",
+      "loadingData": "Chargement des données...",
+      "withSelected": "Avec la sélection",
+      "selectAll": "Tout sélectionner",
+      "deselectAll": "Tout désélectionner",
+      "selectPage": "Sélectionner la page courante",
+      "deselectPage": "Désélectionner la page courante",
+      "selectedCount": "{{count}} sélectionné(s)",
+      "ofTotalCount": "sur un total de {{totalCount}}",
+      "disabled": "Désactivé",
+      "enabled": "Activé",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "sent": "Envoyé",
+      "notSent": "Non envoyé",
+      "read": "Lu",
+      "unread": "Non lu",
+      "changements": "Changements",
+      "noChangements": "Aucun changement",
+      "propriete": "Propriété",
+      "ancienneValeur": "Ancienne valeur",
+      "nouvelleValeur": "Nouvelle valeur",
+      "true": "Vrai",
+      "false": "Faux",
+      "null": "Null",
+      "undefined": "Undefined",
+      "download": "Télécharger",
+      "required": "Obligatoire",
+      "confirmation": "Confirmation",
+      "noVideoAvailable": "Aucune vidéo disponible",
+      "lastModifiedDate": "Date de dernière modification",
+      "errorDownloadingFile": "Erreur lors du téléchargement du fichier",
+      "rafraichir": "Rafraîchir",
+      "champsMarquesAvecAsterisque": "Les champs marqués d'une <span class=\"required-star\">*</span> sont obligatoires. Ils doivent être renseignés pour que le formulaire soit validé",
+      "configureFilters": "Configurer les filtres",
+      "accessRestrictedShort": "<span class=\"restricted-access\">Accès restreint</span>",
+      "accessRestricted": "<span class=\"restricted-access\">Accès restreint</span> Vous n'avez pas les permissions nécessaires pour accéder à cette section."
+    },
+    "file-upload": {
+      "selectFile": "Sélectionner un fichier",
+      "dropFile": "ou le déposer ici",
+      "removeFile": "Supprimer le fichier",
+      "fileTooLarge": "Le fichier est trop volumineux ({{size}} Mo). La taille maximale autorisée est de {{maxSize}} Mo.",
+      "invalidFileType": "Type de fichier invalide. Types autorisés : {{types}}.",
+      "noFileSelected": "Aucun fichier sélectionné",
+      "uploading": "Téléversement...",
+      "uploadSuccess": "Fichier téléversé avec succès",
+      "uploadError": "Erreur lors du téléversement du fichier",
+      "tailleLimite": "Taille limite:",
+      "extensionsAutorisees": "Extensions autorisées:"
+    },
+    "clickToCopy": {
+      "clickToCopy": "Cliquer pour copier",
+      "copySuccess": "Contenu copié dans le presse-papiers",
+      "copyError": "Échec de la copie"
+    }
+  }
+}

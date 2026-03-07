@@ -23,7 +23,16 @@
       "typeCategorie": "Type Categorie",
       "description": "Description",
       "actif": "Actif",
-      "entiteFinanciere": "Entite Financiere"
+      "entiteFinanciere": "Entite Financiere",
+      "fields": {
+        "id": "ID",
+        "nom": "Nom",
+        "code": "Code",
+        "typeCategorie": "Type Categorie",
+        "description": "Description",
+        "actif": "Actif",
+        "entiteFinanciere": "Entite Financiere"
+      }
     }
   }
 }

@@ -29,6 +29,26 @@ export enum EnumIconAlert {
   INFO = 'info',
   QUESTION = 'question',
 }
+
+export enum EnumInputType {
+  TEXT = 'text',
+  NUMBER = 'number',
+  TEXTAREA = 'textarea',
+  SELECT = 'select',
+  DATE = 'date',
+  RADIO = 'radio',
+  CHECKBOX = 'checkbox',
+}
+
+export enum EnumListActions {
+  ADD = 'ADD',
+  EDIT = 'EDIT',
+  VIEW = 'VIEW',
+  PROCESS = 'PROCESS',
+  DELETE = 'DELETE',
+  CLONE = 'CLONE',
+}
+
 export const LISTE_ADMINISTRATION_ROUTES = {
   PATH: 'admin',
 

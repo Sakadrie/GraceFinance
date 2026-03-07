@@ -1,4 +1,4 @@
-<div class="page-header">
+<!-- <div class="page-header">
   <h3 class="fw-bold mb-3">Categories</h3>
   <ul class="breadcrumbs mb-3">
     <li class="nav-home">
@@ -93,5 +93,28 @@
         </table>
       </div>
     </div>
+  </div>
+</div> -->
+<jhi-admin-page-header
+  [pageHeaderInput]="pageHeaderInput"
+  (refreshDataButtonClicked)="loadAll()"
+  (filterSettingsButtonClicked)="switchShowFilterPane()"
+></jhi-admin-page-header>
+<div class="list-main-body">
+  <div class="list-main-filter">
+    <jhi-shared-filter-pane
+      [config]="filterConfig"
+      [show]="showFilterPane"
+      (filterOutput)="onFilterPaneFilter($event)"
+      (resetOutput)="onFilterPaneReset()"
+    ></jhi-shared-filter-pane>
+  </div>
+  <div class="list-main-table card">
+    <jhi-shared-list-table
+      [config]="tableConfig"
+      (action)="onTableAction($event)"
+      (pageChange)="onTablePageChange($event)"
+      (sort)="onTableSort($event)"
+    ></jhi-shared-list-table>
   </div>
 </div>

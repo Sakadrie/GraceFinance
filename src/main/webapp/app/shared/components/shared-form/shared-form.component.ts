@@ -1,8 +1,12 @@
-import { NgIf, NgFor, NgClass } from '@angular/common';
+import { NgIf, NgFor, NgClass, DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TranslateDirective, TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import TranslateDirective from 'app/shared/language/translate.directive';
 import { environment } from 'environments/environment';
+import { AlertChampObligatoireComponent } from '../alert-champ-obligatoire/alert-champ-obligatoire.component';
+import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
+import { MatOption, MatSelect } from '@angular/material/select';
 
 export interface SharedFormFileUploadInputParam {
   libelle: string;
@@ -121,35 +125,29 @@ export interface SharedFormConfig {
   styleUrl: './shared-form.component.scss',
   standalone: true,
   imports: [
-    // NgIf,
-    // FormsModule,
-    // NgFor,
-    // TranslateDirective,
-    // MatFormField,
-    // MatLabel,
-    // MatOption,
-    // MatSelect,
-    // TranslatePipe,
-    // NgClass,
-    // ReusableNgxEditorComponent,
-    // NgxMaskDirective,
-    // NgSelectModule,
-    // DynamicLabelDirective,
-    // FileUploadComponent,
-    // RecaptchaFormsModule,
-    // RecaptchaModule,
-    // AlertChampObligatoireComponent,
+    NgIf,
+    FormsModule,
+    NgFor,
+    TranslateDirective,
+    MatFormField,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    TranslatePipe,
+    NgClass,
+    AlertChampObligatoireComponent,
+    NgClass,
   ],
-  // providers: [
-  //   provideNgxMask(),
-  //   DynamicLabelDirective,
-  //   {
-  //     provide: RECAPTCHA_SETTINGS,
-  //     useValue: {
-  //       siteKey: environment.recaptcha.siteKey,
-  //     } as RecaptchaSettings,
-  //   },
-  // ],
+  providers: [
+    // provideNgxMask(),
+    // DynamicLabelDirective,
+    // {
+    //   provide: RECAPTCHA_SETTINGS,
+    //   useValue: {
+    //     siteKey: environment.recaptcha.siteKey,
+    //   } as RecaptchaSettings,
+    // },
+  ],
 })
 export class SharedFormComponent implements OnInit {
   @Input() config!: SharedFormConfig;

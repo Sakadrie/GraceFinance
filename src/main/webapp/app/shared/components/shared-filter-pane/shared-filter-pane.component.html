@@ -1,1 +1,499 @@
-<p>shared-filter-pane works!</p>
+<div *ngIf="show" class="card mb-3">
+  <div class="card-header fw-bold d-flex justify-content-between align-items-center">
+    {{ config.title || 'main.labels.filter' | translate }}
+    @if (
+      (!config.isHideFilterButton || config.isWithDownloadAllButton || config.isHideResetButton) &&
+      (!config.buttonsLocation || config.buttonsLocation == 'top' || config.buttonsLocation == 'both')
+    ) {
+      <span class="d-flex gap-2">
+        @if (!config.isHideFilterButton) {
+          <button type="submit" class="btn btn-sm btn-outline-primary" (click)="onFilter()">
+            <i class="mdi mdi-filter"></i>
+            <span class="ms-1 d-none d-sm-inline">{{ 'main.buttons.filter' | translate }}</span>
+          </button>
+        }
+        @if (config.isWithDownloadAllButton) {
+          <button type="button" class="btn btn-sm btn-outline-dark" (click)="onDownloadAll()">
+            <i class="mdi mdi-download"></i>
+            <span class="ms-1 d-none d-sm-inline">{{ 'main.buttons.downloadAll' | translate }}</span>
+          </button>
+        }
+        @if (!config.isHideResetButton) {
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onReset()">
+            <i class="mdi mdi-refresh"></i>
+            <span class="ms-1 d-none d-sm-inline">{{ 'main.buttons.reset' | translate }}</span>
+          </button>
+        }
+      </span>
+    }
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onFilter()" #filter="ngForm" autocomplete="off" novalidate name="filter">
+      <div class="row g-3">
+        <ng-container *ngFor="let input of config.inputs | orderByIndex">
+          @if (!input.hide) {
+            <div [ngClass]="input.colClasses ? input.colClasses : 'col-12 col-md-3'">
+              <!-- Text, Number, FloatNumber, Date, DateTime -->
+              <div
+                *ngIf="
+                  input.type === 'text' ||
+                  input.type === 'number' ||
+                  input.type === 'floatNumber' ||
+                  input.type === 'date' ||
+                  input.type === 'datetime'
+                "
+                class="form-floating mb-2"
+              >
+                @if (input.type === 'number') {
+                  <input
+                    [type]="'text'"
+                    class="form-control form-control-sm py-1 px-2"
+                    [ngClass]="{
+                      'input-border-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid input-border-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }"
+                    [id]="input.id"
+                    [placeholder]="input.placeholder || 'main.placeholders.defaultPlaceholder' | translate"
+                    [(ngModel)]="filterValues[input.id]"
+                    (ngModelChange)="onInputChange(input.id, $event)"
+                    name="{{ input.id }}"
+                    [attr.maxlength]="input.validations?.maxLength ? input.validations?.maxLength : null"
+                    [attr.minlength]="input.validations?.minLength ? input.validations?.minLength : null"
+                    [attr.min]="input.type === 'number' && input.validations?.min !== undefined ? input.validations?.min : null"
+                    [attr.max]="input.type === 'number' && input.validations?.max !== undefined ? input.validations?.max : null"
+                    [required]="input.validations?.required ? true : false"
+                    mask="separator.0"
+                  />
+                }
+                @if (input.type === 'floatNumber') {
+                  <!-- <input type="'text'" class="form-control form-control-sm py-1 px-2" [ngClass]="{
+                      'input-border-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid input-border-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }" [id]="input.id"
+                                [placeholder]="input.placeholder || 'main.placeholders.defaultPlaceholder' | translate"
+                                [(ngModel)]="filterValues[input.id]" (ngModelChange)="onInputChange(input.id, $event)"
+                                name="{{ input.id }}"
+                                [attr.maxlength]="input.validations?.maxLength ? input.validations?.maxLength : null"
+                                [attr.minlength]="input.validations?.minLength ? input.validations?.minLength : null"
+                                [attr.min]="input.validations?.min !== undefined ? input.validations?.min : null"
+                                [attr.max]="input.validations?.max !== undefined ? input.validations?.max : null"
+                                [required]="input.validations?.required ? true : false"
+                                [mask]="'separator.' + (input.decimalLimit ? input.decimalLimit : '2')"
+                                [thousandSeparator]="input.thousandSeparator ? input.thousandSeparator : '.'"
+                                [decimalMarker]="input.decimalMarker ? input.decimalMarker : ','" /> -->
+                }
+                @if (input.type !== 'number' && input.type !== 'floatNumber' && input.mask) {
+                  <!-- <input [type]="input.type === 'datetime' ? 'datetime-local' : input.type"
+                                class="form-control form-control-sm py-1 px-2" [ngClass]="{
+                      'input-border-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid input-border-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }" [id]="input.id"
+                                [placeholder]="input.placeholder || 'main.placeholders.defaultPlaceholder' | translate"
+                                [(ngModel)]="filterValues[input.id]" (ngModelChange)="onInputChange(input.id, $event)"
+                                name="{{ input.id }}"
+                                [attr.maxlength]="input.validations?.maxLength ? input.validations?.maxLength : null"
+                                [attr.minlength]="input.validations?.minLength ? input.validations?.minLength : null"
+                                [required]="input.validations?.required ? true : false"
+                                [mask]="input.mask ? input.mask : null" /> -->
+                }
+                @if (input.type !== 'number' && input.type !== 'floatNumber' && !input.mask) {
+                  <input
+                    [type]="input.type === 'datetime' ? 'datetime-local' : input.type"
+                    class="form-control form-control-sm py-1 px-2"
+                    [ngClass]="{
+                      'input-border-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid input-border-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }"
+                    [id]="input.id"
+                    [placeholder]="input.placeholder || 'main.placeholders.defaultPlaceholder' | translate"
+                    [(ngModel)]="filterValues[input.id]"
+                    (ngModelChange)="onInputChange(input.id, $event)"
+                    name="{{ input.id }}"
+                    [attr.maxlength]="input.validations?.maxLength ? input.validations?.maxLength : null"
+                    [attr.minlength]="input.validations?.minLength ? input.validations?.minLength : null"
+                    [required]="input.validations?.required ? true : false"
+                  />
+                }
+                <label [for]="input.id" [ngClass]="{ 'text-required': input.validations?.required }" jhiTranslate="{{ input.label }}">
+                  {{ input.label }}
+                </label>
+                <div
+                  *ngIf="
+                    withValidationStyleAndInfo &&
+                    (filter.controls[input.id]?.touched || filter.controls[input.id]?.dirty) &&
+                    filterErrors[input.id]
+                  "
+                  class="text-danger small mt-1"
+                  jhiTranslate="{{ filterErrors[input.id] }}"
+                  [translateValues]="filterErrorsTranslatedValues[input.id]"
+                >
+                  {{ filterErrors[input.id] }}
+                </div>
+                <div
+                  *ngIf="
+                    withValidationStyleAndInfo &&
+                    (filter.controls[input.id]?.touched || filter.controls[input.id]?.dirty) &&
+                    filter.controls[input.id]?.errors?.required &&
+                    !filterErrors[input.id]
+                  "
+                  class="text-danger small mt-1"
+                  jhiTranslate="main.validations.required"
+                >
+                  {{ 'main.validations.required' }}
+                </div>
+              </div>
+              <!-- Select -->
+              <div *ngIf="input.type === 'select'" class="form-floating mb-2 w-100">
+                <mat-form-field appearance="fill" class="w-100 mb-2">
+                  <mat-label [ngClass]="{ 'text-required': input.validations?.required }">
+                    {{ input.label | translate }}
+                  </mat-label>
+                  <mat-select
+                    [id]="input.id"
+                    [ngClass]="{
+                      'input-border-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }"
+                    [(ngModel)]="filterValues[input.id]"
+                    (selectionChange)="onInputChange(input.id, $event.value)"
+                    name="{{ input.id }}"
+                    [placeholder]="input.placeholder || 'main.placeholders.select' | translate"
+                    [required]="input.validations?.required ? true : false"
+                  >
+                    <mat-option value="" disabled>{{ input.placeholder || 'main.placeholders.select' | translate }} </mat-option>
+                    <!-- <mat-option *ngFor="let opt of input.options" [value]="opt.value">
+                                        <span jhiDynamicLabel [defaultLabel]="opt.label || ''"
+                                            [labels]="{ fr: opt.labelFr, en: opt.labelEn, 'zh-cn': opt.labelCn }"></span>
+                                    </mat-option> -->
+                  </mat-select>
+                  <div
+                    *ngIf="
+                      withValidationStyleAndInfo &&
+                      (filter.controls[input.id]?.touched || filter.controls[input.id]?.dirty) &&
+                      filterErrors[input.id]
+                    "
+                    class="text-danger small mt-1"
+                  >
+                    {{ filterErrors[input.id] }}
+                  </div>
+                  <div
+                    *ngIf="
+                      withValidationStyleAndInfo &&
+                      (filter.controls[input.id]?.touched || filter.controls[input.id]?.dirty) &&
+                      filter.controls[input.id]?.errors?.required &&
+                      !filterErrors[input.id]
+                    "
+                    class="text-danger small mt-1"
+                    jhiTranslate="main.validations.required"
+                  >
+                    {{ 'main.validations.required' }}
+                  </div>
+                </mat-form-field>
+              </div>
+              <!-- Select2 (ng-select) -->
+              <div *ngIf="input.type === 'select2'" class="form-floating mb-2 w-100">
+                @if (input.groupByKey) {
+                  <!-- <ng-select [items]="input.options" [bindLabel]="input.bindLabel || 'label'"
+                                [bindValue]="input.bindValue || 'value'" [searchable]="input.searchable ?? true"
+                                [searchFn]="input.searchFunction ? input.searchFunction : null" [clearable]="true"
+                                [groupBy]="input.groupByKey"
+                                [placeholder]="input.placeholder || 'main.placeholders.select' | translate"
+                                [(ngModel)]="filterValues[input.id]"
+                                (change)="onInputSelect2Change({ id: input.id, bindValue: input.bindValue || 'value' }, $event)"
+                                [required]="input.validations?.required ? true : false" [id]="input.id"
+                                name="{{ input.id }}" [ngClass]="{
+                      'input-border-invalid': withValidationStyleAndInfo && filterErrors[input.id],
+                      'is-invalid': withValidationStyleAndInfo && filterErrors[input.id],
+                      'is-valid input-border-valid': withValidationStyleAndInfo && !filterErrors[input.id] && filterValues[input.id],
+                    }">
+                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                    @if (input.isWithOptionsLabelTranslation) {
+                                    {{ item.label | translate }}
+                                    }
+                                    @if (!input.isWithOptionsLabelTranslation) {
+                                    <span jhiDynamicLabel [defaultLabel]="item.label || ''"
+                                        [labels]="{ fr: item.labelFr, en: item.labelEn, 'zh-cn': item.labelCn }"></span>
+                                    }
+                                </ng-template>
+                            </ng-select> -->
+                }
+                @if (!input.groupByKey) {
+                  <!-- <ng-select [items]="input.options" [bindLabel]="input.bindLabel || 'label'"
+                                [bindValue]="input.bindValue || 'value'" [searchable]="input.searchable ?? true"
+                                [searchFn]="input.searchFunction ? input.searchFunction : null" [clearable]="true"
+                                [placeholder]="input.placeholder || 'main.placeholders.select' | translate"
+                                [(ngModel)]="filterValues[input.id]"
+                                (change)="onInputSelect2Change({ id: input.id, bindValue: input.bindValue || 'value' }, $event)"
+                                [required]="input.validations?.required ? true : false" [id]="input.id"
+                                name="{{ input.id }}" [ngClass]="{
+                      'input-border-invalid': withValidationStyleAndInfo && filterErrors[input.id],
+                      'is-invalid': withValidationStyleAndInfo && filterErrors[input.id],
+                      'is-valid input-border-valid': withValidationStyleAndInfo && !filterErrors[input.id] && filterValues[input.id],
+                    }">
+                                <ng-template ng-option-tmp let-item="item" let-index="index">
+                                    @if (input.isWithOptionsLabelTranslation) {
+                                    {{ item.label | translate }}
+                                    }
+                                    @if (!input.isWithOptionsLabelTranslation) {
+                                   <span jhiDynamicLabel [defaultLabel]="item.label || ''"
+                                        [labels]="{ fr: item.labelFr, en: item.labelEn, 'zh-cn': item.labelCn }"></span> 
+                                    }
+                                </ng-template>
+                            </ng-select> -->
+                }
+                <div *ngIf="filterErrors[input.id]" class="text-danger small mt-1">
+                  {{ filterErrors[input.id] }}
+                </div>
+              </div>
+              <div *ngIf="input.type === 'dateRange'" class="mb-2">
+                <div class="form-floating mb-1">
+                  <input
+                    type="date"
+                    class="form-control form-control-sm py-1 px-2"
+                    [ngClass]="{
+                      'input-border-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }"
+                    [id]="input.id + '_from'"
+                    [placeholder]="input.placeholder + ' (de)'"
+                    [ngModel]="filterValues[input.id]?.from"
+                    (ngModelChange)="onDateRangeChange(input.id, 'from', $event)"
+                    name="{{ input.id }}_from"
+                    [required]="input.validations?.required ? true : false"
+                  />
+                  <label [for]="input.id + '_from'" [ngClass]="{ 'text-required': input.validations?.required }">
+                    {{ input.label | translate }} (de)
+                  </label>
+                </div>
+                <div class="form-floating">
+                  <input
+                    type="date"
+                    class="form-control form-control-sm py-1 px-2"
+                    [ngClass]="{
+                      'input-border-invalid':
+                        (withValidationStyleAndInfo && filter.controls[input.id] && filter.controls[input.id].errors?.required) ||
+                        filterErrors[input.id],
+                      'is-invalid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        ((filter.controls[input.id] && filter.controls[input.id].errors?.required) || filterErrors[input.id]),
+                      'is-valid':
+                        withValidationStyleAndInfo &&
+                        ((filter.controls[input.id] && filter.controls[input.id].touched) ||
+                          (filter.controls[input.id] && filter.controls[input.id].dirty) ||
+                          filterValues[input.id]) &&
+                        !(filter.controls[input.id] && filter.controls[input.id].errors?.required) &&
+                        !filterErrors[input.id],
+                    }"
+                    [id]="input.id + '_to'"
+                    [placeholder]="input.placeholder + ' (à)'"
+                    [ngModel]="filterValues[input.id]?.to"
+                    (ngModelChange)="onDateRangeChange(input.id, 'to', $event)"
+                    name="{{ input.id }}_to"
+                    [required]="input.validations?.required ? true : false"
+                  />
+                  <label [for]="input.id + '_to'" [ngClass]="{ 'text-required': input.validations?.required }">
+                    {{ input.label | translate }} (à)
+                  </label>
+                </div>
+                <div
+                  *ngIf="
+                    withValidationStyleAndInfo &&
+                    (filter.controls[input.id]?.touched || filter.controls[input.id]?.dirty) &&
+                    filterErrors[input.id]
+                  "
+                  class="text-danger small mt-1"
+                >
+                  {{ filterErrors[input.id] }}
+                </div>
+                <div
+                  *ngIf="
+                    withValidationStyleAndInfo &&
+                    (filter.controls[input.id]?.touched || filter.controls[input.id]?.dirty) &&
+                    filter.controls[input.id]?.errors?.required &&
+                    !filterErrors[input.id]
+                  "
+                  class="text-danger small mt-1"
+                  jhiTranslate="main.validations.required"
+                >
+                  {{ 'main.validations.required' }}
+                </div>
+              </div>
+              <!-- Checkbox -->
+              <div *ngIf="input.type === 'checkbox'" class="form-check mb-2">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [id]="input.id"
+                  [(ngModel)]="filterValues[input.id]"
+                  (ngModelChange)="onInputChange(input.id, $event)"
+                  name="{{ input.id }}"
+                  [required]="input.validations?.required ? true : false"
+                />
+                <label class="form-check-label" [for]="input.id" [ngClass]="{ 'text-required': input.validations?.required }">
+                  {{ input.label | translate }}
+                </label>
+                <div *ngIf="filterErrors[input.id]" class="text-danger small mt-1">
+                  {{ filterErrors[input.id] }}
+                </div>
+              </div>
+
+              <!-- Switch -->
+              <div *ngIf="input.type === 'switch'" class="form-check form-switch mb-2">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [id]="input.id"
+                  [(ngModel)]="filterValues[input.id]"
+                  (ngModelChange)="onInputChange(input.id, $event)"
+                  name="{{ input.id }}"
+                  [required]="input.validations?.required ? true : false"
+                />
+                <label class="form-check-label" [for]="input.id" [ngClass]="{ 'text-required': input.validations?.required }">
+                  {{ input.label | translate }}
+                </label>
+                <div *ngIf="filterErrors[input.id]" class="text-danger small mt-1">
+                  {{ filterErrors[input.id] }}
+                </div>
+              </div>
+
+              <!-- Radio -->
+              <div *ngIf="input.type === 'radio'" class="mb-2">
+                <label class="form-label d-block mb-1" [ngClass]="{ 'text-required': input.validations?.required }">
+                  {{ input.label | translate }}
+                </label>
+                <div *ngFor="let opt of input.options" class="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    class="form-check-input"
+                    [id]="input.id + '_' + opt.value"
+                    [name]="input.id"
+                    [value]="opt.value"
+                    [(ngModel)]="filterValues[input.id]"
+                    (ngModelChange)="onInputChange(input.id, $event)"
+                    [required]="input.validations?.required ? true : false"
+                  />
+                  <label class="form-check-label" [for]="input.id + '_' + opt.value">{{ opt.label }}</label>
+                </div>
+                <div *ngIf="filterErrors[input.id]" class="text-danger small mt-1">
+                  {{ filterErrors[input.id] }}
+                </div>
+              </div>
+            </div>
+          }
+        </ng-container>
+      </div>
+      @if (
+        (!config.isHideFilterButton || config.isWithDownloadAllButton || config.isHideResetButton) &&
+        (config.buttonsLocation == 'bottom' || config.buttonsLocation == 'both')
+      ) {
+        <div class="mt-3 d-flex gap-2">
+          @if (!config.isHideFilterButton) {
+            <button type="submit" class="btn btn-sm btn-outline-primary">
+              <i class="mdi mdi-filter"></i>
+              <span class="ms-1 d-none d-sm-inline">{{ 'main.buttons.filter' | translate }}</span>
+            </button>
+          }
+          @if (config.isWithDownloadAllButton) {
+            <button type="button" class="btn btn-sm btn-outline-dark" (click)="onDownloadAll()">
+              <i class="mdi mdi-download"></i>
+              <span class="ms-1 d-none d-sm-inline">{{ 'main.buttons.downloadAll' | translate }}</span>
+            </button>
+          }
+          @if (!config.isHideResetButton) {
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onReset()">
+              <i class="mdi mdi-refresh"></i>
+              <span class="ms-1 d-none d-sm-inline">{{ 'main.buttons.reset' | translate }}</span>
+            </button>
+          }
+        </div>
+      }
+    </form>
+  </div>
+</div>

@@ -8,7 +8,7 @@ export const CATEGORIE_ROUTE: Route[] = [
     component: CategorieComponent,
     title: LISTE_ADMINISTRATION_ROUTES.REFERENTIEL.CATEGORIE.TITRE,
     // resolve: {
-    //   allGroupeProduit: allGroupeProduitResolve,
+    //   allEntiteFinanciere: allGroupeProduitResolve,
     // },
   },
   // {

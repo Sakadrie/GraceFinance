@@ -149,6 +149,7 @@ export class SharedListTableComponent {
   @Output() pageChange = new EventEmitter<{ page: number; pageSize: number }>();
 
   expandedRows = new Set<number>();
+  jsonRepairService: any;
 
   constructor(
     // private jsonRepairService: JsonRepairService,
@@ -306,17 +307,17 @@ export class SharedListTableComponent {
    * @param jsonString La chaîne à parser
    * @returns Un tableau de Record<string, any>
    */
-  // public parseJsonArrayString(jsonString: string): Record<string, any>[] {
-  //   try {
-  //     const parsed = this.jsonRepairService.parseJsonArrayFix(jsonString);
-  //     if (Array.isArray(parsed)) {
-  //       return parsed as Record<string, any>[];
-  //     }
-  //     return [];
-  //   } catch {
-  //     return [];
-  //   }
-  // }
+  public parseJsonArrayString(jsonString: string): Record<string, any>[] {
+    try {
+      const parsed = this.jsonRepairService.parseJsonArrayFix(jsonString);
+      if (Array.isArray(parsed)) {
+        return parsed as Record<string, any>[];
+      }
+      return [];
+    } catch {
+      return [];
+    }
+  }
 
   public checkIfIsArrayOfObjects(value: any): boolean {
     return Array.isArray(value) && value.every(item => typeof item === 'object' && item !== null);

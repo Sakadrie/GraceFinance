@@ -1,0 +1,444 @@
+<div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+  <div class="my-auto">
+    @if (pageHeaderInput.title && pageHeaderInput.title != '') {
+      <h5
+        [translateValues]="pageHeaderInput.titleTranslatedValues"
+        class="page-title fs-21 mb-1"
+        jhiTranslate="{{ pageHeaderInput.title }}"
+      >
+        {{ pageHeaderInput.title }}
+      </h5>
+    }
+
+    @if (pageHeaderInput.items.length > 0) {
+      <nav>
+        <ol class="breadcrumb mb-0">
+          @for (item of pageHeaderInput.items; track item) {
+            <ng-template [ngIf]="!item.url">
+              <li [attr.aria-current]="item.isActive ? 'page' : null" [ngClass]="{ active: item.isActive }" class="breadcrumbs-item">
+                <span jhiTranslate="{{ item.label }}">{{ item.label }}</span>
+              </li>
+            </ng-template>
+            <ng-template [ngIf]="item.url">
+              <li [attr.aria-current]="item.isActive ? 'page' : null" [ngClass]="{ active: item.isActive }" class="breadcrumbs-item">
+                <a [href]="item.url" jhiTranslate="{{ item.label }}">{{ item.label }}</a>
+              </li>
+            </ng-template>
+          }
+        </ol>
+      </nav>
+    }
+  </div>
+
+  <div class="d-flex my-xl-auto right-content align-items-center">
+    @if (pageHeaderInput.isWithFilterSettingsButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="filterSettingsButtonClicked.emit()"
+          class="btn btn-info me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithFilterSettingsButtonLabel"
+          ngbTooltip="{{ 'main.buttons.filterPanel' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="mdi mdi-filter-variant"></i>
+          @if (pageHeaderInput.isWithFilterSettingsButtonLabel) {
+            <span
+              class="d-none d-md-inline ms-1"
+              jhiTranslate="{{ pageHeaderInput.filterSettingsButtonLabel || 'main.buttons.filterPanel' }}"
+            ></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithAddButton) {
+      @if (pageHeaderInput.addButtonAuthorities?.length) {
+        <div *jhiHasAnyAuthority="pageHeaderInput.addButtonAuthorities!" class="pe-1 mb-xl-0">
+          <button
+            (click)="addButtonClicked.emit()"
+            class="btn btn-success me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithAddButtonLabel"
+            ngbTooltip="{{ 'main.buttons.add' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-plus"></i>
+            @if (pageHeaderInput.isWithAddButtonLabel) {
+              <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.addButtonLabel || 'main.buttons.add' }}"></span>
+            }
+          </button>
+        </div>
+      }
+      @if (!pageHeaderInput.addButtonAuthorities?.length) {
+        <div class="pe-1 mb-xl-0">
+          <button
+            (click)="addButtonClicked.emit()"
+            class="btn btn-success me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithAddButtonLabel"
+            ngbTooltip="{{ 'main.buttons.add' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-plus"></i>
+            @if (pageHeaderInput.isWithAddButtonLabel) {
+              <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.addButtonLabel || 'main.buttons.add' }}"></span>
+            }
+          </button>
+        </div>
+      }
+    }
+    @if (pageHeaderInput.isWithAddBescImportButton) {
+      @if (pageHeaderInput.addBescImportButtonAuthorities?.length) {
+        <div *jhiHasAnyAuthority="pageHeaderInput.addBescImportButtonAuthorities!" class="pe-1 mb-xl-0">
+          <button
+            (click)="addBescImportButtonClicked.emit()"
+            class="btn btn-primary me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithAddBescImportButtonLabel"
+            ngbTooltip="{{ 'main.buttons.addBescImport' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-cloud-download"></i>
+            @if (pageHeaderInput.isWithAddBescImportButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.addBescImportButtonLabel || 'main.buttons.addBescImport' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+      @if (!pageHeaderInput.addBescImportButtonAuthorities?.length) {
+        <div class="pe-1 mb-xl-0">
+          <button
+            (click)="addBescImportButtonClicked.emit()"
+            class="btn btn-primary me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithAddBescImportButtonLabel"
+            ngbTooltip="{{ 'main.buttons.addBescImport' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-cloud-download"></i>
+            @if (pageHeaderInput.isWithAddBescImportButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.addBescImportButtonLabel || 'main.buttons.addBescImport' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+    }
+    @if (pageHeaderInput.isWithAddBescExportButton) {
+      @if (pageHeaderInput.addBescExportButtonAuthorities?.length) {
+        <div *jhiHasAnyAuthority="pageHeaderInput.addBescExportButtonAuthorities!" class="pe-1 mb-xl-0">
+          <button
+            (click)="addBescExportButtonClicked.emit()"
+            class="btn btn-success me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithAddBescExportButtonLabel"
+            ngbTooltip="{{ 'main.buttons.addBescExport' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-cloud-upload"></i>
+            @if (pageHeaderInput.isWithAddBescExportButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.addBescExportButtonLabel || 'main.buttons.addBescExport' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+      @if (!pageHeaderInput.addBescExportButtonAuthorities?.length) {
+        <div class="pe-1 mb-xl-0">
+          <button
+            (click)="addBescExportButtonClicked.emit()"
+            class="btn btn-success me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithAddBescExportButtonLabel"
+            ngbTooltip="{{ 'main.buttons.addBescExport' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-cloud-upload"></i>
+            @if (pageHeaderInput.isWithAddBescExportButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.addBescExportButtonLabel || 'main.buttons.addBescExport' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+    }
+    @if (pageHeaderInput.isWithRefreshDataButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="refreshDataButtonClicked.emit()"
+          class="btn btn-warning me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithRefreshDataButtonLabel"
+          ngbTooltip="{{ 'main.buttons.refreshData' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="mdi mdi-refresh"></i>
+          @if (pageHeaderInput.isWithRefreshDataButtonLabel) {
+            <span
+              class="d-none d-md-inline ms-1"
+              jhiTranslate="{{ pageHeaderInput.refreshDataButtonLabel || 'main.buttons.refreshData' }}"
+            ></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithExportDataButton) {
+      @if (pageHeaderInput.exportDataButtonAuthorities?.length) {
+        <div *jhiHasAnyAuthority="pageHeaderInput.exportDataButtonAuthorities!" class="pe-1 mb-xl-0">
+          <button
+            (click)="exportDataButtonClicked.emit()"
+            class="btn btn-dark me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithExportDataButtonLabel"
+            ngbTooltip="{{ 'main.buttons.export' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-file-export"></i>
+            @if (pageHeaderInput.isWithExportDataButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.exportDataButtonLabel || 'main.buttons.export' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+      @if (!pageHeaderInput.exportDataButtonAuthorities?.length) {
+        <div class="pe-1 mb-xl-0">
+          <button
+            (click)="exportDataButtonClicked.emit()"
+            class="btn btn-dark me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithExportDataButtonLabel"
+            ngbTooltip="{{ 'main.buttons.export' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-file-export"></i>
+            @if (pageHeaderInput.isWithExportDataButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.exportDataButtonLabel || 'main.buttons.export' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+    }
+    @if (pageHeaderInput.isWithSaveButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="saveButtonClicked.emit()"
+          class="btn btn-primary me-2"
+          ngbTooltip="{{ 'main.buttons.save' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="bi bi-save2 me-1"></i>
+          @if (pageHeaderInput.isWithSaveButtonLabel) {
+            <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.saveButtonLabel || 'main.buttons.save' }}"></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithResetButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="resetButtonClicked.emit()"
+          class="btn btn-warning me-2"
+          ngbTooltip="{{ 'main.buttons.reset' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="bi bi-arrow-counterclockwise me-1"></i>
+          @if (pageHeaderInput.isWithResetButtonLabel) {
+            <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.resetButtonLabel || 'main.buttons.reset' }}"></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithBackButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="backButtonClicked.emit()"
+          class="btn btn-dark me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithBackButtonLabel"
+          ngbTooltip="{{ 'main.buttons.back' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="bi bi-arrow-left"></i>
+          @if (pageHeaderInput.isWithBackButtonLabel) {
+            <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.backButtonLabel || 'main.buttons.back' }}"></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithTopOffcanvasButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="topOffcanvasButtonClicked.emit()"
+          class="btn btn-info me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithTopOffcanvasButtonLabel"
+          ngbTooltip="{{ 'main.buttons.topCanvas' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="mdi mdi-arrow-up-bold-box-outline"></i>
+          @if (pageHeaderInput.isWithTopOffcanvasButtonLabel) {
+            <span
+              class="d-none d-md-inline ms-1"
+              jhiTranslate="{{ pageHeaderInput.topOffcanvasButtonLabel || 'main.buttons.topCanvas' }}"
+            ></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithBottomOffcanvasButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="bottomOffcanvasButtonClicked.emit()"
+          class="btn btn-info me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithBottomOffcanvasButtonLabel"
+          ngbTooltip="{{ 'main.buttons.bottomCanvas' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="mdi mdi-arrow-down-bold-box-outline"></i>
+          @if (pageHeaderInput.isWithBottomOffcanvasButtonLabel) {
+            <span
+              class="d-none d-md-inline ms-1"
+              jhiTranslate="{{ pageHeaderInput.bottomOffcanvasButtonLabel || 'main.buttons.bottomCanvas' }}"
+            ></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithRightOffcanvasButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="rightOffcanvasButtonClicked.emit()"
+          class="btn btn-info me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithRightOffcanvasButtonLabel"
+          ngbTooltip="{{ 'main.buttons.rightCanvas' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="mdi mdi-arrow-right-bold-box-outline"></i>
+          @if (pageHeaderInput.isWithRightOffcanvasButtonLabel) {
+            <span
+              class="d-none d-md-inline ms-1"
+              jhiTranslate="{{ pageHeaderInput.rightOffcanvasButtonLabel || 'main.buttons.rightCanvas' }}"
+            ></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithLeftOffcanvasButton) {
+      <div class="pe-1 mb-xl-0">
+        <button
+          (click)="leftOffcanvasButtonClicked.emit()"
+          class="btn btn-info me-2"
+          [class.btn-icon]="!pageHeaderInput.isWithLeftOffcanvasButtonLabel"
+          ngbTooltip="{{ 'main.buttons.leftCanvas' | translate }}"
+          placement="bottom"
+          type="button"
+        >
+          <i class="mdi mdi-arrow-left-bold-box-outline"></i>
+          @if (pageHeaderInput.isWithLeftOffcanvasButtonLabel) {
+            <span
+              class="d-none d-md-inline ms-1"
+              jhiTranslate="{{ pageHeaderInput.leftOffcanvasButtonLabel || 'main.buttons.leftCanvas' }}"
+            ></span>
+          }
+        </button>
+      </div>
+    }
+    @if (pageHeaderInput.isWithShowSystemDataButton) {
+      @if (pageHeaderInput.showSystemDataButtonAuthorities?.length) {
+        <div *jhiHasAnyAuthority="pageHeaderInput.showSystemDataButtonAuthorities!" class="pe-1 mb-xl-0">
+          <button
+            (click)="showSystemDataButtonClicked.emit()"
+            class="btn btn-warning me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithShowSystemDataButtonLabel"
+            ngbTooltip="{{ 'main.buttons.showSystemData' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-alert-outline"></i>
+            @if (pageHeaderInput.isWithShowSystemDataButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.showSystemDataButtonLabel || 'main.buttons.showSystemData' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+      @if (!pageHeaderInput.showSystemDataButtonAuthorities?.length) {
+        <div class="pe-1 mb-xl-0">
+          <button
+            (click)="showSystemDataButtonClicked.emit()"
+            class="btn btn-warning me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithShowSystemDataButtonLabel"
+            ngbTooltip="{{ 'main.buttons.showSystemData' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-alert-outline"></i>
+            @if (pageHeaderInput.isWithShowSystemDataButtonLabel) {
+              <span
+                class="d-none d-md-inline ms-1"
+                jhiTranslate="{{ pageHeaderInput.showSystemDataButtonLabel || 'main.buttons.showSystemData' }}"
+              ></span>
+            }
+          </button>
+        </div>
+      }
+    }
+    @if (pageHeaderInput.isWithDeleteButton) {
+      @if (pageHeaderInput.deleteButtonAuthorities?.length) {
+        <div *jhiHasAnyAuthority="pageHeaderInput.deleteButtonAuthorities!" class="pe-1 mb-xl-0">
+          <button
+            (click)="deleteButtonClicked.emit()"
+            class="btn btn-danger me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithDeleteButtonLabel"
+            ngbTooltip="{{ 'main.buttons.delete' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-delete"></i>
+            @if (pageHeaderInput.isWithDeleteButtonLabel) {
+              <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.deleteButtonLabel || 'main.buttons.delete' }}"></span>
+            }
+          </button>
+        </div>
+      }
+      @if (!pageHeaderInput.deleteButtonAuthorities?.length) {
+        <div class="pe-1 mb-xl-0">
+          <button
+            (click)="deleteButtonClicked.emit()"
+            class="btn btn-danger me-2"
+            [class.btn-icon]="!pageHeaderInput.isWithDeleteButtonLabel"
+            ngbTooltip="{{ 'main.buttons.delete' | translate }}"
+            placement="bottom"
+            type="button"
+          >
+            <i class="mdi mdi-delete"></i>
+            @if (pageHeaderInput.isWithDeleteButtonLabel) {
+              <span class="d-none d-md-inline ms-1" jhiTranslate="{{ pageHeaderInput.deleteButtonLabel || 'main.buttons.delete' }}"></span>
+            }
+          </button>
+        </div>
+      }
+    }
+  </div>
+</div>
