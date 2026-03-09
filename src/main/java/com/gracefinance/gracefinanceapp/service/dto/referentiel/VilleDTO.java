@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.dto.referentiel;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,9 +20,7 @@ public class VilleDTO implements Serializable {
     private Boolean actif;
 
     @NotNull
-    private Long districtId;
-
-    private String districtNom;
+    private DistrictDTO district;
 
     public Long getId() {
         return id;
@@ -64,20 +62,16 @@ public class VilleDTO implements Serializable {
         this.actif = actif;
     }
 
-    public Long getDistrictId() {
-        return districtId;
+    public Boolean isActif() {
+        return this.actif;
     }
 
-    public void setDistrictId(Long districtId) {
-        this.districtId = districtId;
+    public DistrictDTO getDistrict() {
+        return this.district;
     }
 
-    public String getDistrictNom() {
-        return districtNom;
-    }
-
-    public void setDistrictNom(String districtNom) {
-        this.districtNom = districtNom;
+    public void setDistrict(DistrictDTO district) {
+        this.district = district;
     }
 
     @Override
@@ -95,6 +89,27 @@ public class VilleDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "VilleDTO{id=" + id + ", nom='" + nom + "', code='" + code + "', districtId=" + districtId + "}";
+        return (
+            "{" +
+            " id='" +
+            getId() +
+            "'" +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", description='" +
+            getDescription() +
+            "'" +
+            ", actif='" +
+            isActif() +
+            "'" +
+            ", district='" +
+            getDistrict() +
+            "'" +
+            "}"
+        );
     }
 }

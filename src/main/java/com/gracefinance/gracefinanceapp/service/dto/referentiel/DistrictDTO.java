@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.dto.referentiel;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,9 +20,7 @@ public class DistrictDTO implements Serializable {
     private Boolean actif;
 
     @NotNull
-    private Long sousRegionId;
-
-    private String sousRegionNom;
+    private SousRegionDTO sousRegion;
 
     public Long getId() {
         return id;
@@ -64,26 +62,26 @@ public class DistrictDTO implements Serializable {
         this.actif = actif;
     }
 
-    public Long getSousRegionId() {
-        return sousRegionId;
+    public Boolean isActif() {
+        return this.actif;
     }
 
-    public void setSousRegionId(Long sousRegionId) {
-        this.sousRegionId = sousRegionId;
+    public SousRegionDTO getSousRegion() {
+        return this.sousRegion;
     }
 
-    public String getSousRegionNom() {
-        return sousRegionNom;
-    }
-
-    public void setSousRegionNom(String sousRegionNom) {
-        this.sousRegionNom = sousRegionNom;
+    public void setSousRegion(SousRegionDTO sousRegion) {
+        this.sousRegion = sousRegion;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DistrictDTO)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DistrictDTO)) {
+            return false;
+        }
         DistrictDTO that = (DistrictDTO) o;
         return Objects.equals(id, that.id);
     }
@@ -95,6 +93,27 @@ public class DistrictDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "DistrictDTO{id=" + id + ", nom='" + nom + "', code='" + code + "', sousRegionId=" + sousRegionId + "}";
+        return (
+            "{" +
+            " id='" +
+            getId() +
+            "'" +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", description='" +
+            getDescription() +
+            "'" +
+            ", actif='" +
+            isActif() +
+            "'" +
+            ", sousRegion='" +
+            getSousRegion() +
+            "'" +
+            "}"
+        );
     }
 }

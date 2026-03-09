@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.dto.referentiel;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,9 +20,7 @@ public class SousRegionDTO implements Serializable {
     private Boolean actif;
 
     @NotNull
-    private Long regionId;
-
-    private String regionNom;
+    private RegionDTO region;
 
     public Long getId() {
         return id;
@@ -64,20 +62,16 @@ public class SousRegionDTO implements Serializable {
         this.actif = actif;
     }
 
-    public Long getRegionId() {
-        return regionId;
+    public Boolean isActif() {
+        return this.actif;
     }
 
-    public void setRegionId(Long regionId) {
-        this.regionId = regionId;
+    public RegionDTO getRegion() {
+        return this.region;
     }
 
-    public String getRegionNom() {
-        return regionNom;
-    }
-
-    public void setRegionNom(String regionNom) {
-        this.regionNom = regionNom;
+    public void setRegion(RegionDTO region) {
+        this.region = region;
     }
 
     @Override
@@ -95,6 +89,27 @@ public class SousRegionDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "SousRegionDTO{id=" + id + ", nom='" + nom + "', code='" + code + "', regionId=" + regionId + "}";
+        return (
+            "{" +
+            " id='" +
+            getId() +
+            "'" +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", description='" +
+            getDescription() +
+            "'" +
+            ", actif='" +
+            isActif() +
+            "'" +
+            ", region='" +
+            getRegion() +
+            "'" +
+            "}"
+        );
     }
 }
