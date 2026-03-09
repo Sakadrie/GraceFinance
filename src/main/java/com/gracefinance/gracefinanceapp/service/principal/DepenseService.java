@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.principal;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.DepenseCriteria;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.DepenseCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.DepenseDTO;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;

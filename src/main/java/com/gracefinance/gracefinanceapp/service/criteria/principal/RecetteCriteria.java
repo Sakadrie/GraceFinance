@@ -1,4 +1,4 @@
-package com.gracefinance.gracefinanceapp.domain.criteria;
+package com.gracefinance.gracefinanceapp.service.criteria.principal;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,17 +8,17 @@ import tech.jhipster.service.Criteria;
 import tech.jhipster.service.filter.*;
 
 /**
- * Criteria class for the {@link com.gracefinance.gracefinanceapp.domain.principal.Depense} entity. This class is used
- * in {@link com.gracefinance.gracefinanceapp.web.rest.principal.DepenseResource} to receive all the possible filtering options from
+ * Criteria class for the {@link com.gracefinance.gracefinanceapp.domain.principal.Recette} entity. This class is used
+ * in {@link com.gracefinance.gracefinanceapp.web.rest.principal.RecetteResource} to receive all the possible filtering options from
  * the Http GET request parameters.
  * For example the following could be a valid request:
- * {@code /depenses?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
+ * {@code /recettes?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
  * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
  * fix type specific filters.
  */
 @ParameterObject
 @SuppressWarnings("common-java:DuplicatedBlocks")
-public class DepenseCriteria implements Serializable, Criteria {
+public class RecetteCriteria implements Serializable, Criteria {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,19 +26,21 @@ public class DepenseCriteria implements Serializable, Criteria {
 
     private StringFilter code;
 
-    private LocalDateFilter dateDepense;
+    private LocalDateFilter dateRecette;
 
     private BigDecimalFilter montant;
+
+    private StringFilter typeRecette;
+
+    private BooleanFilter anonyme;
+
+    private StringFilter membreNom;
 
     private StringFilter motif;
 
     private StringFilter referencePiece;
 
     private StringFilter statut;
-
-    private StringFilter validerPar;
-
-    private InstantFilter dateValidation;
 
     private LongFilter entiteFinanciereId;
 
@@ -48,18 +50,19 @@ public class DepenseCriteria implements Serializable, Criteria {
 
     private Boolean distinct;
 
-    public DepenseCriteria() {}
+    public RecetteCriteria() {}
 
-    public DepenseCriteria(DepenseCriteria other) {
+    public RecetteCriteria(RecetteCriteria other) {
         this.id = other.optionalId().map(LongFilter::copy).orElse(null);
         this.code = other.optionalCode().map(StringFilter::copy).orElse(null);
-        this.dateDepense = other.optionalDateDepense().map(LocalDateFilter::copy).orElse(null);
+        this.dateRecette = other.optionalDateRecette().map(LocalDateFilter::copy).orElse(null);
         this.montant = other.optionalMontant().map(BigDecimalFilter::copy).orElse(null);
+        this.typeRecette = other.optionalTypeRecette().map(StringFilter::copy).orElse(null);
+        this.anonyme = other.optionalAnonyme().map(BooleanFilter::copy).orElse(null);
+        this.membreNom = other.optionalMembreNom().map(StringFilter::copy).orElse(null);
         this.motif = other.optionalMotif().map(StringFilter::copy).orElse(null);
         this.referencePiece = other.optionalReferencePiece().map(StringFilter::copy).orElse(null);
         this.statut = other.optionalStatut().map(StringFilter::copy).orElse(null);
-        this.validerPar = other.optionalValiderPar().map(StringFilter::copy).orElse(null);
-        this.dateValidation = other.optionalDateValidation().map(InstantFilter::copy).orElse(null);
         this.entiteFinanciereId = other.optionalEntiteFinanciereId().map(LongFilter::copy).orElse(null);
         this.caisseId = other.optionalCaisseId().map(LongFilter::copy).orElse(null);
         this.categorieId = other.optionalCategorieId().map(LongFilter::copy).orElse(null);
@@ -67,8 +70,8 @@ public class DepenseCriteria implements Serializable, Criteria {
     }
 
     @Override
-    public DepenseCriteria copy() {
-        return new DepenseCriteria(this);
+    public RecetteCriteria copy() {
+        return new RecetteCriteria(this);
     }
 
     public LongFilter getId() {
@@ -109,23 +112,23 @@ public class DepenseCriteria implements Serializable, Criteria {
         this.code = code;
     }
 
-    public LocalDateFilter getDateDepense() {
-        return dateDepense;
+    public LocalDateFilter getDateRecette() {
+        return dateRecette;
     }
 
-    public Optional<LocalDateFilter> optionalDateDepense() {
-        return Optional.ofNullable(dateDepense);
+    public Optional<LocalDateFilter> optionalDateRecette() {
+        return Optional.ofNullable(dateRecette);
     }
 
-    public LocalDateFilter dateDepense() {
-        if (dateDepense == null) {
-            setDateDepense(new LocalDateFilter());
+    public LocalDateFilter dateRecette() {
+        if (dateRecette == null) {
+            setDateRecette(new LocalDateFilter());
         }
-        return dateDepense;
+        return dateRecette;
     }
 
-    public void setDateDepense(LocalDateFilter dateDepense) {
-        this.dateDepense = dateDepense;
+    public void setDateRecette(LocalDateFilter dateRecette) {
+        this.dateRecette = dateRecette;
     }
 
     public BigDecimalFilter getMontant() {
@@ -145,6 +148,63 @@ public class DepenseCriteria implements Serializable, Criteria {
 
     public void setMontant(BigDecimalFilter montant) {
         this.montant = montant;
+    }
+
+    public StringFilter getTypeRecette() {
+        return typeRecette;
+    }
+
+    public Optional<StringFilter> optionalTypeRecette() {
+        return Optional.ofNullable(typeRecette);
+    }
+
+    public StringFilter typeRecette() {
+        if (typeRecette == null) {
+            setTypeRecette(new StringFilter());
+        }
+        return typeRecette;
+    }
+
+    public void setTypeRecette(StringFilter typeRecette) {
+        this.typeRecette = typeRecette;
+    }
+
+    public BooleanFilter getAnonyme() {
+        return anonyme;
+    }
+
+    public Optional<BooleanFilter> optionalAnonyme() {
+        return Optional.ofNullable(anonyme);
+    }
+
+    public BooleanFilter anonyme() {
+        if (anonyme == null) {
+            setAnonyme(new BooleanFilter());
+        }
+        return anonyme;
+    }
+
+    public void setAnonyme(BooleanFilter anonyme) {
+        this.anonyme = anonyme;
+    }
+
+    public StringFilter getMembreNom() {
+        return membreNom;
+    }
+
+    public Optional<StringFilter> optionalMembreNom() {
+        return Optional.ofNullable(membreNom);
+    }
+
+    public StringFilter membreNom() {
+        if (membreNom == null) {
+            setMembreNom(new StringFilter());
+        }
+        return membreNom;
+    }
+
+    public void setMembreNom(StringFilter membreNom) {
+        this.membreNom = membreNom;
     }
 
     public StringFilter getMotif() {
@@ -202,44 +262,6 @@ public class DepenseCriteria implements Serializable, Criteria {
 
     public void setStatut(StringFilter statut) {
         this.statut = statut;
-    }
-
-    public StringFilter getValiderPar() {
-        return validerPar;
-    }
-
-    public Optional<StringFilter> optionalValiderPar() {
-        return Optional.ofNullable(validerPar);
-    }
-
-    public StringFilter validerPar() {
-        if (validerPar == null) {
-            setValiderPar(new StringFilter());
-        }
-        return validerPar;
-    }
-
-    public void setValiderPar(StringFilter validerPar) {
-        this.validerPar = validerPar;
-    }
-
-    public InstantFilter getDateValidation() {
-        return dateValidation;
-    }
-
-    public Optional<InstantFilter> optionalDateValidation() {
-        return Optional.ofNullable(dateValidation);
-    }
-
-    public InstantFilter dateValidation() {
-        if (dateValidation == null) {
-            setDateValidation(new InstantFilter());
-        }
-        return dateValidation;
-    }
-
-    public void setDateValidation(InstantFilter dateValidation) {
-        this.dateValidation = dateValidation;
     }
 
     public LongFilter getEntiteFinanciereId() {
@@ -326,17 +348,18 @@ public class DepenseCriteria implements Serializable, Criteria {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        final DepenseCriteria that = (DepenseCriteria) o;
+        final RecetteCriteria that = (RecetteCriteria) o;
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(code, that.code) &&
-            Objects.equals(dateDepense, that.dateDepense) &&
+            Objects.equals(dateRecette, that.dateRecette) &&
             Objects.equals(montant, that.montant) &&
+            Objects.equals(typeRecette, that.typeRecette) &&
+            Objects.equals(anonyme, that.anonyme) &&
+            Objects.equals(membreNom, that.membreNom) &&
             Objects.equals(motif, that.motif) &&
             Objects.equals(referencePiece, that.referencePiece) &&
             Objects.equals(statut, that.statut) &&
-            Objects.equals(validerPar, that.validerPar) &&
-            Objects.equals(dateValidation, that.dateValidation) &&
             Objects.equals(entiteFinanciereId, that.entiteFinanciereId) &&
             Objects.equals(caisseId, that.caisseId) &&
             Objects.equals(categorieId, that.categorieId) &&
@@ -349,13 +372,14 @@ public class DepenseCriteria implements Serializable, Criteria {
         return Objects.hash(
             id,
             code,
-            dateDepense,
+            dateRecette,
             montant,
+            typeRecette,
+            anonyme,
+            membreNom,
             motif,
             referencePiece,
             statut,
-            validerPar,
-            dateValidation,
             entiteFinanciereId,
             caisseId,
             categorieId,
@@ -366,16 +390,17 @@ public class DepenseCriteria implements Serializable, Criteria {
     // prettier-ignore
     @Override
     public String toString() {
-        return "DepenseCriteria{" +
+        return "RecetteCriteria{" +
             optionalId().map(f -> "id=" + f + ", ").orElse("") +
             optionalCode().map(f -> "code=" + f + ", ").orElse("") +
-            optionalDateDepense().map(f -> "dateDepense=" + f + ", ").orElse("") +
+            optionalDateRecette().map(f -> "dateRecette=" + f + ", ").orElse("") +
             optionalMontant().map(f -> "montant=" + f + ", ").orElse("") +
+            optionalTypeRecette().map(f -> "typeRecette=" + f + ", ").orElse("") +
+            optionalAnonyme().map(f -> "anonyme=" + f + ", ").orElse("") +
+            optionalMembreNom().map(f -> "membreNom=" + f + ", ").orElse("") +
             optionalMotif().map(f -> "motif=" + f + ", ").orElse("") +
             optionalReferencePiece().map(f -> "referencePiece=" + f + ", ").orElse("") +
             optionalStatut().map(f -> "statut=" + f + ", ").orElse("") +
-            optionalValiderPar().map(f -> "validerPar=" + f + ", ").orElse("") +
-            optionalDateValidation().map(f -> "dateValidation=" + f + ", ").orElse("") +
             optionalEntiteFinanciereId().map(f -> "entiteFinanciereId=" + f + ", ").orElse("") +
             optionalCaisseId().map(f -> "caisseId=" + f + ", ").orElse("") +
             optionalCategorieId().map(f -> "categorieId=" + f + ", ").orElse("") +

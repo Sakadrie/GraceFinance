@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.repository.principal;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.RecetteCriteria;
 import com.gracefinance.gracefinanceapp.domain.principal.Recette;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.RecetteCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

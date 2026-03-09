@@ -1,4 +1,4 @@
-package com.gracefinance.gracefinanceapp.domain.criteria;
+package com.gracefinance.gracefinanceapp.service.criteria.security;
 
 import java.io.Serializable;
 import java.util.Objects;

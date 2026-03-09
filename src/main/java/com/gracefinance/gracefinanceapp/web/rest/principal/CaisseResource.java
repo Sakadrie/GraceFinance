@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.web.rest.principal;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.CaisseCriteria;
 import com.gracefinance.gracefinanceapp.repository.principal.CaisseRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.CaisseCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.CaisseDTO;
 import com.gracefinance.gracefinanceapp.service.principal.CaisseService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;

@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.repository.security.AffectationUtilisateurRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.security.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.security.AffectationUtilisateurDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.security.AffectationUtilisateurMapper;
 import com.gracefinance.gracefinanceapp.service.security.AffectationUtilisateurService;

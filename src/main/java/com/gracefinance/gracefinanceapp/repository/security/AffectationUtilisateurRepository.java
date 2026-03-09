@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.repository.security;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.domain.security.AffectationUtilisateur;
+import com.gracefinance.gracefinanceapp.service.criteria.security.AffectationUtilisateurCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

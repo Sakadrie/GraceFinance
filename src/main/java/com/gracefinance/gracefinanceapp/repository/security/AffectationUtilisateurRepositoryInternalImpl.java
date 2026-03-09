@@ -1,6 +1,5 @@
 package com.gracefinance.gracefinanceapp.repository.security;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.domain.security.AffectationUtilisateur;
 import com.gracefinance.gracefinanceapp.domain.security.Profil;
 import com.gracefinance.gracefinanceapp.repository.EntiteFinanciereSqlHelper;
@@ -11,6 +10,7 @@ import com.gracefinance.gracefinanceapp.repository.rowmapper.AffectationUtilisat
 import com.gracefinance.gracefinanceapp.repository.rowmapper.ColumnConverter;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.EntiteFinanciereRowMapper;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.UserRowMapper;
+import com.gracefinance.gracefinanceapp.service.criteria.security.AffectationUtilisateurCriteria;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
 import java.util.ArrayList;

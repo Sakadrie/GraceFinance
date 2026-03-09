@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.DepenseCriteria;
 import com.gracefinance.gracefinanceapp.repository.principal.DepenseRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.DepenseCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.DepenseDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.principal.DepenseMapper;
 import com.gracefinance.gracefinanceapp.service.principal.DepenseService;

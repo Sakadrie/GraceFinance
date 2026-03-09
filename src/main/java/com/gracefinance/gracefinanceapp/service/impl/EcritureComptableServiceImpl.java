@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.EcritureComptableCriteria;
 import com.gracefinance.gracefinanceapp.repository.principal.EcritureComptableRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.EcritureComptableCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.EcritureComptableDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.principal.EcritureComptableMapper;
 import com.gracefinance.gracefinanceapp.service.principal.EcritureComptableService;

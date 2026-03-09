@@ -1,11 +1,11 @@
 package com.gracefinance.gracefinanceapp.repository.principal;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.EcritureComptableCriteria;
 import com.gracefinance.gracefinanceapp.domain.principal.EcritureComptable;
 import com.gracefinance.gracefinanceapp.repository.EcritureComptableSqlHelper;
 import com.gracefinance.gracefinanceapp.repository.EntityManager;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.ColumnConverter;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.EcritureComptableRowMapper;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.EcritureComptableCriteria;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
 import java.util.ArrayList;

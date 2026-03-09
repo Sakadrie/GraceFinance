@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.web.rest.referentiel;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.TransfertCriteria;
 import com.gracefinance.gracefinanceapp.repository.referentiel.TransfertRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.referentiel.TransfertCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.referentiel.TransfertDTO;
 import com.gracefinance.gracefinanceapp.service.referentiel.TransfertService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;

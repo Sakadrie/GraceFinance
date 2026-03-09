@@ -360,31 +360,31 @@
           "title": "Fichier"
         },
         "categorie": {
-          "title": "Organisations",
+          "title": "Catégorie",
           "detail": {
-            "title": "Détails de l'organisation",
-            "titleWithId": "Détails de l'organisation [{{idLibelle}}: {{id}}]"
+            "title": "Détails de la catégorie",
+            "titleWithId": "Détails de la catégorie [{{idLibelle}}: {{id}}]"
           },
           "add": {
-            "title": "Ajouter une organisation"
+            "title": "Ajouter une catégorie"
           },
           "edit": {
-            "title": "Modifier l'organisation",
-            "titleWithId": "Modifier l'organisation [{{idLibelle}}: {{id}}]"
+            "title": "Modifier la catégorie",
+            "titleWithId": "Modifier la catégorie [{{idLibelle}}: {{id}}]"
           }
         },
         "transfert": {
-          "title": "Incoterm",
+          "title": "Transfert",
           "detail": {
-            "title": "Détails de l'incoterm",
-            "titleWithId": "Détails de l'incoterm [{{idLibelle}}: {{id}}]"
+            "title": "Détails du transfert",
+            "titleWithId": "Détails du transfert [{{idLibelle}}: {{id}}]"
           },
           "add": {
-            "title": "Ajouter un incoterm"
+            "title": "Ajouter un transfert"
           },
           "edit": {
-            "title": "Modifier l'incoterm",
-            "titleWithId": "Modifier l'incoterm [{{idLibelle}}: {{id}}]"
+            "title": "Modifier le transfert",
+            "titleWithId": "Modifier le transfert [{{idLibelle}}: {{id}}]"
           }
         },
         "produit": {

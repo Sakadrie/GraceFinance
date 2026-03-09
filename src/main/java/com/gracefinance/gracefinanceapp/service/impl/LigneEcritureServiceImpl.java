@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.LigneEcritureCriteria;
 import com.gracefinance.gracefinanceapp.repository.principal.LigneEcritureRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.LigneEcritureCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.LigneEcritureDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.principal.LigneEcritureMapper;
 import com.gracefinance.gracefinanceapp.service.principal.LigneEcritureService;

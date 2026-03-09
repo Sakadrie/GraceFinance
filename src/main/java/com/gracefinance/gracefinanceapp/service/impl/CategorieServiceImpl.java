@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.CategorieCriteria;
 import com.gracefinance.gracefinanceapp.repository.referentiel.CategorieRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.referentiel.CategorieCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.referentiel.CategorieDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.referentiel.CategorieMapper;
 import com.gracefinance.gracefinanceapp.service.referentiel.CategorieService;

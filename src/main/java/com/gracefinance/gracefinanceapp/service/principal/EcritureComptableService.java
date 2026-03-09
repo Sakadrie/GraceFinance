@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.principal;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.EcritureComptableCriteria;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.EcritureComptableCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.EcritureComptableDTO;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;

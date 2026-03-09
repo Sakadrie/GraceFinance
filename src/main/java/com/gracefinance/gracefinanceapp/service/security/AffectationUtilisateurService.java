@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.security;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.AffectationUtilisateurCriteria;
+import com.gracefinance.gracefinanceapp.service.criteria.security.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.security.AffectationUtilisateurDTO;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;

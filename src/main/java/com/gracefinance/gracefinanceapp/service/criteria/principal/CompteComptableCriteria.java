@@ -1,11 +1,14 @@
-package com.gracefinance.gracefinanceapp.domain.criteria;
+package com.gracefinance.gracefinanceapp.service.criteria.principal;
 
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Optional;
 import org.springdoc.core.annotations.ParameterObject;
 import tech.jhipster.service.Criteria;
-import tech.jhipster.service.filter.*;
+import tech.jhipster.service.filter.Filter;
+import tech.jhipster.service.filter.IntegerFilter;
+import tech.jhipster.service.filter.LongFilter;
+import tech.jhipster.service.filter.StringFilter;
 
 /**
  * Criteria class for the {@link com.gracefinance.gracefinanceapp.domain.principal.CompteComptable} entity. This class is used

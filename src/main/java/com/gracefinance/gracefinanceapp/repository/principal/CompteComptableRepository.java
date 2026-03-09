@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.repository.principal;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.CompteComptableCriteria;
 import com.gracefinance.gracefinanceapp.domain.principal.CompteComptable;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.CompteComptableCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;

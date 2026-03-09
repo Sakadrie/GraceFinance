@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.CompteComptableCriteria;
 import com.gracefinance.gracefinanceapp.repository.principal.CompteComptableRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.CompteComptableCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.CompteComptableDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.principal.CompteComptableMapper;
 import com.gracefinance.gracefinanceapp.service.principal.CompteComptableService;

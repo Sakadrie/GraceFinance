@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.repository.referentiel;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.CategorieCriteria;
 import com.gracefinance.gracefinanceapp.domain.referentiel.Categorie;
+import com.gracefinance.gracefinanceapp.service.criteria.referentiel.CategorieCriteria;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;

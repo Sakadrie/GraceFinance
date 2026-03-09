@@ -1,6 +1,6 @@
 package com.gracefinance.gracefinanceapp.service.referentiel;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.CategorieCriteria;
+import com.gracefinance.gracefinanceapp.service.criteria.referentiel.CategorieCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.referentiel.CategorieDTO;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Flux;

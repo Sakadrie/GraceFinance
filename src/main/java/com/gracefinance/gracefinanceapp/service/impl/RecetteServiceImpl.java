@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.service.impl;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.RecetteCriteria;
 import com.gracefinance.gracefinanceapp.repository.principal.RecetteRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.RecetteCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.RecetteDTO;
 import com.gracefinance.gracefinanceapp.service.mapper.principal.RecetteMapper;
 import com.gracefinance.gracefinanceapp.service.principal.RecetteService;

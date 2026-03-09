@@ -1,7 +1,7 @@
 package com.gracefinance.gracefinanceapp.web.rest;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.repository.security.AffectationUtilisateurRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.security.AffectationUtilisateurCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.security.AffectationUtilisateurDTO;
 import com.gracefinance.gracefinanceapp.service.security.AffectationUtilisateurService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;

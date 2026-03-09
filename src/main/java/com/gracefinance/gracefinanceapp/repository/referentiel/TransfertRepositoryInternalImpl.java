@@ -1,6 +1,5 @@
 package com.gracefinance.gracefinanceapp.repository.referentiel;
 
-import com.gracefinance.gracefinanceapp.domain.criteria.TransfertCriteria;
 import com.gracefinance.gracefinanceapp.domain.referentiel.Transfert;
 import com.gracefinance.gracefinanceapp.repository.CaisseSqlHelper;
 import com.gracefinance.gracefinanceapp.repository.EntiteFinanciereSqlHelper;
@@ -10,6 +9,7 @@ import com.gracefinance.gracefinanceapp.repository.rowmapper.CaisseRowMapper;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.ColumnConverter;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.EntiteFinanciereRowMapper;
 import com.gracefinance.gracefinanceapp.repository.rowmapper.TransfertRowMapper;
+import com.gracefinance.gracefinanceapp.service.criteria.referentiel.TransfertCriteria;
 import io.r2dbc.spi.Row;
 import io.r2dbc.spi.RowMetadata;
 import java.util.ArrayList;

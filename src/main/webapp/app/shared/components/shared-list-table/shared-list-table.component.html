@@ -1043,12 +1043,17 @@
             (pageChange)="onPageChange($event)"
           ></ngb-pagination>
         </div>
-        <!-- <div class="d-flex justify-content-center mt-2">
+        <div class="d-flex justify-content-center mt-2">
           <label for="pageSizeSelect">Lignes par page :</label>
-          <select id="pageSizeSelect" class="form-select form-select-sm w-auto d-inline mx-2" [ngModel]="pageSize" (ngModelChange)="onPageSizeChange($event)">
-            <option *ngFor="let size of pageSizes" [ngValue]="size">{{size}}</option>
+          <select
+            id="pageSizeSelect"
+            class="form-select form-select-sm w-auto d-inline mx-2"
+            [ngModel]="pageSize"
+            (ngModelChange)="onPageSizeChange($event)"
+          >
+            <option *ngFor="let size of pageSizes" [ngValue]="size">{{ size }}</option>
           </select>
-        </div> -->
+        </div>
       </div>
     }
   </div>
