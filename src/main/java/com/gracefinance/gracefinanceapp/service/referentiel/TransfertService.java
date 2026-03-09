@@ -1,73 +1,90 @@
 package com.gracefinance.gracefinanceapp.service.referentiel;
 
+import com.gracefinance.gracefinanceapp.repository.referentiel.TransfertRepository;
 import com.gracefinance.gracefinanceapp.service.criteria.referentiel.TransfertCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.referentiel.TransfertDTO;
+import com.gracefinance.gracefinanceapp.service.mapper.referentiel.TransfertMapper;
+import java.util.List;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.gracefinance.gracefinanceapp.domain.referentiel.Transfert}.
+ * Service Implementation for managing
+ * {@link com.gracefinance.gracefinanceapp.domain.referentiel.Transfert}.
  */
-public interface TransfertService {
-    /**
-     * Save a transfert.
-     *
-     * @param transfertDTO the entity to save.
-     * @return the persisted entity.
-     */
-    Mono<TransfertDTO> save(TransfertDTO transfertDTO);
+@Service
+@Transactional
+public class TransfertService {
 
-    /**
-     * Updates a transfert.
-     *
-     * @param transfertDTO the entity to update.
-     * @return the persisted entity.
-     */
-    Mono<TransfertDTO> update(TransfertDTO transfertDTO);
+    private static final Logger LOG = LoggerFactory.getLogger(TransfertService.class);
 
-    /**
-     * Partially updates a transfert.
-     *
-     * @param transfertDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Mono<TransfertDTO> partialUpdate(TransfertDTO transfertDTO);
-    /**
-     * Find transferts by criteria.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Flux<TransfertDTO> findByCriteria(TransfertCriteria criteria, Pageable pageable);
+    private final TransfertRepository transfertRepository;
+    private final TransfertMapper transfertMapper;
 
-    /**
-     * Find the count of transferts by criteria.
-     * @param criteria filtering criteria
-     * @return the count of transferts
-     */
-    public Mono<Long> countByCriteria(TransfertCriteria criteria);
+    public TransfertService(TransfertRepository transfertRepository, TransfertMapper transfertMapper) {
+        this.transfertRepository = transfertRepository;
+        this.transfertMapper = transfertMapper;
+    }
 
-    /**
-     * Returns the number of transferts available.
-     * @return the number of entities in the database.
-     *
-     */
-    Mono<Long> countAll();
+    public TransfertDTO save(TransfertDTO transfertDTO) {
+        LOG.debug("Request to save Transfert : {}", transfertDTO);
+        return transfertMapper.toDto(transfertRepository.save(transfertMapper.toEntity(transfertDTO)));
+    }
 
-    /**
-     * Get the "id" transfert.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Mono<TransfertDTO> findOne(Long id);
+    public TransfertDTO update(TransfertDTO transfertDTO) {
+        LOG.debug("Request to update Transfert : {}", transfertDTO);
+        return transfertMapper.toDto(transfertRepository.save(transfertMapper.toEntity(transfertDTO)));
+    }
 
-    /**
-     * Delete the "id" transfert.
-     *
-     * @param id the id of the entity.
-     * @return a Mono to signal the deletion
-     */
-    Mono<Void> delete(Long id);
+    public Optional<TransfertDTO> partialUpdate(TransfertDTO transfertDTO) {
+        LOG.debug("Request to partially update Transfert : {}", transfertDTO);
+        return transfertRepository
+            .findById(transfertDTO.getId())
+            .map(existing -> {
+                transfertMapper.partialUpdate(existing, transfertDTO);
+                return existing;
+            })
+            .map(transfertRepository::save)
+            .map(transfertMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<TransfertDTO> findOne(Long id) {
+        LOG.debug("Request to get Transfert : {}", id);
+        return transfertRepository.findById(id).map(transfertMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TransfertDTO> findAll() {
+        LOG.debug("Request to get all Transferts");
+        return transfertMapper.toDto(transfertRepository.findAll());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<TransfertDTO> findByCriteria(TransfertCriteria criteria, Pageable pageable) {
+        LOG.debug("Request to get Transferts by criteria : {}", criteria);
+        return transfertRepository.findAll(pageable).map(transfertMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByCriteria(TransfertCriteria criteria) {
+        LOG.debug("Request to count Transferts by criteria : {}", criteria);
+        return transfertRepository.count();
+    }
+
+    @Transactional(readOnly = true)
+    public long countAll() {
+        LOG.debug("Request to count all Transferts");
+        return transfertRepository.count();
+    }
+
+    public void delete(Long id) {
+        LOG.debug("Request to delete Transfert : {}", id);
+        transfertRepository.deleteById(id);
+    }
 }

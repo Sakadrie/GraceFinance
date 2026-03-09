@@ -3,80 +3,72 @@ package com.gracefinance.gracefinanceapp.domain.referentiel;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gracefinance.gracefinanceapp.domain.principal.Caisse;
 import com.gracefinance.gracefinanceapp.domain.principal.EntiteFinanciere;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A Transfert.
  */
-@Table("transfert")
+@Entity
+@Table(name = "transfert")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Transfert implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "must not be null")
-    @Column("date_transfert")
+    @NotNull
+    @Column(name = "date_transfert", nullable = false)
     private LocalDate dateTransfert;
 
-    @NotNull(message = "must not be null")
-    @Column("montant")
+    @NotNull
+    @Column(name = "montant", nullable = false, precision = 21, scale = 2)
     private BigDecimal montant;
 
-    @Column("motif")
+    @Column(name = "motif")
     private String motif;
 
-    @NotNull(message = "must not be null")
-    @Column("type_transfert")
+    @NotNull
+    @Column(name = "type_transfert", nullable = false)
     private String typeTransfert;
 
-    @NotNull(message = "must not be null")
-    @Column("statut")
+    @NotNull
+    @Column(name = "statut", nullable = false)
     private String statut;
 
-    @Column("valider_par")
+    @Column(name = "valider_par")
     private String validerPar;
 
-    @Column("date_validation")
+    @Column(name = "date_validation")
     private Instant dateValidation;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private EntiteFinanciere entiteFinanciereSource;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "caisse_source_id")
     @JsonIgnoreProperties(value = { "entiteFinanciere" }, allowSetters = true)
     private Caisse caisseSource;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "caisse_destination_id")
     @JsonIgnoreProperties(value = { "entiteFinanciere" }, allowSetters = true)
     private Caisse caisseDestination;
 
-    @Column("entite_financiere_source_id")
-    private Long entiteFinanciereSourceId;
-
-    @Column("caisse_source_id")
-    private Long caisseSourceId;
-
-    @Column("caisse_destination_id")
-    private Long caisseDestinationId;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -198,13 +190,12 @@ public class Transfert implements Serializable {
         return this.entiteFinanciereSource;
     }
 
-    public void setEntiteFinanciereSource(EntiteFinanciere entiteFinanciere) {
-        this.entiteFinanciereSource = entiteFinanciere;
-        this.entiteFinanciereSourceId = entiteFinanciere != null ? entiteFinanciere.getId() : null;
+    public void setEntiteFinanciereSource(EntiteFinanciere e) {
+        this.entiteFinanciereSource = e;
     }
 
-    public Transfert entiteFinanciereSource(EntiteFinanciere entiteFinanciere) {
-        this.setEntiteFinanciereSource(entiteFinanciere);
+    public Transfert entiteFinanciereSource(EntiteFinanciere e) {
+        this.setEntiteFinanciereSource(e);
         return this;
     }
 
@@ -214,7 +205,6 @@ public class Transfert implements Serializable {
 
     public void setCaisseSource(Caisse caisse) {
         this.caisseSource = caisse;
-        this.caisseSourceId = caisse != null ? caisse.getId() : null;
     }
 
     public Transfert caisseSource(Caisse caisse) {
@@ -228,39 +218,12 @@ public class Transfert implements Serializable {
 
     public void setCaisseDestination(Caisse caisse) {
         this.caisseDestination = caisse;
-        this.caisseDestinationId = caisse != null ? caisse.getId() : null;
     }
 
     public Transfert caisseDestination(Caisse caisse) {
         this.setCaisseDestination(caisse);
         return this;
     }
-
-    public Long getEntiteFinanciereSourceId() {
-        return this.entiteFinanciereSourceId;
-    }
-
-    public void setEntiteFinanciereSourceId(Long entiteFinanciere) {
-        this.entiteFinanciereSourceId = entiteFinanciere;
-    }
-
-    public Long getCaisseSourceId() {
-        return this.caisseSourceId;
-    }
-
-    public void setCaisseSourceId(Long caisse) {
-        this.caisseSourceId = caisse;
-    }
-
-    public Long getCaisseDestinationId() {
-        return this.caisseDestinationId;
-    }
-
-    public void setCaisseDestinationId(Long caisse) {
-        this.caisseDestinationId = caisse;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -275,23 +238,39 @@ public class Transfert implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "Transfert{" +
-            "id=" + getId() +
-            ", code='" + getCode() + "'" +
-            ", dateTransfert='" + getDateTransfert() + "'" +
-            ", montant=" + getMontant() +
-            ", motif='" + getMotif() + "'" +
-            ", typeTransfert='" + getTypeTransfert() + "'" +
-            ", statut='" + getStatut() + "'" +
-            ", validerPar='" + getValiderPar() + "'" +
-            ", dateValidation='" + getDateValidation() + "'" +
-            "}";
+        return (
+            "Transfert{" +
+            "id=" +
+            getId() +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", dateTransfert='" +
+            getDateTransfert() +
+            "'" +
+            ", montant=" +
+            getMontant() +
+            ", motif='" +
+            getMotif() +
+            "'" +
+            ", typeTransfert='" +
+            getTypeTransfert() +
+            "'" +
+            ", statut='" +
+            getStatut() +
+            "'" +
+            ", validerPar='" +
+            getValiderPar() +
+            "'" +
+            ", dateValidation='" +
+            getDateValidation() +
+            "'" +
+            "}"
+        );
     }
 }

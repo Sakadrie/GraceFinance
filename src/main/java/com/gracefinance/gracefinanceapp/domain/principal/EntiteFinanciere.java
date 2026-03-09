@@ -1,57 +1,65 @@
 package com.gracefinance.gracefinanceapp.domain.principal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.gracefinance.gracefinanceapp.domain.referentiel.Ville;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
- * APPLICATION: Gestion Financière d'Église (Norme SYSCOHADA)
- * Version: 1.0
+ * APPLICATION: Gestion Financière d'Église (Norme SYSCOHADA) Version: 1.0
  */
-@Table("entite_financiere")
+@Entity
+@Table(name = "entite_financiere")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class EntiteFinanciere implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("nom")
+    @NotNull
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "must not be null")
-    @Column("type")
+    @NotNull
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @NotNull(message = "must not be null")
-    @Column("actif")
+    @NotNull
+    @Column(name = "actif", nullable = false)
     private Boolean actif;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne
+    @JoinColumn(name = "ville_id")
+    private Ville ville;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_entite_financiere__eglise_liee",
+        joinColumns = @JoinColumn(name = "entite_financiere_id"),
+        inverseJoinColumns = @JoinColumn(name = "eglise_liee_id")
+    )
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private Set<EntiteFinanciere> egliseLiees = new HashSet<>();
 
-    @org.springframework.data.annotation.Transient
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "egliseLiees")
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private Set<EntiteFinanciere> structureLiees = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -143,13 +151,13 @@ public class EntiteFinanciere implements Serializable {
         return this;
     }
 
-    public EntiteFinanciere addEgliseLiee(EntiteFinanciere entiteFinanciere) {
-        this.egliseLiees.add(entiteFinanciere);
+    public EntiteFinanciere addEgliseLiee(EntiteFinanciere e) {
+        this.egliseLiees.add(e);
         return this;
     }
 
-    public EntiteFinanciere removeEgliseLiee(EntiteFinanciere entiteFinanciere) {
-        this.egliseLiees.remove(entiteFinanciere);
+    public EntiteFinanciere removeEgliseLiee(EntiteFinanciere e) {
+        this.egliseLiees.remove(e);
         return this;
     }
 
@@ -172,19 +180,17 @@ public class EntiteFinanciere implements Serializable {
         return this;
     }
 
-    public EntiteFinanciere addStructureLiee(EntiteFinanciere entiteFinanciere) {
-        this.structureLiees.add(entiteFinanciere);
-        entiteFinanciere.getEgliseLiees().add(this);
+    public EntiteFinanciere addStructureLiee(EntiteFinanciere e) {
+        this.structureLiees.add(e);
+        e.getEgliseLiees().add(this);
         return this;
     }
 
-    public EntiteFinanciere removeStructureLiee(EntiteFinanciere entiteFinanciere) {
-        this.structureLiees.remove(entiteFinanciere);
-        entiteFinanciere.getEgliseLiees().remove(this);
+    public EntiteFinanciere removeStructureLiee(EntiteFinanciere e) {
+        this.structureLiees.remove(e);
+        e.getEgliseLiees().remove(this);
         return this;
     }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -199,20 +205,31 @@ public class EntiteFinanciere implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "EntiteFinanciere{" +
-            "id=" + getId() +
-            ", nom='" + getNom() + "'" +
-            ", code='" + getCode() + "'" +
-            ", type='" + getType() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", actif='" + getActif() + "'" +
-            "}";
+        return (
+            "EntiteFinanciere{" +
+            "id=" +
+            getId() +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", type='" +
+            getType() +
+            "'" +
+            ", description='" +
+            getDescription() +
+            "'" +
+            ", actif='" +
+            getActif() +
+            "'" +
+            "}"
+        );
     }
 }

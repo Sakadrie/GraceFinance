@@ -2,53 +2,49 @@ package com.gracefinance.gracefinanceapp.domain.referentiel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gracefinance.gracefinanceapp.domain.principal.EntiteFinanciere;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A Categorie.
  */
-@Table("categorie")
+@Entity
+@Table(name = "categorie")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Categorie implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("nom")
+    @NotNull
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "must not be null")
-    @Column("type_categorie")
+    @NotNull
+    @Column(name = "type_categorie", nullable = false)
     private String typeCategorie;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @NotNull(message = "must not be null")
-    @Column("actif")
+    @NotNull
+    @Column(name = "actif", nullable = false)
     private Boolean actif;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private EntiteFinanciere entiteFinanciere;
 
-    @Column("entite_financiere_id")
-    private Long entiteFinanciereId;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -133,23 +129,12 @@ public class Categorie implements Serializable {
 
     public void setEntiteFinanciere(EntiteFinanciere entiteFinanciere) {
         this.entiteFinanciere = entiteFinanciere;
-        this.entiteFinanciereId = entiteFinanciere != null ? entiteFinanciere.getId() : null;
     }
 
     public Categorie entiteFinanciere(EntiteFinanciere entiteFinanciere) {
         this.setEntiteFinanciere(entiteFinanciere);
         return this;
     }
-
-    public Long getEntiteFinanciereId() {
-        return this.entiteFinanciereId;
-    }
-
-    public void setEntiteFinanciereId(Long entiteFinanciere) {
-        this.entiteFinanciereId = entiteFinanciere;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -164,20 +149,31 @@ public class Categorie implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "Categorie{" +
-            "id=" + getId() +
-            ", nom='" + getNom() + "'" +
-            ", code='" + getCode() + "'" +
-            ", typeCategorie='" + getTypeCategorie() + "'" +
-            ", description='" + getDescription() + "'" +
-            ", actif='" + getActif() + "'" +
-            "}";
+        return (
+            "Categorie{" +
+            "id=" +
+            getId() +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", typeCategorie='" +
+            getTypeCategorie() +
+            "'" +
+            ", description='" +
+            getDescription() +
+            "'" +
+            ", actif='" +
+            getActif() +
+            "'" +
+            "}"
+        );
     }
 }

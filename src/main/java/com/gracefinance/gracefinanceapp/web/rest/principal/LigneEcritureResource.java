@@ -5,45 +5,50 @@ import com.gracefinance.gracefinanceapp.service.criteria.principal.LigneEcriture
 import com.gracefinance.gracefinanceapp.service.dto.principal.LigneEcritureDTO;
 import com.gracefinance.gracefinanceapp.service.principal.LigneEcritureService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.util.ForwardedHeaderUtils;
-import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
-import tech.jhipster.web.util.reactive.ResponseUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 /**
- * REST controller for managing {@link com.gracefinance.gracefinanceapp.domain.principal.LigneEcriture}.
+ * REST controller for managing
+ * {@link com.gracefinance.gracefinanceapp.domain.principal.LigneEcriture}.
  */
 @RestController
 @RequestMapping("/api/ligne-ecritures")
 public class LigneEcritureResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(LigneEcritureResource.class);
-
     private static final String ENTITY_NAME = "ligneEcriture";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final LigneEcritureService ligneEcritureService;
-
     private final LigneEcritureRepository ligneEcritureRepository;
 
     public LigneEcritureResource(LigneEcritureService ligneEcritureService, LigneEcritureRepository ligneEcritureRepository) {
@@ -51,45 +56,21 @@ public class LigneEcritureResource {
         this.ligneEcritureRepository = ligneEcritureRepository;
     }
 
-    /**
-     * {@code POST  /ligne-ecritures} : Create a new ligneEcriture.
-     *
-     * @param ligneEcritureDTO the ligneEcritureDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new ligneEcritureDTO, or with status {@code 400 (Bad Request)} if the ligneEcriture has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("")
-    public Mono<ResponseEntity<LigneEcritureDTO>> createLigneEcriture(@Valid @RequestBody LigneEcritureDTO ligneEcritureDTO)
+    public ResponseEntity<LigneEcritureDTO> createLigneEcriture(@Valid @RequestBody LigneEcritureDTO ligneEcritureDTO)
         throws URISyntaxException {
         LOG.debug("REST request to save LigneEcriture : {}", ligneEcritureDTO);
         if (ligneEcritureDTO.getId() != null) {
-            throw new BadRequestAlertException("A new ligneEcriture cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new LigneEcriture cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        return ligneEcritureService
-            .save(ligneEcritureDTO)
-            .map(result -> {
-                try {
-                    return ResponseEntity.created(new URI("/api/ligne-ecritures/" + result.getId()))
-                        .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                        .body(result);
-                } catch (URISyntaxException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        LigneEcritureDTO result = ligneEcritureService.save(ligneEcritureDTO);
+        return ResponseEntity.created(new URI("/api/ligne-ecritures/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
-    /**
-     * {@code PUT  /ligne-ecritures/:id} : Updates an existing ligneEcriture.
-     *
-     * @param id the id of the ligneEcritureDTO to save.
-     * @param ligneEcritureDTO the ligneEcritureDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated ligneEcritureDTO,
-     * or with status {@code 400 (Bad Request)} if the ligneEcritureDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the ligneEcritureDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<LigneEcritureDTO>> updateLigneEcriture(
+    public ResponseEntity<LigneEcritureDTO> updateLigneEcriture(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody LigneEcritureDTO ligneEcritureDTO
     ) throws URISyntaxException {
@@ -100,38 +81,17 @@ public class LigneEcritureResource {
         if (!Objects.equals(id, ligneEcritureDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
-
-        return ligneEcritureRepository
-            .existsById(id)
-            .flatMap(exists -> {
-                if (!exists) {
-                    return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
-                }
-
-                return ligneEcritureService
-                    .update(ligneEcritureDTO)
-                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                    .map(result ->
-                        ResponseEntity.ok()
-                            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                            .body(result)
-                    );
-            });
+        if (!ligneEcritureRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+        LigneEcritureDTO result = ligneEcritureService.update(ligneEcritureDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
-    /**
-     * {@code PATCH  /ligne-ecritures/:id} : Partial updates given fields of an existing ligneEcriture, field will ignore if it is null
-     *
-     * @param id the id of the ligneEcritureDTO to save.
-     * @param ligneEcritureDTO the ligneEcritureDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated ligneEcritureDTO,
-     * or with status {@code 400 (Bad Request)} if the ligneEcritureDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the ligneEcritureDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the ligneEcritureDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public Mono<ResponseEntity<LigneEcritureDTO>> partialUpdateLigneEcriture(
+    public ResponseEntity<LigneEcritureDTO> partialUpdateLigneEcriture(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody LigneEcritureDTO ligneEcritureDTO
     ) throws URISyntaxException {
@@ -142,98 +102,47 @@ public class LigneEcritureResource {
         if (!Objects.equals(id, ligneEcritureDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
-
-        return ligneEcritureRepository
-            .existsById(id)
-            .flatMap(exists -> {
-                if (!exists) {
-                    return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
-                }
-
-                Mono<LigneEcritureDTO> result = ligneEcritureService.partialUpdate(ligneEcritureDTO);
-
-                return result
-                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                    .map(res ->
-                        ResponseEntity.ok()
-                            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, res.getId().toString()))
-                            .body(res)
-                    );
-            });
+        if (!ligneEcritureRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+        Optional<LigneEcritureDTO> result = ligneEcritureService.partialUpdate(ligneEcritureDTO);
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, ligneEcritureDTO.getId().toString())
+        );
     }
 
-    /**
-     * {@code GET  /ligne-ecritures} : get all the ligneEcritures.
-     *
-     * @param pageable the pagination information.
-     * @param request a {@link ServerHttpRequest} request.
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of ligneEcritures in body.
-     */
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseEntity<List<LigneEcritureDTO>>> getAllLigneEcritures(
+    @GetMapping("")
+    public ResponseEntity<List<LigneEcritureDTO>> getAllLigneEcritures(
         LigneEcritureCriteria criteria,
         @org.springdoc.core.annotations.ParameterObject Pageable pageable,
-        ServerHttpRequest request
+        HttpServletRequest request
     ) {
         LOG.debug("REST request to get LigneEcritures by criteria: {}", criteria);
-        return ligneEcritureService
-            .countByCriteria(criteria)
-            .zipWith(ligneEcritureService.findByCriteria(criteria, pageable).collectList())
-            .map(countWithEntities ->
-                ResponseEntity.ok()
-                    .headers(
-                        PaginationUtil.generatePaginationHttpHeaders(
-                            ForwardedHeaderUtils.adaptFromForwardedHeaders(request.getURI(), request.getHeaders()),
-                            new PageImpl<>(countWithEntities.getT2(), pageable, countWithEntities.getT1())
-                        )
-                    )
-                    .body(countWithEntities.getT2())
-            );
+        Page<LigneEcritureDTO> page = ligneEcritureService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromRequestUri(request), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    /**
-     * {@code GET  /ligne-ecritures/count} : count all the ligneEcritures.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
     @GetMapping("/count")
-    public Mono<ResponseEntity<Long>> countLigneEcritures(LigneEcritureCriteria criteria) {
+    public ResponseEntity<Long> countLigneEcritures(LigneEcritureCriteria criteria) {
         LOG.debug("REST request to count LigneEcritures by criteria: {}", criteria);
-        return ligneEcritureService.countByCriteria(criteria).map(count -> ResponseEntity.status(HttpStatus.OK).body(count));
+        return ResponseEntity.ok(ligneEcritureService.countByCriteria(criteria));
     }
 
-    /**
-     * {@code GET  /ligne-ecritures/:id} : get the "id" ligneEcriture.
-     *
-     * @param id the id of the ligneEcritureDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the ligneEcritureDTO, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/{id}")
-    public Mono<ResponseEntity<LigneEcritureDTO>> getLigneEcriture(@PathVariable("id") Long id) {
+    public ResponseEntity<LigneEcritureDTO> getLigneEcriture(@PathVariable("id") Long id) {
         LOG.debug("REST request to get LigneEcriture : {}", id);
-        Mono<LigneEcritureDTO> ligneEcritureDTO = ligneEcritureService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(ligneEcritureDTO);
+        Optional<LigneEcritureDTO> LigneEcritureDTO = ligneEcritureService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(LigneEcritureDTO);
     }
 
-    /**
-     * {@code DELETE  /ligne-ecritures/:id} : delete the "id" ligneEcriture.
-     *
-     * @param id the id of the ligneEcritureDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/{id}")
-    public Mono<ResponseEntity<Void>> deleteLigneEcriture(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteLigneEcriture(@PathVariable("id") Long id) {
         LOG.debug("REST request to delete LigneEcriture : {}", id);
-        return ligneEcritureService
-            .delete(id)
-            .then(
-                Mono.just(
-                    ResponseEntity.noContent()
-                        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-                        .build()
-                )
-            );
+        ligneEcritureService.delete(id);
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

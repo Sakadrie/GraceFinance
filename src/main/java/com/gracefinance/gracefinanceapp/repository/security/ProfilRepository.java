@@ -1,64 +1,31 @@
 package com.gracefinance.gracefinanceapp.repository.security;
 
 import com.gracefinance.gracefinanceapp.domain.security.Profil;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.r2dbc.repository.Query;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 /**
- * Spring Data R2DBC repository for the Profil entity.
+ * Spring Data JPA repository for the Profil entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ProfilRepository extends ReactiveCrudRepository<Profil, Long>, ProfilRepositoryInternal {
-    Flux<Profil> findAllBy(Pageable pageable);
+public interface ProfilRepository extends JpaRepository<Profil, Long> {
+    Page<Profil> findAllBy(Pageable pageable);
 
-    @Override
-    Mono<Profil> findOneWithEagerRelationships(Long id);
+    @Query(value = "select p from Profil p left join fetch p.droits", countQuery = "select count(distinct p) from Profil p")
+    Page<Profil> findAllWithEagerRelationships(Pageable pageable);
 
-    @Override
-    Flux<Profil> findAllWithEagerRelationships();
+    @Query("select p from Profil p left join fetch p.droits")
+    List<Profil> findAllWithEagerRelationships();
 
-    @Override
-    Flux<Profil> findAllWithEagerRelationships(Pageable page);
+    @Query("select p from Profil p left join fetch p.droits where p.id = :id")
+    Optional<Profil> findOneWithEagerRelationships(@Param("id") Long id);
 
-    @Query(
-        "SELECT entity.* FROM profil entity JOIN rel_profil__droit joinTable ON entity.id = joinTable.droit_id WHERE joinTable.droit_id = :id"
-    )
-    Flux<Profil> findByDroit(Long id);
-
-    @Override
-    <S extends Profil> Mono<S> save(S entity);
-
-    @Override
-    Flux<Profil> findAll();
-
-    @Override
-    Mono<Profil> findById(Long id);
-
-    @Override
-    Mono<Void> deleteById(Long id);
-}
-
-interface ProfilRepositoryInternal {
-    <S extends Profil> Mono<S> save(S entity);
-
-    Flux<Profil> findAllBy(Pageable pageable);
-
-    Flux<Profil> findAll();
-
-    Mono<Profil> findById(Long id);
-    // this is not supported at the moment because of https://github.com/jhipster/generator-jhipster/issues/18269
-    // Flux<Profil> findAllBy(Pageable pageable, Criteria criteria);
-
-    Mono<Profil> findOneWithEagerRelationships(Long id);
-
-    Flux<Profil> findAllWithEagerRelationships();
-
-    Flux<Profil> findAllWithEagerRelationships(Pageable page);
-
-    Mono<Void> deleteById(Long id);
+    @Query("select p from Profil p join p.droits d where d.id = :id")
+    List<Profil> findByDroit(@Param("id") Long id);
 }

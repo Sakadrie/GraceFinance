@@ -1,56 +1,53 @@
 package com.gracefinance.gracefinanceapp.domain.principal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A Caisse.
  */
-@Table("caisse")
+@Entity
+@Table(name = "caisse")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Caisse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("nom")
+    @NotNull
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "must not be null")
-    @Column("type")
+    @NotNull
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @NotNull(message = "must not be null")
-    @Column("devise")
+    @NotNull
+    @Column(name = "devise", nullable = false)
     private String devise;
 
-    @NotNull(message = "must not be null")
-    @Column("solde")
+    @NotNull
+    @Column(name = "solde", nullable = false, precision = 21, scale = 2)
     private BigDecimal solde;
 
-    @NotNull(message = "must not be null")
-    @Column("actif")
+    @NotNull
+    @Column(name = "actif", nullable = false)
     private Boolean actif;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private EntiteFinanciere entiteFinanciere;
-
-    @Column("entite_financiere_id")
-    private Long entiteFinanciereId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -151,7 +148,6 @@ public class Caisse implements Serializable {
 
     public void setEntiteFinanciere(EntiteFinanciere entiteFinanciere) {
         this.entiteFinanciere = entiteFinanciere;
-        this.entiteFinanciereId = entiteFinanciere != null ? entiteFinanciere.getId() : null;
     }
 
     public Caisse entiteFinanciere(EntiteFinanciere entiteFinanciere) {
@@ -159,44 +155,42 @@ public class Caisse implements Serializable {
         return this;
     }
 
-    public Long getEntiteFinanciereId() {
-        return this.entiteFinanciereId;
-    }
-
-    public void setEntiteFinanciereId(Long entiteFinanciere) {
-        this.entiteFinanciereId = entiteFinanciere;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Caisse)) {
-            return false;
-        }
+        if (this == o) return true;
+        if (!(o instanceof Caisse)) return false;
         return getId() != null && getId().equals(((Caisse) o).getId());
     }
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "Caisse{" +
-            "id=" + getId() +
-            ", nom='" + getNom() + "'" +
-            ", code='" + getCode() + "'" +
-            ", type='" + getType() + "'" +
-            ", devise='" + getDevise() + "'" +
-            ", solde=" + getSolde() +
-            ", actif='" + getActif() + "'" +
-            "}";
+        return (
+            "Caisse{" +
+            "id=" +
+            getId() +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", type='" +
+            getType() +
+            "'" +
+            ", devise='" +
+            getDevise() +
+            "'" +
+            ", solde=" +
+            getSolde() +
+            ", actif='" +
+            getActif() +
+            "'" +
+            "}"
+        );
     }
 }

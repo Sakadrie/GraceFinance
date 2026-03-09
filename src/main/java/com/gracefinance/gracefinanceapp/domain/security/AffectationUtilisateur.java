@@ -2,55 +2,53 @@ package com.gracefinance.gracefinanceapp.domain.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gracefinance.gracefinanceapp.domain.principal.EntiteFinanciere;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A AffectationUtilisateur.
  */
-@Table("affectation_utilisateur")
+@Entity
+@Table(name = "affectation_utilisateur")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class AffectationUtilisateur implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("actif")
+    @NotNull
+    @Column(name = "actif", nullable = false)
     private Boolean actif;
 
-    @NotNull(message = "must not be null")
-    @Column("date_affectation")
+    @NotNull
+    @Column(name = "date_affectation", nullable = false)
     private LocalDate dateAffectation;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private EntiteFinanciere entiteFinanciere;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_affectation_utilisateur__profil",
+        joinColumns = @JoinColumn(name = "affectation_utilisateur_id"),
+        inverseJoinColumns = @JoinColumn(name = "profil_id")
+    )
     @JsonIgnoreProperties(value = { "droits", "affectations" }, allowSetters = true)
     private Set<Profil> profils = new HashSet<>();
 
-    @Column("user_id")
-    private Long userId;
-
-    @Column("entite_financiere_id")
-    private Long entiteFinanciereId;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -96,7 +94,6 @@ public class AffectationUtilisateur implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
-        this.userId = user != null ? user.getId() : null;
     }
 
     public AffectationUtilisateur user(User user) {
@@ -110,7 +107,6 @@ public class AffectationUtilisateur implements Serializable {
 
     public void setEntiteFinanciere(EntiteFinanciere entiteFinanciere) {
         this.entiteFinanciere = entiteFinanciere;
-        this.entiteFinanciereId = entiteFinanciere != null ? entiteFinanciere.getId() : null;
     }
 
     public AffectationUtilisateur entiteFinanciere(EntiteFinanciere entiteFinanciere) {
@@ -141,24 +137,6 @@ public class AffectationUtilisateur implements Serializable {
         return this;
     }
 
-    public Long getUserId() {
-        return this.userId;
-    }
-
-    public void setUserId(Long user) {
-        this.userId = user;
-    }
-
-    public Long getEntiteFinanciereId() {
-        return this.entiteFinanciereId;
-    }
-
-    public void setEntiteFinanciereId(Long entiteFinanciere) {
-        this.entiteFinanciereId = entiteFinanciere;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -172,17 +150,22 @@ public class AffectationUtilisateur implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "AffectationUtilisateur{" +
-            "id=" + getId() +
-            ", actif='" + getActif() + "'" +
-            ", dateAffectation='" + getDateAffectation() + "'" +
-            "}";
+        return (
+            "AffectationUtilisateur{" +
+            "id=" +
+            getId() +
+            ", actif='" +
+            getActif() +
+            "'" +
+            ", dateAffectation='" +
+            getDateAffectation() +
+            "'" +
+            "}"
+        );
     }
 }

@@ -1,52 +1,23 @@
 package com.gracefinance.gracefinanceapp.repository.referentiel;
 
 import com.gracefinance.gracefinanceapp.domain.referentiel.Categorie;
-import com.gracefinance.gracefinanceapp.service.criteria.referentiel.CategorieCriteria;
+import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.r2dbc.repository.Query;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 /**
- * Spring Data R2DBC repository for the Categorie entity.
+ * Spring Data JPA repository for the Categorie entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CategorieRepository extends ReactiveCrudRepository<Categorie, Long>, CategorieRepositoryInternal {
-    Flux<Categorie> findAllBy(Pageable pageable);
+public interface CategorieRepository extends JpaRepository<Categorie, Long>, JpaSpecificationExecutor<Categorie> {
+    @Query("select c from Categorie c where c.entiteFinanciere.id = :id")
+    List<Categorie> findByEntiteFinanciere(Long id);
 
-    @Query("SELECT * FROM categorie entity WHERE entity.entite_financiere_id = :id")
-    Flux<Categorie> findByEntiteFinanciere(Long id);
+    @Query("select c from Categorie c where c.entiteFinanciere is null")
+    List<Categorie> findAllWhereEntiteFinanciereIsNull();
 
-    @Query("SELECT * FROM categorie entity WHERE entity.entite_financiere_id IS NULL")
-    Flux<Categorie> findAllWhereEntiteFinanciereIsNull();
-
-    @Override
-    <S extends Categorie> Mono<S> save(S entity);
-
-    @Override
-    Flux<Categorie> findAll();
-
-    @Override
-    Mono<Categorie> findById(Long id);
-
-    @Override
-    Mono<Void> deleteById(Long id);
-}
-
-interface CategorieRepositoryInternal {
-    <S extends Categorie> Mono<S> save(S entity);
-
-    Flux<Categorie> findAllBy(Pageable pageable);
-
-    Flux<Categorie> findAll();
-
-    Mono<Categorie> findById(Long id);
-    // this is not supported at the moment because of https://github.com/jhipster/generator-jhipster/issues/18269
-    // Flux<Categorie> findAllBy(Pageable pageable, Criteria criteria);
-    Flux<Categorie> findByCriteria(CategorieCriteria criteria, Pageable pageable);
-
-    Mono<Long> countByCriteria(CategorieCriteria criteria);
+    Page<Categorie> findAllBy(Pageable pageable);
 }

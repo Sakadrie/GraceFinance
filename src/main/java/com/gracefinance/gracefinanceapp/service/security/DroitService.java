@@ -1,66 +1,76 @@
 package com.gracefinance.gracefinanceapp.service.security;
 
+import com.gracefinance.gracefinanceapp.repository.security.DroitRepository;
 import com.gracefinance.gracefinanceapp.service.dto.security.DroitDTO;
+import com.gracefinance.gracefinanceapp.service.mapper.security.DroitMapper;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.gracefinance.gracefinanceapp.domain.security.Droit}.
+ * Service Implementation for managing
+ * {@link com.gracefinance.gracefinanceapp.domain.security.Droit}.
  */
-public interface DroitService {
-    /**
-     * Save a droit.
-     *
-     * @param droitDTO the entity to save.
-     * @return the persisted entity.
-     */
-    Mono<DroitDTO> save(DroitDTO droitDTO);
+@Service
+@Transactional
+public class DroitService {
 
-    /**
-     * Updates a droit.
-     *
-     * @param droitDTO the entity to update.
-     * @return the persisted entity.
-     */
-    Mono<DroitDTO> update(DroitDTO droitDTO);
+    private static final Logger LOG = LoggerFactory.getLogger(DroitService.class);
 
-    /**
-     * Partially updates a droit.
-     *
-     * @param droitDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Mono<DroitDTO> partialUpdate(DroitDTO droitDTO);
+    private final DroitRepository droitRepository;
+    private final DroitMapper droitMapper;
 
-    /**
-     * Get all the droits.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Flux<DroitDTO> findAll(Pageable pageable);
+    public DroitService(DroitRepository droitRepository, DroitMapper droitMapper) {
+        this.droitRepository = droitRepository;
+        this.droitMapper = droitMapper;
+    }
 
-    /**
-     * Returns the number of droits available.
-     * @return the number of entities in the database.
-     *
-     */
-    Mono<Long> countAll();
+    public DroitDTO save(DroitDTO droitDTO) {
+        LOG.debug("Request to save Droit : {}", droitDTO);
+        return droitMapper.toDto(droitRepository.save(droitMapper.toEntity(droitDTO)));
+    }
 
-    /**
-     * Get the "id" droit.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Mono<DroitDTO> findOne(Long id);
+    public DroitDTO update(DroitDTO droitDTO) {
+        LOG.debug("Request to update Droit : {}", droitDTO);
+        return droitMapper.toDto(droitRepository.save(droitMapper.toEntity(droitDTO)));
+    }
 
-    /**
-     * Delete the "id" droit.
-     *
-     * @param id the id of the entity.
-     * @return a Mono to signal the deletion
-     */
-    Mono<Void> delete(Long id);
+    public Optional<DroitDTO> partialUpdate(DroitDTO droitDTO) {
+        LOG.debug("Request to partially update Droit : {}", droitDTO);
+        return droitRepository
+            .findById(droitDTO.getId())
+            .map(existing -> {
+                droitMapper.partialUpdate(existing, droitDTO);
+                return existing;
+            })
+            .map(droitRepository::save)
+            .map(droitMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<DroitDTO> findOne(Long id) {
+        LOG.debug("Request to get Droit : {}", id);
+        return droitRepository.findById(id).map(droitMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<DroitDTO> findAll(Pageable pageable) {
+        LOG.debug("Request to get all Droits");
+        return droitRepository.findAllBy(pageable).map(droitMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public long countAll() {
+        LOG.debug("Request to count all Droits");
+        return droitRepository.count();
+    }
+
+    public void delete(Long id) {
+        LOG.debug("Request to delete Droit : {}", id);
+        droitRepository.deleteById(id);
+    }
 }

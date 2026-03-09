@@ -1,38 +1,37 @@
 package com.gracefinance.gracefinanceapp.domain.principal;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A CompteComptable.
  */
-@Table("compte_comptable")
+@Entity
+@Table(name = "compte_comptable")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class CompteComptable implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "must not be null")
-    @Column("libelle")
+    @NotNull
+    @Column(name = "libelle", nullable = false)
     private String libelle;
 
-    @NotNull(message = "must not be null")
-    @Column("classe")
+    @NotNull
+    @Column(name = "classe", nullable = false)
     private Integer classe;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -85,8 +84,6 @@ public class CompteComptable implements Serializable {
         this.classe = classe;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,18 +97,24 @@ public class CompteComptable implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "CompteComptable{" +
-            "id=" + getId() +
-            ", code='" + getCode() + "'" +
-            ", libelle='" + getLibelle() + "'" +
-            ", classe=" + getClasse() +
-            "}";
+        return (
+            "CompteComptable{" +
+            "id=" +
+            getId() +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", libelle='" +
+            getLibelle() +
+            "'" +
+            ", classe=" +
+            getClasse() +
+            "}"
+        );
     }
 }

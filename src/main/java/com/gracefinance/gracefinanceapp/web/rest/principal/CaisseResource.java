@@ -5,28 +5,34 @@ import com.gracefinance.gracefinanceapp.service.criteria.principal.CaisseCriteri
 import com.gracefinance.gracefinanceapp.service.dto.principal.CaisseDTO;
 import com.gracefinance.gracefinanceapp.service.principal.CaisseService;
 import com.gracefinance.gracefinanceapp.web.rest.errors.BadRequestAlertException;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.util.ForwardedHeaderUtils;
-import reactor.core.publisher.Mono;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
-import tech.jhipster.web.util.reactive.ResponseUtil;
+import tech.jhipster.web.util.ResponseUtil;
 
 /**
  * REST controller for managing {@link com.gracefinance.gracefinanceapp.domain.principal.Caisse}.
@@ -36,14 +42,12 @@ import tech.jhipster.web.util.reactive.ResponseUtil;
 public class CaisseResource {
 
     private static final Logger LOG = LoggerFactory.getLogger(CaisseResource.class);
-
     private static final String ENTITY_NAME = "caisse";
 
     @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final CaisseService caisseService;
-
     private final CaisseRepository caisseRepository;
 
     public CaisseResource(CaisseService caisseService, CaisseRepository caisseRepository) {
@@ -51,44 +55,20 @@ public class CaisseResource {
         this.caisseRepository = caisseRepository;
     }
 
-    /**
-     * {@code POST  /caisses} : Create a new caisse.
-     *
-     * @param caisseDTO the caisseDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new caisseDTO, or with status {@code 400 (Bad Request)} if the caisse has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("")
-    public Mono<ResponseEntity<CaisseDTO>> createCaisse(@Valid @RequestBody CaisseDTO caisseDTO) throws URISyntaxException {
+    public ResponseEntity<CaisseDTO> createCaisse(@Valid @RequestBody CaisseDTO caisseDTO) throws URISyntaxException {
         LOG.debug("REST request to save Caisse : {}", caisseDTO);
         if (caisseDTO.getId() != null) {
             throw new BadRequestAlertException("A new caisse cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        return caisseService
-            .save(caisseDTO)
-            .map(result -> {
-                try {
-                    return ResponseEntity.created(new URI("/api/caisses/" + result.getId()))
-                        .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                        .body(result);
-                } catch (URISyntaxException e) {
-                    throw new RuntimeException(e);
-                }
-            });
+        CaisseDTO result = caisseService.save(caisseDTO);
+        return ResponseEntity.created(new URI("/api/caisses/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
-    /**
-     * {@code PUT  /caisses/:id} : Updates an existing caisse.
-     *
-     * @param id the id of the caisseDTO to save.
-     * @param caisseDTO the caisseDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated caisseDTO,
-     * or with status {@code 400 (Bad Request)} if the caisseDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the caisseDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/{id}")
-    public Mono<ResponseEntity<CaisseDTO>> updateCaisse(
+    public ResponseEntity<CaisseDTO> updateCaisse(
         @PathVariable(value = "id", required = false) final Long id,
         @Valid @RequestBody CaisseDTO caisseDTO
     ) throws URISyntaxException {
@@ -99,38 +79,17 @@ public class CaisseResource {
         if (!Objects.equals(id, caisseDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
-
-        return caisseRepository
-            .existsById(id)
-            .flatMap(exists -> {
-                if (!exists) {
-                    return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
-                }
-
-                return caisseService
-                    .update(caisseDTO)
-                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                    .map(result ->
-                        ResponseEntity.ok()
-                            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-                            .body(result)
-                    );
-            });
+        if (!caisseRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+        CaisseDTO result = caisseService.update(caisseDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);
     }
 
-    /**
-     * {@code PATCH  /caisses/:id} : Partial updates given fields of an existing caisse, field will ignore if it is null
-     *
-     * @param id the id of the caisseDTO to save.
-     * @param caisseDTO the caisseDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated caisseDTO,
-     * or with status {@code 400 (Bad Request)} if the caisseDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the caisseDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the caisseDTO couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/{id}", consumes = { "application/json", "application/merge-patch+json" })
-    public Mono<ResponseEntity<CaisseDTO>> partialUpdateCaisse(
+    public ResponseEntity<CaisseDTO> partialUpdateCaisse(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody CaisseDTO caisseDTO
     ) throws URISyntaxException {
@@ -141,98 +100,47 @@ public class CaisseResource {
         if (!Objects.equals(id, caisseDTO.getId())) {
             throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
         }
-
-        return caisseRepository
-            .existsById(id)
-            .flatMap(exists -> {
-                if (!exists) {
-                    return Mono.error(new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound"));
-                }
-
-                Mono<CaisseDTO> result = caisseService.partialUpdate(caisseDTO);
-
-                return result
-                    .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                    .map(res ->
-                        ResponseEntity.ok()
-                            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, res.getId().toString()))
-                            .body(res)
-                    );
-            });
+        if (!caisseRepository.existsById(id)) {
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
+        }
+        Optional<CaisseDTO> result = caisseService.partialUpdate(caisseDTO);
+        return ResponseUtil.wrapOrNotFound(
+            result,
+            HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, caisseDTO.getId().toString())
+        );
     }
 
-    /**
-     * {@code GET  /caisses} : get all the caisses.
-     *
-     * @param pageable the pagination information.
-     * @param request a {@link ServerHttpRequest} request.
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of caisses in body.
-     */
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseEntity<List<CaisseDTO>>> getAllCaisses(
+    @GetMapping("")
+    public ResponseEntity<List<CaisseDTO>> getAllCaisses(
         CaisseCriteria criteria,
         @org.springdoc.core.annotations.ParameterObject Pageable pageable,
-        ServerHttpRequest request
+        HttpServletRequest request
     ) {
         LOG.debug("REST request to get Caisses by criteria: {}", criteria);
-        return caisseService
-            .countByCriteria(criteria)
-            .zipWith(caisseService.findByCriteria(criteria, pageable).collectList())
-            .map(countWithEntities ->
-                ResponseEntity.ok()
-                    .headers(
-                        PaginationUtil.generatePaginationHttpHeaders(
-                            ForwardedHeaderUtils.adaptFromForwardedHeaders(request.getURI(), request.getHeaders()),
-                            new PageImpl<>(countWithEntities.getT2(), pageable, countWithEntities.getT1())
-                        )
-                    )
-                    .body(countWithEntities.getT2())
-            );
+        Page<CaisseDTO> page = caisseService.findByCriteria(criteria, pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromRequestUri(request), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
-    /**
-     * {@code GET  /caisses/count} : count all the caisses.
-     *
-     * @param criteria the criteria which the requested entities should match.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the count in body.
-     */
     @GetMapping("/count")
-    public Mono<ResponseEntity<Long>> countCaisses(CaisseCriteria criteria) {
+    public ResponseEntity<Long> countCaisses(CaisseCriteria criteria) {
         LOG.debug("REST request to count Caisses by criteria: {}", criteria);
-        return caisseService.countByCriteria(criteria).map(count -> ResponseEntity.status(HttpStatus.OK).body(count));
+        return ResponseEntity.ok(caisseService.countByCriteria(criteria));
     }
 
-    /**
-     * {@code GET  /caisses/:id} : get the "id" caisse.
-     *
-     * @param id the id of the caisseDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the caisseDTO, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/{id}")
-    public Mono<ResponseEntity<CaisseDTO>> getCaisse(@PathVariable("id") Long id) {
+    public ResponseEntity<CaisseDTO> getCaisse(@PathVariable("id") Long id) {
         LOG.debug("REST request to get Caisse : {}", id);
-        Mono<CaisseDTO> caisseDTO = caisseService.findOne(id);
+        Optional<CaisseDTO> caisseDTO = caisseService.findOne(id);
         return ResponseUtil.wrapOrNotFound(caisseDTO);
     }
 
-    /**
-     * {@code DELETE  /caisses/:id} : delete the "id" caisse.
-     *
-     * @param id the id of the caisseDTO to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/{id}")
-    public Mono<ResponseEntity<Void>> deleteCaisse(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteCaisse(@PathVariable("id") Long id) {
         LOG.debug("REST request to delete Caisse : {}", id);
-        return caisseService
-            .delete(id)
-            .then(
-                Mono.just(
-                    ResponseEntity.noContent()
-                        .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
-                        .build()
-                )
-            );
+        caisseService.delete(id);
+        return ResponseEntity.noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+            .build();
     }
 }

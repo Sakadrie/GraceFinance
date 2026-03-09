@@ -1,73 +1,90 @@
 package com.gracefinance.gracefinanceapp.service.principal;
 
+import com.gracefinance.gracefinanceapp.repository.principal.RecetteRepository;
 import com.gracefinance.gracefinanceapp.service.criteria.principal.RecetteCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.RecetteDTO;
+import com.gracefinance.gracefinanceapp.service.mapper.principal.RecetteMapper;
+import java.util.List;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.gracefinance.gracefinanceapp.domain.principal.Recette}.
+ * Service Implementation for managing
+ * {@link com.gracefinance.gracefinanceapp.domain.principal.Recette}.
  */
-public interface RecetteService {
-    /**
-     * Save a recette.
-     *
-     * @param recetteDTO the entity to save.
-     * @return the persisted entity.
-     */
-    Mono<RecetteDTO> save(RecetteDTO recetteDTO);
+@Service
+@Transactional
+public class RecetteService {
 
-    /**
-     * Updates a recette.
-     *
-     * @param recetteDTO the entity to update.
-     * @return the persisted entity.
-     */
-    Mono<RecetteDTO> update(RecetteDTO recetteDTO);
+    private static final Logger LOG = LoggerFactory.getLogger(RecetteService.class);
 
-    /**
-     * Partially updates a recette.
-     *
-     * @param recetteDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Mono<RecetteDTO> partialUpdate(RecetteDTO recetteDTO);
-    /**
-     * Find recettes by criteria.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Flux<RecetteDTO> findByCriteria(RecetteCriteria criteria, Pageable pageable);
+    private final RecetteRepository recetteRepository;
+    private final RecetteMapper recetteMapper;
 
-    /**
-     * Find the count of recettes by criteria.
-     * @param criteria filtering criteria
-     * @return the count of recettes
-     */
-    public Mono<Long> countByCriteria(RecetteCriteria criteria);
+    public RecetteService(RecetteRepository recetteRepository, RecetteMapper recetteMapper) {
+        this.recetteRepository = recetteRepository;
+        this.recetteMapper = recetteMapper;
+    }
 
-    /**
-     * Returns the number of recettes available.
-     * @return the number of entities in the database.
-     *
-     */
-    Mono<Long> countAll();
+    public RecetteDTO save(RecetteDTO recetteDTO) {
+        LOG.debug("Request to save Recette : {}", recetteDTO);
+        return recetteMapper.toDto(recetteRepository.save(recetteMapper.toEntity(recetteDTO)));
+    }
 
-    /**
-     * Get the "id" recette.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Mono<RecetteDTO> findOne(Long id);
+    public RecetteDTO update(RecetteDTO recetteDTO) {
+        LOG.debug("Request to update Recette : {}", recetteDTO);
+        return recetteMapper.toDto(recetteRepository.save(recetteMapper.toEntity(recetteDTO)));
+    }
 
-    /**
-     * Delete the "id" recette.
-     *
-     * @param id the id of the entity.
-     * @return a Mono to signal the deletion
-     */
-    Mono<Void> delete(Long id);
+    public Optional<RecetteDTO> partialUpdate(RecetteDTO recetteDTO) {
+        LOG.debug("Request to partially update Recette : {}", recetteDTO);
+        return recetteRepository
+            .findById(recetteDTO.getId())
+            .map(existing -> {
+                recetteMapper.partialUpdate(existing, recetteDTO);
+                return existing;
+            })
+            .map(recetteRepository::save)
+            .map(recetteMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Optional<RecetteDTO> findOne(Long id) {
+        LOG.debug("Request to get Recette : {}", id);
+        return recetteRepository.findById(id).map(recetteMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public List<RecetteDTO> findAll() {
+        LOG.debug("Request to get all Recettes");
+        return recetteMapper.toDto(recetteRepository.findAll());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<RecetteDTO> findByCriteria(RecetteCriteria criteria, Pageable pageable) {
+        LOG.debug("Request to get Recettes by criteria : {}", criteria);
+        return recetteRepository.findAll(pageable).map(recetteMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByCriteria(RecetteCriteria criteria) {
+        LOG.debug("Request to count Recettes by criteria : {}", criteria);
+        return recetteRepository.count();
+    }
+
+    @Transactional(readOnly = true)
+    public long countAll() {
+        LOG.debug("Request to count all Recettes");
+        return recetteRepository.count();
+    }
+
+    public void delete(Long id) {
+        LOG.debug("Request to delete Recette : {}", id);
+        recetteRepository.deleteById(id);
+    }
 }

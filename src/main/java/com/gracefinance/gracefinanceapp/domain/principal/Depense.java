@@ -2,80 +2,70 @@ package com.gracefinance.gracefinanceapp.domain.principal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.gracefinance.gracefinanceapp.domain.referentiel.Categorie;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A Depense.
  */
-@Table("depense")
+@Entity
+@Table(name = "depense")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Depense implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @NotNull(message = "must not be null")
-    @Column("date_depense")
+    @NotNull
+    @Column(name = "date_depense", nullable = false)
     private LocalDate dateDepense;
 
-    @NotNull(message = "must not be null")
-    @Column("montant")
+    @NotNull
+    @Column(name = "montant", nullable = false, precision = 21, scale = 2)
     private BigDecimal montant;
 
-    @NotNull(message = "must not be null")
-    @Column("motif")
+    @NotNull
+    @Column(name = "motif", nullable = false)
     private String motif;
 
-    @Column("reference_piece")
+    @Column(name = "reference_piece")
     private String referencePiece;
 
-    @NotNull(message = "must not be null")
-    @Column("statut")
+    @NotNull
+    @Column(name = "statut", nullable = false)
     private String statut;
 
-    @Column("valider_par")
+    @Column(name = "valider_par")
     private String validerPar;
 
-    @Column("date_validation")
+    @Column(name = "date_validation")
     private Instant dateValidation;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "egliseLiees", "structureLiees" }, allowSetters = true)
     private EntiteFinanciere entiteFinanciere;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "entiteFinanciere" }, allowSetters = true)
     private Caisse caisse;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "entiteFinanciere" }, allowSetters = true)
     private Categorie categorie;
 
-    @Column("entite_financiere_id")
-    private Long entiteFinanciereId;
-
-    @Column("caisse_id")
-    private Long caisseId;
-
-    @Column("categorie_id")
-    private Long categorieId;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -199,7 +189,6 @@ public class Depense implements Serializable {
 
     public void setEntiteFinanciere(EntiteFinanciere entiteFinanciere) {
         this.entiteFinanciere = entiteFinanciere;
-        this.entiteFinanciereId = entiteFinanciere != null ? entiteFinanciere.getId() : null;
     }
 
     public Depense entiteFinanciere(EntiteFinanciere entiteFinanciere) {
@@ -213,7 +202,6 @@ public class Depense implements Serializable {
 
     public void setCaisse(Caisse caisse) {
         this.caisse = caisse;
-        this.caisseId = caisse != null ? caisse.getId() : null;
     }
 
     public Depense caisse(Caisse caisse) {
@@ -227,39 +215,12 @@ public class Depense implements Serializable {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
-        this.categorieId = categorie != null ? categorie.getId() : null;
     }
 
     public Depense categorie(Categorie categorie) {
         this.setCategorie(categorie);
         return this;
     }
-
-    public Long getEntiteFinanciereId() {
-        return this.entiteFinanciereId;
-    }
-
-    public void setEntiteFinanciereId(Long entiteFinanciere) {
-        this.entiteFinanciereId = entiteFinanciere;
-    }
-
-    public Long getCaisseId() {
-        return this.caisseId;
-    }
-
-    public void setCaisseId(Long caisse) {
-        this.caisseId = caisse;
-    }
-
-    public Long getCategorieId() {
-        return this.categorieId;
-    }
-
-    public void setCategorieId(Long categorie) {
-        this.categorieId = categorie;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -274,23 +235,39 @@ public class Depense implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "Depense{" +
-            "id=" + getId() +
-            ", code='" + getCode() + "'" +
-            ", dateDepense='" + getDateDepense() + "'" +
-            ", montant=" + getMontant() +
-            ", motif='" + getMotif() + "'" +
-            ", referencePiece='" + getReferencePiece() + "'" +
-            ", statut='" + getStatut() + "'" +
-            ", validerPar='" + getValiderPar() + "'" +
-            ", dateValidation='" + getDateValidation() + "'" +
-            "}";
+        return (
+            "Depense{" +
+            "id=" +
+            getId() +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", dateDepense='" +
+            getDateDepense() +
+            "'" +
+            ", montant=" +
+            getMontant() +
+            ", motif='" +
+            getMotif() +
+            "'" +
+            ", referencePiece='" +
+            getReferencePiece() +
+            "'" +
+            ", statut='" +
+            getStatut() +
+            "'" +
+            ", validerPar='" +
+            getValiderPar() +
+            "'" +
+            ", dateValidation='" +
+            getDateValidation() +
+            "'" +
+            "}"
+        );
     }
 }

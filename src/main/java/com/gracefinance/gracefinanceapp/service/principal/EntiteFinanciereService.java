@@ -1,74 +1,95 @@
 package com.gracefinance.gracefinanceapp.service.principal;
 
+import com.gracefinance.gracefinanceapp.repository.principal.EntiteFinanciereRepository;
+import com.gracefinance.gracefinanceapp.service.criteria.principal.EntiteFinanciereCriteria;
 import com.gracefinance.gracefinanceapp.service.dto.principal.EntiteFinanciereDTO;
+import com.gracefinance.gracefinanceapp.service.mapper.principal.EntiteFinanciereMapper;
+import java.util.Optional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Service Interface for managing {@link com.gracefinance.gracefinanceapp.domain.principal.EntiteFinanciere}.
+ * Service Implementation for managing
+ * {@link com.gracefinance.gracefinanceapp.domain.principal.EntiteFinanciere}.
  */
-public interface EntiteFinanciereService {
-    /**
-     * Save a entiteFinanciere.
-     *
-     * @param entiteFinanciereDTO the entity to save.
-     * @return the persisted entity.
-     */
-    Mono<EntiteFinanciereDTO> save(EntiteFinanciereDTO entiteFinanciereDTO);
+@Service
+@Transactional
+public class EntiteFinanciereService {
 
-    /**
-     * Updates a entiteFinanciere.
-     *
-     * @param entiteFinanciereDTO the entity to update.
-     * @return the persisted entity.
-     */
-    Mono<EntiteFinanciereDTO> update(EntiteFinanciereDTO entiteFinanciereDTO);
+    private static final Logger LOG = LoggerFactory.getLogger(EntiteFinanciereService.class);
 
-    /**
-     * Partially updates a entiteFinanciere.
-     *
-     * @param entiteFinanciereDTO the entity to update partially.
-     * @return the persisted entity.
-     */
-    Mono<EntiteFinanciereDTO> partialUpdate(EntiteFinanciereDTO entiteFinanciereDTO);
+    private final EntiteFinanciereRepository entiteFinanciereRepository;
+    private final EntiteFinanciereMapper entiteFinanciereMapper;
 
-    /**
-     * Get all the entiteFinancieres.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Flux<EntiteFinanciereDTO> findAll(Pageable pageable);
+    public EntiteFinanciereService(EntiteFinanciereRepository entiteFinanciereRepository, EntiteFinanciereMapper entiteFinanciereMapper) {
+        this.entiteFinanciereRepository = entiteFinanciereRepository;
+        this.entiteFinanciereMapper = entiteFinanciereMapper;
+    }
 
-    /**
-     * Get all the entiteFinancieres with eager load of many-to-many relationships.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Flux<EntiteFinanciereDTO> findAllWithEagerRelationships(Pageable pageable);
+    public EntiteFinanciereDTO save(EntiteFinanciereDTO entiteFinanciereDTO) {
+        LOG.debug("Request to save EntiteFinanciere : {}", entiteFinanciereDTO);
+        return entiteFinanciereMapper.toDto(entiteFinanciereRepository.save(entiteFinanciereMapper.toEntity(entiteFinanciereDTO)));
+    }
 
-    /**
-     * Returns the number of entiteFinancieres available.
-     * @return the number of entities in the database.
-     *
-     */
-    Mono<Long> countAll();
+    public EntiteFinanciereDTO update(EntiteFinanciereDTO entiteFinanciereDTO) {
+        LOG.debug("Request to update EntiteFinanciere : {}", entiteFinanciereDTO);
+        return entiteFinanciereMapper.toDto(entiteFinanciereRepository.save(entiteFinanciereMapper.toEntity(entiteFinanciereDTO)));
+    }
 
-    /**
-     * Get the "id" entiteFinanciere.
-     *
-     * @param id the id of the entity.
-     * @return the entity.
-     */
-    Mono<EntiteFinanciereDTO> findOne(Long id);
+    public Optional<EntiteFinanciereDTO> partialUpdate(EntiteFinanciereDTO entiteFinanciereDTO) {
+        LOG.debug("Request to partially update EntiteFinanciere : {}", entiteFinanciereDTO);
+        return entiteFinanciereRepository
+            .findById(entiteFinanciereDTO.getId())
+            .map(existing -> {
+                entiteFinanciereMapper.partialUpdate(existing, entiteFinanciereDTO);
+                return existing;
+            })
+            .map(entiteFinanciereRepository::save)
+            .map(entiteFinanciereMapper::toDto);
+    }
 
-    /**
-     * Delete the "id" entiteFinanciere.
-     *
-     * @param id the id of the entity.
-     * @return a Mono to signal the deletion
-     */
-    Mono<Void> delete(Long id);
+    @Transactional(readOnly = true)
+    public Optional<EntiteFinanciereDTO> findOne(Long id) {
+        LOG.debug("Request to get EntiteFinanciere : {}", id);
+        return entiteFinanciereRepository.findById(id).map(entiteFinanciereMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EntiteFinanciereDTO> findAll(Pageable pageable) {
+        LOG.debug("Request to get all EntiteFinancieres");
+        return entiteFinanciereRepository.findAllBy(pageable).map(entiteFinanciereMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EntiteFinanciereDTO> findAllWithEagerRelationships(Pageable pageable) {
+        LOG.debug("Request to get all EntiteFinancieres with eager relationships");
+        return entiteFinanciereRepository.findAllWithEagerRelationships(pageable).map(entiteFinanciereMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<EntiteFinanciereDTO> findByCriteria(EntiteFinanciereCriteria criteria, Pageable pageable) {
+        LOG.debug("Request to get EntiteFinancieres by criteria : {}", criteria);
+        return entiteFinanciereRepository.findAll(pageable).map(entiteFinanciereMapper::toDto);
+    }
+
+    @Transactional(readOnly = true)
+    public long countByCriteria(EntiteFinanciereCriteria criteria) {
+        LOG.debug("Request to count EntiteFinancieres by criteria : {}", criteria);
+        return entiteFinanciereRepository.count();
+    }
+
+    @Transactional(readOnly = true)
+    public long countAll() {
+        LOG.debug("Request to count all EntiteFinancieres");
+        return entiteFinanciereRepository.count();
+    }
+
+    public void delete(Long id) {
+        LOG.debug("Request to delete EntiteFinanciere : {}", id);
+        entiteFinanciereRepository.deleteById(id);
+    }
 }

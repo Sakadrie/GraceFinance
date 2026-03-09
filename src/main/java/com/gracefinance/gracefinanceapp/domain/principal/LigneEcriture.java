@@ -1,50 +1,43 @@
 package com.gracefinance.gracefinanceapp.domain.principal;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A LigneEcriture.
  */
-@Table("ligne_ecriture")
+@Entity
+@Table(name = "ligne_ecriture")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class LigneEcriture implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("montant")
+    @NotNull
+    @Column(name = "montant", nullable = false, precision = 21, scale = 2)
     private BigDecimal montant;
 
-    @NotNull(message = "must not be null")
-    @Column("sens")
+    @NotNull
+    @Column(name = "sens", nullable = false)
     private String sens;
 
-    @Column("libelle")
+    @Column(name = "libelle")
     private String libelle;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     private EcritureComptable ecriture;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToOne(fetch = FetchType.LAZY)
     private CompteComptable compte;
 
-    @Column("ecriture_id")
-    private Long ecritureId;
-
-    @Column("compte_id")
-    private Long compteId;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -101,13 +94,12 @@ public class LigneEcriture implements Serializable {
         return this.ecriture;
     }
 
-    public void setEcriture(EcritureComptable ecritureComptable) {
-        this.ecriture = ecritureComptable;
-        this.ecritureId = ecritureComptable != null ? ecritureComptable.getId() : null;
+    public void setEcriture(EcritureComptable ecriture) {
+        this.ecriture = ecriture;
     }
 
-    public LigneEcriture ecriture(EcritureComptable ecritureComptable) {
-        this.setEcriture(ecritureComptable);
+    public LigneEcriture ecriture(EcritureComptable ecriture) {
+        this.setEcriture(ecriture);
         return this;
     }
 
@@ -115,33 +107,14 @@ public class LigneEcriture implements Serializable {
         return this.compte;
     }
 
-    public void setCompte(CompteComptable compteComptable) {
-        this.compte = compteComptable;
-        this.compteId = compteComptable != null ? compteComptable.getId() : null;
+    public void setCompte(CompteComptable compte) {
+        this.compte = compte;
     }
 
-    public LigneEcriture compte(CompteComptable compteComptable) {
-        this.setCompte(compteComptable);
+    public LigneEcriture compte(CompteComptable compte) {
+        this.setCompte(compte);
         return this;
     }
-
-    public Long getEcritureId() {
-        return this.ecritureId;
-    }
-
-    public void setEcritureId(Long ecritureComptable) {
-        this.ecritureId = ecritureComptable;
-    }
-
-    public Long getCompteId() {
-        return this.compteId;
-    }
-
-    public void setCompteId(Long compteComptable) {
-        this.compteId = compteComptable;
-    }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -156,18 +129,24 @@ public class LigneEcriture implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "LigneEcriture{" +
-            "id=" + getId() +
-            ", montant=" + getMontant() +
-            ", sens='" + getSens() + "'" +
-            ", libelle='" + getLibelle() + "'" +
-            "}";
+        return (
+            "LigneEcriture{" +
+            "id=" +
+            getId() +
+            ", montant=" +
+            getMontant() +
+            ", sens='" +
+            getSens() +
+            "'" +
+            ", libelle='" +
+            getLibelle() +
+            "'" +
+            "}"
+        );
     }
 }

@@ -1,48 +1,52 @@
 package com.gracefinance.gracefinanceapp.domain.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
 
 /**
  * A Profil.
  */
-@Table("profil")
+@Entity
+@Table(name = "profil")
 @SuppressWarnings("common-java:DuplicatedBlocks")
 public class Profil implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column("id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "must not be null")
-    @Column("nom")
+    @NotNull
+    @Column(name = "nom", nullable = false)
     private String nom;
 
-    @NotNull(message = "must not be null")
-    @Column("code")
+    @NotNull
+    @Column(name = "code", nullable = false)
     private String code;
 
-    @Column("description")
+    @Column(name = "description")
     private String description;
 
-    @org.springframework.data.annotation.Transient
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "rel_profil__droit",
+        joinColumns = @JoinColumn(name = "profil_id"),
+        inverseJoinColumns = @JoinColumn(name = "droit_id")
+    )
     @JsonIgnoreProperties(value = { "profils" }, allowSetters = true)
     private Set<Droit> droits = new HashSet<>();
 
-    @org.springframework.data.annotation.Transient
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "profils")
     @JsonIgnoreProperties(value = { "user", "entiteFinanciere", "profils" }, allowSetters = true)
     private Set<AffectationUtilisateur> affectations = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
-
     public Long getId() {
         return this.id;
     }
@@ -137,19 +141,17 @@ public class Profil implements Serializable {
         return this;
     }
 
-    public Profil addAffectation(AffectationUtilisateur affectationUtilisateur) {
-        this.affectations.add(affectationUtilisateur);
-        affectationUtilisateur.getProfils().add(this);
+    public Profil addAffectation(AffectationUtilisateur a) {
+        this.affectations.add(a);
+        a.getProfils().add(this);
         return this;
     }
 
-    public Profil removeAffectation(AffectationUtilisateur affectationUtilisateur) {
-        this.affectations.remove(affectationUtilisateur);
-        affectationUtilisateur.getProfils().remove(this);
+    public Profil removeAffectation(AffectationUtilisateur a) {
+        this.affectations.remove(a);
+        a.getProfils().remove(this);
         return this;
     }
-
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -164,18 +166,25 @@ public class Profil implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
-        return "Profil{" +
-            "id=" + getId() +
-            ", nom='" + getNom() + "'" +
-            ", code='" + getCode() + "'" +
-            ", description='" + getDescription() + "'" +
-            "}";
+        return (
+            "Profil{" +
+            "id=" +
+            getId() +
+            ", nom='" +
+            getNom() +
+            "'" +
+            ", code='" +
+            getCode() +
+            "'" +
+            ", description='" +
+            getDescription() +
+            "'" +
+            "}"
+        );
     }
 }
